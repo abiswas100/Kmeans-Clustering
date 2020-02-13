@@ -19,7 +19,14 @@ for files in os.listdir():
         filename.append(files)
 
 
-# # Running 6 clusters on each image of Museum 
+ # Running 6 clusters on each image of Museum
+ # For Twamley keep cluster above 10 
+
+#Restricting python to use only 2 cores
+cpu_nums = list(range(psutil.cpu_count()))
+proc = psutil.Process(os.getpid())
+proc.cpu_affinity(cpu_nums[:2])
+
 
 pbar = ProgressBar()
 start = time.time()
