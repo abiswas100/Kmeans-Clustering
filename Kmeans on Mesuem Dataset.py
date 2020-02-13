@@ -1,9 +1,6 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# In[6]:
-
-
 import cv2
 import numpy as np
 from sklearn.cluster import KMeans
@@ -11,9 +8,6 @@ import matplotlib.pyplot as plt
 import os
 import time
 from progressbar import ProgressBar
-
-
-# In[7]:
 
 
 #Storing the images from File to an array named image_list
@@ -27,9 +21,6 @@ for files in os.listdir():
 
 
 # # Running 6 clusters on each image of Museum 
-
-# In[ ]:
-
 
 pbar = ProgressBar()
 start = time.time()
@@ -53,18 +44,11 @@ for image in pbar(image_list):
     segmented_image = segmented_image.reshape(image.shape)
     clustered_images_list.append(segmented_image)
 
-
-# In[ ]:
-
-
 end = time.time()
 print("Time consumed in working: ",end - start)  
 
 
-# # saving the clustered images in a folder
-
-# In[ ]:
-
+# saving the clustered images in a folder
 
 try:
     os.mkdir('kmeans-output')
@@ -80,4 +64,3 @@ for img in clustered_images_list:
     #cv2.imwrite(str(counter) + '.jpg', img)
     cv2.imwrite(filename[counter], img)
     counter = counter + 1
-
