@@ -26,7 +26,7 @@ for files in os.listdir():
 cpu_nums = list(range(psutil.cpu_count()))
 proc = psutil.Process(os.getpid())
 proc.cpu_affinity(cpu_nums[:2])
-
+print("CPUS being consumed.."+cpu_count())
 
 pbar = ProgressBar()
 start = time.time()
@@ -40,6 +40,7 @@ for image in pbar(image_list):
     criteria = (cv2.TERM_CRITERIA_EPS + cv2.TERM_CRITERIA_MAX_ITER, 100, 0.01)
     #KMEANS 
     clusters = 6
+    print("Clustering the dataset in into "+clusters+"clusters")
     compactness, labels, centers = cv2.kmeans(pixel_values, clusters, None,criteria, 10, cv2.KMEANS_PP_CENTERS)
     # convert back to 8 bit values
     centers = np.uint8(centers)
