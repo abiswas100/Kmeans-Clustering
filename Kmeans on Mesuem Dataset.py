@@ -18,19 +18,20 @@ for files in os.listdir():
         image_list.append(img)
         filename.append(files)
 
-
- # Running 6 clusters on each image of Museum
- # For Twamley keep cluster above 10 
-
 #Restricting python to use only 2 cores
 cpu_nums = list(range(psutil.cpu_count()))
 proc = psutil.Process(os.getpid())
 proc.cpu_affinity(cpu_nums[:2])
-print("CPUS being consumed.."+cpu_count())
+print("CPUS being consumed..",cpu_count())
 
 pbar = ProgressBar()
 start = time.time()
 clustered_images_list = []
+
+ # Running 6 clusters on each image of Museum
+ # For Twamley keep cluster above 10 
+
+print("Clustering the dataset in into ")
 for image in pbar(image_list):
     # reshape the image to a 2D array of pixels and 3 color values (RGB)
     pixel_values = image.reshape((-1, 3))
@@ -40,7 +41,7 @@ for image in pbar(image_list):
     criteria = (cv2.TERM_CRITERIA_EPS + cv2.TERM_CRITERIA_MAX_ITER, 100, 0.01)
     #KMEANS 
     clusters = 6
-    print("Clustering the dataset in into "+clusters+"clusters")
+    
     compactness, labels, centers = cv2.kmeans(pixel_values, clusters, None,criteria, 10, cv2.KMEANS_PP_CENTERS)
     # convert back to 8 bit values
     centers = np.uint8(centers)
