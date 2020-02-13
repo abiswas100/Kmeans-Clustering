@@ -1,12 +1,13 @@
-
-import cv2
-import numpy as np
-from sklearn.cluster import KMeans
-import matplotlib.pyplot as plt
 import os
 import time
-from progressbar import ProgressBar
+from multiprocessing import cpu_count
 
+import cv2
+import matplotlib.pyplot as plt
+import numpy as np
+import psutil
+from progressbar import ProgressBar
+from sklearn.cluster import KMeans
 
 #Storing the images from File to an array named image_list
 image_list = []
@@ -44,7 +45,7 @@ for image in pbar(image_list):
 
 end = time.time()
 print("Time consumed in working: ",end - start)  
-
+print("clustering completed ......")
 
 # saving the clustered images in a folder
 
@@ -53,7 +54,7 @@ try:
 except FileExistsError:
     print("File already exists so just saving them in that folder")
     pass
-    
+print("Pushing clustered images to disk..............")    
 os.chdir('kmeans-output')
 counter = 0
 for img in clustered_images_list:
