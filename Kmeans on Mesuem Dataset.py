@@ -71,3 +71,4 @@ for img in clustered_images_list:
     #cv2.imwrite(str(counter) + '.jpg', img)
     cv2.imwrite(filename[counter], img)
     counter = counter + 1
+print("Finished .................")
