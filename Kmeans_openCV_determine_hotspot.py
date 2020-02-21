@@ -28,16 +28,12 @@ proc.cpu_affinity(cpu_nums[:2])
 print("CPUS being consumed..",cpu_count())
 
 
-counter = 0
-for image in image_list:
-    counter = counter +1 
-    #plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
     # reshape the image to a 2D array of pixels and 3 color values (RGB)
-    pixel_values = image.reshape((-1, 3))
+pixel_values = image.reshape((-1, 3))
     # convert to float
-    pixel_values = np.float32(pixel_values)
-    print(pixel_values)
-    len(pixel_values)
+pixel_values = np.float32(pixel_values)
+print(pixel_values)
+len(pixel_values)
 
 #create an array for the number of clusters
 n_clusters = 6
