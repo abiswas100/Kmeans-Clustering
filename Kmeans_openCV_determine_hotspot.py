@@ -1,11 +1,13 @@
-
-from PIL import Image
-import cv2 
-import numpy as np
-import pandas as pd
-from sklearn.cluster import KMeans, DBSCAN
-import matplotlib.pyplot as plt
+import os
 import time
+from multiprocessing import cpu_count
+
+import cv2
+import matplotlib.pyplot as plt
+import numpy as np
+import psutil
+from progressbar import ProgressBar
+from sklearn.cluster import KMeans
 
 image = cv2.imread("F:\Kmeans\Museum_Tryout_12.jpg")
 plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
