@@ -12,13 +12,19 @@ from sklearn.cluster import KMeans
 
 image_list = []
 filename = []
+counter = 0  
 os.chdir(r"Museum Clustering Tryouts//images")
 for files in os.listdir():
     if(files.endswith('.jpg')):
-        img = cv2.imread(str(files))
-        image_list.append(img)
-        filename.append(files)
-        print("All Images loaded into array")
+        if(counter == 0):   # to input all the image just remove the conditional statements and use the below 4 lines
+            img = cv2.imread(str(files))
+            image_list.append(img)
+            filename.append(files)
+            print("All Images loaded into array")
+            counter = counter+1
+        else:            
+            break
+
 
 
 #Restricting python to use only 2 cores
