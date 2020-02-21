@@ -9,6 +9,17 @@ import psutil
 from progressbar import ProgressBar
 from sklearn.cluster import KMeans
 
+
+image_list = []
+filename = []
+os.chdir(r"Museum Clustering Tryouts//images")
+for files in os.listdir():
+    if(files.endswith('.jpg')):
+        img = cv2.imread(str(files))
+        image_list.append(img)
+        filename.append(files)
+        print("works....")
+
 image = cv2.imread("F:\Kmeans\Museum_Tryout_12.jpg")
 plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
 
