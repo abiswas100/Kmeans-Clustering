@@ -62,7 +62,7 @@ for image in pbar(image_list):
 
 end = time.time()
 print("Time consumed in working: ",end - start)
-
+cv2.imwrite(filename[0], )
 
 # # disable only the cluster number 2 (turn the pixel into black)
 # masked_image = np.copy(image)
@@ -85,11 +85,6 @@ print("Time consumed in working: ",end - start)
 # masked_image = masked_image.reshape(image.shape)
 # # show the image
 # plt.imshow(cv2.cvtColor(masked_image, cv2.COLOR_BGR2RGB))
-
-
-
-
-
 
 
 #Saving the images in output folder
