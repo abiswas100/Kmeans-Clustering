@@ -36,7 +36,7 @@ pbar = ProgressBar()
 start = time.time()
 clustered_images_list = [] #list containing all the clustered outputs
  # Running 6 clusters on each image of Museum
- # For Twamley keep cluster above 10 iam
+ # For Twamley keep cluster above 10 
 
 print("Clustering the dataset in into ")
 for image in pbar(image_list):
