@@ -65,7 +65,7 @@ print("Time consumed in working: ",end - start)
 cv2.imwrite(filename[0], segmented_image)
 
 #the labels array contains all the pixel ..it is of size 32780 so we have to interpret the a 1-D labels array 
-# as pixels in x,y co-ordinate 
+# as pixels in x,y co-ordinate.
 
 
 
