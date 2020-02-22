@@ -34,7 +34,11 @@ print("CPUS being consumed..",cpu_count())
 
 pbar = ProgressBar()
 start = time.time()
+clustered_images_list = [] #list containing all the clustered outputs
+ # Running 6 clusters on each image of Museum
+ # For Twamley keep cluster above 10 iam
 
+print("Clustering the dataset in into ")
 for image in pbar(image_list):
     # reshape the image to a 2D array of pixels and 3 color values (RGB)
     pixel_values = image.reshape((-1, 3))
@@ -43,7 +47,7 @@ for image in pbar(image_list):
     print(pixel_values)
     print("Length of the pixel value list",len(pixel_values))
     #create an array for the number of clusters
-    kmeans = KMeans(n_clusters=3, random_state=0, n_jobs = -1).fit(pixel_values)
+    kmeans = KMeans(n_clusters=6, random_state=0, n_jobs = -1).fit(pixel_values)
     # convert back to 8 bit values
     centers = kmeans.cluster_centers_
     centers = np.uint8(centers)
@@ -51,20 +55,13 @@ for image in pbar(image_list):
     # flatten the labels array
     labels = kmeans.labels_
     # print(labels)
-    print(set(labels))
-    print(len(labels))
+    print("The labels set",set(labels),"The length of the labels array",len(labels))
+    segmented_image = centers[labels]
+    segmented_image = segmented_image.reshape(image.shape)
+    clustered_images_list.append(segmented_image)
 
 end = time.time()
 print("Time consumed in working: ",end - start)
-
-segmented_image = centers[labels]
-# reshape back to the original image dimension
-segmented_image = segmented_image.reshape(image.shape)
-# show the image
-plt.imshow(cv2.cvtColor(segmented_image, cv2.COLOR_BGR2RGB))
-
-
-
 
 # # disable only the cluster number 2 (turn the pixel into black)
 # masked_image = np.copy(image)
