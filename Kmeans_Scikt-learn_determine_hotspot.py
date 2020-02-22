@@ -64,15 +64,6 @@ end = time.time()
 print("Time consumed in working: ",end - start)
 
 
-
-
-
-
-
-
-
-
-
 # # disable only the cluster number 2 (turn the pixel into black)
 # masked_image = np.copy(image)
 # # convert to the shape of a vector of pixel values
@@ -99,4 +90,21 @@ print("Time consumed in working: ",end - start)
 
 
 
-averages = []
+
+
+#Saving the images in output folder
+try:
+    os.mkdir('kmeans-output')
+except FileExistsError:
+    print("File already exists so just saving them in that folder")
+    pass
+print("Pushing clustered images to disk..............")    
+os.chdir('kmeans-output')
+counter = 0
+for img in clustered_images_list:
+    # show the image
+    #plt.imshow(cv2.cvtColor(segmented_image, cv2.COLOR_BGR2RGB))
+    #cv2.imwrite(str(counter) + '.jpg', img)
+    cv2.imwrite(filename[counter], img)
+    counter = counter + 1
+print("Finished .................")
