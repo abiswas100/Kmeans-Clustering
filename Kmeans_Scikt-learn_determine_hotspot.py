@@ -37,7 +37,7 @@ start = time.time()
 clustered_images_list = [] #list containing all the clustered outputs
  # Running 6 clusters on each image of Museum
  # For Twamley keep cluster above 10 
-
+print("")
 print("Clustering the dataset in into ")
 for image in pbar(image_list):
     # reshape the image to a 2D array of pixels and 3 color values (RGB)
@@ -54,7 +54,7 @@ for image in pbar(image_list):
     print(centers)
     # flatten the labels array
     labels = kmeans.labels_
-    # print(labels)
+    print("The actual labels array",labels)
     print("The labels set",set(labels),"The length of the labels array",len(labels))
     segmented_image = centers[labels]
     segmented_image = segmented_image.reshape(image.shape)
@@ -97,7 +97,9 @@ try:
     os.mkdir('kmeans-output')
 except FileExistsError:
     print("File already exists so just saving them in that folder")
-    pass
+    os.removedirs('Kmeans-output')
+    os.mkdir('kmeans-output')
+    print("")
 print("Pushing clustered images to disk..............")    
 os.chdir('kmeans-output')
 counter = 0
