@@ -43,15 +43,13 @@ for image in pbar(image_list):
     print(pixel_values)
     print("Length of the pixel value list",len(pixel_values))
     #create an array for the number of clusters
-    n_clusters = 6
-    criteria = (cv2.TERM_CRITERIA_EPS + cv2.TERM_CRITERIA_MAX_ITER, 100, 0.1)
-    compactness, labels, centers = cv2.kmeans(pixel_values, n_clusters, None, criteria, 10, cv2.KMEANS_PP_CENTERS)
-
+    kmeans = KMeans(n_clusters=3, random_state=0, n_jobs = -1).fit(pixel_values)
     # convert back to 8 bit values
+    centers = kmeans.cluster_centers_
     centers = np.uint8(centers)
     print(centers)
     # flatten the labels array
-    labels = labels.flatten()
+    labels = kmeans.labels_
     # print(labels)
     print(set(labels))
     print(len(labels))
