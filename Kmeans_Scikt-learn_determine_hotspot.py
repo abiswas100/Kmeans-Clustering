@@ -62,7 +62,7 @@ for image in pbar(image_list):
 
 end = time.time()
 print("Time consumed in working: ",end - start)
-cv2.imwrite(filename[0], )
+cv2.imwrite(filename[0], segmented_image)
 
 # # disable only the cluster number 2 (turn the pixel into black)
 # masked_image = np.copy(image)
