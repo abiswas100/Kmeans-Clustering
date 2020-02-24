@@ -43,7 +43,7 @@ clustered_images_list = [] #list containing all the clustered outputs
  # For Twamley keep cluster above 10 
 print("")
 print("Clustering the image ")
-
+labels_of_all_image = []
 for image in pbar(image_list):
     # reshape the image to a 2D array of pixels and 3 color values (RGB)
     pixel_values = image.reshape((-1, 3))
@@ -66,6 +66,7 @@ for image in pbar(image_list):
     print("The centers are ----",centers)
     # flatten the labels array
     labels = kmeans.labels_
+    labels_of_all_image.append(labels)
     print("The actual labels array",labels)
     print("The labels set - ",set(labels),"   The length of the labels array",len(labels))
     segmented_image = centers[labels]
@@ -76,8 +77,18 @@ print(" ")
 end = time.time()
 print("Time consumed in working: ",end - start)
 
-
-
+#function to mask only the hotspot
+for img in clustered_images_list:
+    masked_image = np.copy(img)
+    # convert to the shape of a vector of pixel values
+    masked_image = masked_image.reshape((-1, 3))
+    best_cluster = fb.calculate_temperature(clustered_images_list,labels_of_all_image,filename)
+    for i in range(0,6):
+        if i == best_cluster:
+            masked_image[labels == best_cluster] = [255,255,255]      
+        else:
+            masked_image[labels == i] = [0,0,0]
+        
 #Saving the images in output folder
 print("  ")
 try:
