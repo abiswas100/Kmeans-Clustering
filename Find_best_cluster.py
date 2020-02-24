@@ -35,6 +35,7 @@ def extract_temperature(csv_filename):
 
 #This function call the extract temperature function and calculates surface temperature and hottest cluster
 best_cluster = 0
+cluster_averages = []
 def calculate_temperature(image,labels,filename):
     csv_filename = filename[:-4] + '.csv'
     temperature = extract_temperature("csv_filename")
@@ -45,13 +46,11 @@ def calculate_temperature(image,labels,filename):
             X_coordinate = int(pixel_label/512)
             Y_coordinate = int(pixel_label/512)#change in the proper way
             number_of_pixels = number_of_pixels + 1 
-            temp = temperature[X_coordinate][Y_coordinate]
-    
+            temp = float(temperature[X_coordinate][Y_coordinate])
+            
             total_temp = total_temp + temp
     
             average = total_temp/number_of_pixels
+    cluster_averages.append(average)           
+    return max(cluster_averages)
 
-
-            return best_cluster
-
-    
