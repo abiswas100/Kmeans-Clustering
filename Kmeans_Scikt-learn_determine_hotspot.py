@@ -110,14 +110,15 @@ except FileExistsError:
     print("File already exists so just saving them in that folder")
     os.removedirs('Kmeans-output')
     os.mkdir('kmeans-output')
-    print("")
-print("Pushing clustered images to disk..............")    
-os.chdir('kmeans-output')
-counter = 0
-for img in clustered_images_list:
-    # show the image
-    #plt.imshow(cv2.cvtColor(segmented_image, cv2.COLOR_BGR2RGB))
-    #cv2.imwrite(str(counter) + '.jpg', img)
-    cv2.imwrite(filename[0], img)
-    counter = counter + 1
-print("Finished .................")
+    print("Removed previous outputs and creating again")
+finally:
+    print("Pushing clustered images to disk..............")    
+    os.chdir('kmeans-output')
+    counter = 0
+    for img in clustered_images_list:
+        # show the image
+        #plt.imshow(cv2.cvtColor(segmented_image, cv2.COLOR_BGR2RGB))
+        #cv2.imwrite(str(counter) + '.jpg', img)
+        cv2.imwrite(filename[0], img)
+        counter = counter + 1
+    print("Finished .................")
