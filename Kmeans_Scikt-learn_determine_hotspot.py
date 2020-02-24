@@ -62,7 +62,7 @@ for image in pbar(image_list):
 
 end = time.time()
 print("Time consumed in working: ",end - start)
-cv2.imwrite(filename[0], segmented_image)
+
 
 #the labels array contains all the pixel ..it is of size 32780 so we have to interpret the a 1-D labels array 
 # as pixels in x,y co-ordinate.
@@ -110,6 +110,6 @@ for img in clustered_images_list:
     # show the image
     #plt.imshow(cv2.cvtColor(segmented_image, cv2.COLOR_BGR2RGB))
     #cv2.imwrite(str(counter) + '.jpg', img)
-    cv2.imwrite(filename[counter], img)
+    cv2.imwrite(filename[0], img)
     counter = counter + 1
 print("Finished .................")
