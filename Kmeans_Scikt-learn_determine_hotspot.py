@@ -76,37 +76,6 @@ end = time.time()
 print("Time consumed in working: ",end - start)
 
 
-#the labels array contains all the pixel ..it is of size 32780 so we have to interpret the a 1-D labels array 
-# as pixels in x,y co-ordinate.
-
-
-
-
-
-
-# # disable only the cluster number 2 (turn the pixel into black)
-# masked_image = np.copy(image)
-# # convert to the shape of a vector of pixel values
-# masked_image = masked_image.reshape((-1, 3))
-# # color (i.e cluster) to disable
-# clusters = [0,1,2,3,4,5]
-# #for x in clusters:
-# temp = np.array()    #temp array that has the pixel values for a specific cluster
-# temp = masked_image[labels == 0]
-# # print("\ncluster : ",x )""
-# temp=temp.flatten()
-# print(len(temp))
-# print(temp)
-
-# # convert back to original shape
-# for i in clusters:
-#     masked_image[labels == i] = [0,0,0]
-# masked_image[labels == 2] = [255,255,255]   #hotspot for 12 is cluster 2
-# masked_image = masked_image.reshape(image.shape)
-# # show the image
-# plt.imshow(cv2.cvtColor(masked_image, cv2.COLOR_BGR2RGB))
-
-
 #Saving the images in output folder
 print("  ")
 try:
