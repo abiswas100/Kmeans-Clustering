@@ -39,18 +39,17 @@ cluster_averages = []
 def calculate_temperature(image,labels,filename):
     csv_filename = filename[:-4] + '.csv'
     temperature = extract_temperature("csv_filename")
-    number_of_pixels = 0
-    for cluster in set(labels):
+   
+    for cluster in set(labels):         #set(labels) == (0,1,2,3,4,5)
         pixel_labels = np.where(labels == cluster)
         for pixel_label in pixel_labels:
             X_coordinate = int(pixel_label/512)
             Y_coordinate = int(pixel_label/512)#change in the proper way
-            number_of_pixels = number_of_pixels + 1 
             temp = float(temperature[X_coordinate][Y_coordinate])
             
             total_temp = total_temp + temp
     
-            average = total_temp/number_of_pixels
+            average = total_temp/len(pixel_labels)
     cluster_averages.append(average)           
     return max(cluster_averages)
 
