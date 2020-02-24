@@ -46,7 +46,7 @@ def calculate_temperature(labels,filename):
         pixel_labels = np.where(labels == cluster)
         for pixel_label in pixel_labels:
             X_coordinate = int(pixel_label/512)
-            Y_coordinate = int(pixel_label/512)#change in the proper way
+            Y_coordinate = int(pixel_label/512) #change in the proper way
             temp = float(temperature[X_coordinate][Y_coordinate])
             temp_array.append(temp)
             minimum = min(temp)
