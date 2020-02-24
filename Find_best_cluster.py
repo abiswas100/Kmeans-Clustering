@@ -33,22 +33,25 @@ def extract_temperature(csv_filename):
 
     return pixel_temperature
 
-temperature = extract_temperature()
+#This function call the extract temperature function and calculates surface temperature and hottest cluster
 
- 
-def calculate_temperature(image,labels):
-     
- # ##########################################
-        #    Find Average Temperature
-# ##########################################
-    os.chdir(r"Museum Clustering Tryouts//csv")
-    clusters = [0,1,2,3,4,5];
-    masked_image = np.copy(image)
-    # convert to the shape of a vector of pixel values
-    masked_image = masked_image.reshape((-1, 3))
+def calculate_temperature(image,labels,filename):
+    csv_filename = filename[:-4] + '.csv'
+    temperature = extract_temperature("csv_filename")
+    number_of_pixels = 0
+    for cluster in set(labels):
+        pixel_labels = np.where(labels == cluster)
+        for pixel_label in pixel_labels:
+            X_coordinate = int(pixel_label/512)
+            Y_coordinate = int(pixel_label/512)#change in the proper way
+            number_of_pixels = number_of_pixels + 1 
+            temp = temperature[X_coordinate][Y_coordinate]
+    
+            total_temp = total_temp + temp
+    
+            average = total_temp/number_of_pixels
 
-    for i in clusters:
-        temp = np.where(labels==i)
-        print("temp:", temp)
+
+
 
     
