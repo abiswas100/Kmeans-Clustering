@@ -1,6 +1,7 @@
 import optimum_K as op
 
-import os,shutil
+import os
+import shutil as s
 import time
 from multiprocessing import cpu_count
 
@@ -47,7 +48,7 @@ for image in pbar(image_list):
     pixel_values = image.reshape((-1, 3))
     # convert to float
     pixel_values = np.float32(pixel_values)
-    print(pixel_values)
+    print("The pixel array is ",pixel_values)
     print("Length of the pixel value list",len(pixel_values))
     
     #this function will return the best k for each image
@@ -68,6 +69,7 @@ for image in pbar(image_list):
     segmented_image = segmented_image.reshape(image.shape)
     clustered_images_list.append(segmented_image)
 
+print(" ")
 end = time.time()
 print("Time consumed in working: ",end - start)
 
@@ -104,22 +106,16 @@ print("Time consumed in working: ",end - start)
 
 
 #Saving the images in output folder
+
+print("  ")
 try:
     os.mkdir('kmeans-output')
 except FileExistsError:
-    print("File already exists so just saving them in that folder")
-    folder = 'kmeans-output'
-    for filename in os.listdir(folder):
-        file_path = os.path.join(folder, filename)
-    try:
-        if os.path.isfile(file_path) or os.path.islink(file_path):
-            os.unlink(file_path)
-        elif os.path.isdir(file_path):
-            shutil.rmtree(file_path)
-    except Exception as e:
-        print('Failed to delete %s. Reason: %s' % (file_path, e))
-    
-    print("Removed previous outputs and creating again")
+    print(" ")
+    print("Folder already exists removed previous outputs and creating again")
+    s.rmtree('kmeans-output')
+    os.mkdir('kmeans-output')
+    print(" ")
 finally:
     print("Pushing clustered images to disk..............")    
     os.chdir('kmeans-output')
@@ -128,6 +124,10 @@ finally:
         # show the image
         #plt.imshow(cv2.cvtColor(segmented_image, cv2.COLOR_BGR2RGB))
         #cv2.imwrite(str(counter) + '.jpg', img)
+        print(" ")
+        print("Current Directory",os.getcwd())
+        print(" ")
+        print("files in the directory",os.listdir())
         cv2.imwrite(filename[0], img)
         counter = counter + 1
     print("Finished .................")
