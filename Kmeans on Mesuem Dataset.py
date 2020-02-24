@@ -9,6 +9,8 @@ import psutil
 from progressbar import ProgressBar
 from sklearn.cluster import KMeans
 
+
+#run this file directly in the images folder of Twamley or Museum
 #Storing the images from File to an array named image_list
 image_list = []
 filename = []
