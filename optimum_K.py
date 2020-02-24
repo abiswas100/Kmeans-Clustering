@@ -7,5 +7,11 @@ import pandas
 import progressbar
 
 
-def silhoette():
+def silhoette(pixel_array):
+    
+    
+    
+    
+    
     pass
+print("hello world")
