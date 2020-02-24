@@ -48,15 +48,17 @@ for image in pbar(image_list):
     pixel_values = image.reshape((-1, 3))
     # convert to float
     pixel_values = np.float32(pixel_values)
-    print("The pixel array is ",pixel_values)
+    print("")
+    print("The pixel array is ")
+    print(pixel_values)
     print("Length of the pixel value list",len(pixel_values))
-    
+    print("")
     #this function will return the best k for each image
     
     # cluster = op.silhoette(pixel_values)
     
     #create an array for the number of clusters
-    kmeans = KMeans(n_clusters=1, random_state=0, n_jobs = -1).fit(pixel_values)
+    kmeans = KMeans(n_clusters=6, random_state=0, n_jobs = -1).fit(pixel_values)
     # convert back to 8 bit values
     centers = kmeans.cluster_centers_
     centers = np.uint8(centers)
@@ -64,7 +66,7 @@ for image in pbar(image_list):
     # flatten the labels array
     labels = kmeans.labels_
     print("The actual labels array",labels)
-    print("The labels set",set(labels),"The length of the labels array",len(labels))
+    print("The labels set - ",set(labels),"   The length of the labels array",len(labels))
     segmented_image = centers[labels]
     segmented_image = segmented_image.reshape(image.shape)
     clustered_images_list.append(segmented_image)
@@ -106,13 +108,12 @@ print("Time consumed in working: ",end - start)
 
 
 #Saving the images in output folder
-
 print("  ")
 try:
     os.mkdir('kmeans-output')
 except FileExistsError:
     print(" ")
-    print("Folder already exists removed previous outputs and creating again")
+    print("Folder already exists so removing the previous outputs and creating again")
     s.rmtree('kmeans-output')
     os.mkdir('kmeans-output')
     print(" ")
@@ -121,13 +122,7 @@ finally:
     os.chdir('kmeans-output')
     counter = 0
     for img in clustered_images_list:
-        # show the image
-        #plt.imshow(cv2.cvtColor(segmented_image, cv2.COLOR_BGR2RGB))
-        #cv2.imwrite(str(counter) + '.jpg', img)
         print(" ")
-        print("Current Directory",os.getcwd())
-        print(" ")
-        print("files in the directory",os.listdir())
         cv2.imwrite(filename[0], img)
         counter = counter + 1
-    print("Finished .................")
+print("Finished .................")
