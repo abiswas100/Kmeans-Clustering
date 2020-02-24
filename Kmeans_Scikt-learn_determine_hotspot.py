@@ -40,7 +40,8 @@ clustered_images_list = [] #list containing all the clustered outputs
  # Running 6 clusters on each image of Museum
  # For Twamley keep cluster above 10 
 print("")
-print("Clustering the dataset in into ")
+print("Clustering the image ")
+
 for image in pbar(image_list):
     # reshape the image to a 2D array of pixels and 3 color values (RGB)
     pixel_values = image.reshape((-1, 3))
@@ -48,6 +49,8 @@ for image in pbar(image_list):
     pixel_values = np.float32(pixel_values)
     print(pixel_values)
     print("Length of the pixel value list",len(pixel_values))
+    
+    #this function will return the best k for each image
     
     silhoette(pixel_values)
     
