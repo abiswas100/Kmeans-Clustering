@@ -1,6 +1,6 @@
-from .optimum_k import silhoette
+import optimum_K as op
 
-import os
+import os,shutil
 import time
 from multiprocessing import cpu_count
 
@@ -52,10 +52,10 @@ for image in pbar(image_list):
     
     #this function will return the best k for each image
     
-    cluster = silhoette(pixel_values)
+    # cluster = op.silhoette(pixel_values)
     
     #create an array for the number of clusters
-    kmeans = KMeans(n_clusters=6, init='k-means++', random_state=0, n_jobs = -1).fit(pixel_values)
+    kmeans = KMeans(n_clusters=1, random_state=0, n_jobs = -1).fit(pixel_values)
     # convert back to 8 bit values
     centers = kmeans.cluster_centers_
     centers = np.uint8(centers)
@@ -108,8 +108,17 @@ try:
     os.mkdir('kmeans-output')
 except FileExistsError:
     print("File already exists so just saving them in that folder")
-    os.removedirs('Kmeans-output')
-    os.mkdir('kmeans-output')
+    folder = 'kmeans-output'
+    for filename in os.listdir(folder):
+        file_path = os.path.join(folder, filename)
+    try:
+        if os.path.isfile(file_path) or os.path.islink(file_path):
+            os.unlink(file_path)
+        elif os.path.isdir(file_path):
+            shutil.rmtree(file_path)
+    except Exception as e:
+        print('Failed to delete %s. Reason: %s' % (file_path, e))
+    
     print("Removed previous outputs and creating again")
 finally:
     print("Pushing clustered images to disk..............")    
