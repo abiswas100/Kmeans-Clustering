@@ -37,7 +37,7 @@ best_cluster = 0
 cluster_averages = []
 def calculate_temperature(image,labels,filename):
     csv_filename = filename[:-4] + '.csv'
-    temperature = extract_temperature("csv_filename")
+    temperature = extract_temperature("csv_filename") #calling the extract temperature to give the all the pixel_temps in the temperature array
    
     for cluster in set(labels):         #set(labels) == (0,1,2,3,4,5)
         pixel_labels = np.where(labels == cluster)
