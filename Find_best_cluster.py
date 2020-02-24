@@ -35,7 +35,6 @@ def extract_temperature(csv_filename):
 
 #This function call the extract temperature function and calculates surface temperature and hottest cluster
 
-
 def calculate_temperature(labels,filename):
     best_cluster = 0
     cluster_averages = []
