@@ -52,7 +52,7 @@ for image in pbar(image_list):
     
     #this function will return the best k for each image
     
-    silhoette(pixel_values)
+    cluster = silhoette(pixel_values)
     
     #create an array for the number of clusters
     kmeans = KMeans(n_clusters=6, init='k-means++', random_state=0, n_jobs = -1).fit(pixel_values)
