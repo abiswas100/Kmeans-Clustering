@@ -1,3 +1,5 @@
+from .optimum_k import silhoette
+
 import os
 import time
 from multiprocessing import cpu_count
@@ -46,6 +48,9 @@ for image in pbar(image_list):
     pixel_values = np.float32(pixel_values)
     print(pixel_values)
     print("Length of the pixel value list",len(pixel_values))
+    
+    silhoette(pixel_values)
+    
     #create an array for the number of clusters
     kmeans = KMeans(n_clusters=6, random_state=0, n_jobs = -1).fit(pixel_values)
     # convert back to 8 bit values
