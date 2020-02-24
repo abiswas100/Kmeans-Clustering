@@ -13,7 +13,6 @@ def extract_temperature(csv_filename):
     :param csv_file_path: CSV filepath extension
     :return: List containing [512][640] = 327680 data points
     '''
-
     csv_name = re.split(r'[_.\s ]', csv_filename)
     if('MWIR' in csv_name):
         with open(csv_filename) as csv_file:
