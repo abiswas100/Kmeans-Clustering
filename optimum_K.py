@@ -16,7 +16,7 @@ def silhoette(pixel_array):
     # The silhouette_score gives the average value for all the samples.
     # This gives a perspective into the density and separation of the formed
     # clusters
-    silhouette_avg = silhouette_score(X, cluster_labels)
+    silhouette_avg = silhouette_score(pixel_array, cluster_labels)
     print("For n_clusters =", i,"The average silhouette_score is :", silhouette_avg)   
     
     
