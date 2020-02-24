@@ -51,7 +51,7 @@ for image in pbar(image_list):
     # convert back to 8 bit values
     centers = kmeans.cluster_centers_
     centers = np.uint8(centers)
-    print(centers)
+    print("The centers are ----",centers)
     # flatten the labels array
     labels = kmeans.labels_
     print("The actual labels array",labels)
