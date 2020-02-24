@@ -84,7 +84,8 @@ print("Time consumed in working: ",end - start)
 #     masked_image = np.copy(img)
 #     # convert to the shape of a vector of pixel values
 #     masked_image = masked_image.reshape((-1, 3))
-#     best_cluster = fb.calculate_temperature(clustered_images_list,labels_of_all_image,filename)
+#     index_of_image = clustered_images_list.index(img)
+#     best_cluster = fb.calculate_temperature(labels_of_all_image[index_of_image],filename[index_of_image])
 #     for i in range(0,6):
 #         if i == best_cluster:
 #             masked_image[labels == best_cluster] = [255,255,255]      
