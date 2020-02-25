@@ -15,12 +15,12 @@ def extract_temperature(csv_filename):
     :param csv_file_path: CSV filepath extension
     :return: List containing [512][640] = 327680 data points
     '''
-    print(os.listdir())
-    print(Path(os.getcwd).parent)
     path = os.getcwd()
-    print(path)
-    # path = Path(path).parent+'//csv'
-    os.chdir(path)
+    parent_path = Path(path).parent
+    
+    os.chdir(parent_path)    
+    os.chdir('csv')
+
     csv_name = re.split(r'[_.\s ]', csv_filename)
     if('MWIR' in csv_name):
         with open(csv_filename) as csv_file:
@@ -43,10 +43,11 @@ def extract_temperature(csv_filename):
 #This function call the extract temperature function and calculates surface temperature and hottest cluster
 
 def calculate_temperature(labels,filename):
+    
     best_cluster = 0
     cluster_averages = []
     csv_filename = filename[:-4] + '.csv'
-    temperature = extract_temperature("csv_filename") #calling the extract temperature to give the all the pixel_temps in the temperature array
+    temperature = extract_temperature(csv_filename) #calling the extract temperature to give the all the pixel_temps in the temperature array
    
     for cluster in set(labels):         #set(labels) == (0,1,2,3,4,5)
         temp_array = []
