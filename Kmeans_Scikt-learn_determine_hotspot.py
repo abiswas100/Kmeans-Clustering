@@ -27,9 +27,9 @@ for files in os.listdir():
             filename.append(files)
             print("")
             print("All Images loaded into array")
-        counter = counter+1
+            counter = counter+1
     else:            
-             break
+              break
 
 #Restricting python to use only 2 cores
 cpu_nums = list(range(psutil.cpu_count()))
@@ -87,6 +87,7 @@ masked_image_list = []
 print("")
 counter = 0
 for image in clustered_images_list:
+    masked_image = 0
     masked_image = np.copy(image)
     # convert to the shape of a vector of pixel values
     masked_image = masked_image.reshape((-1, 3))
