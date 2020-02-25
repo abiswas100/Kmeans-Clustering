@@ -21,3 +21,5 @@ def silhoette(pixel_array):
             # Compute the silhouette scores for each sample
             sample_silhouette_values = silhouette_samples(pixel_array, cluster_labels)
             print("silhouette score for each sample",sample_silhouette_values)
+
+    pass
