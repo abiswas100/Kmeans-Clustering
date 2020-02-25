@@ -79,48 +79,48 @@ print(" ")
 end = time.time()
 print("Time consumed in clustering: ",end - start)
 
-#Saving the clustered images in output folder
-print("  ")
-try:
-    path = os.getcwd()
-    parent_path = Path(path).parent
-    os.chdir(parent_path)    
-    os.mkdir('kmeans-output')
+# #Saving the clustered images in output folder
+# print("  ")
+# try:
+#     path = os.getcwd()
+#     parent_path = Path(path).parent
+#     os.chdir(parent_path)    
+#     os.mkdir('kmeans-output')
 
-except FileExistsError:
-    print(" ")
-    print("Folder already exists so removing the previous outputs and creating again")
-    s.rmtree('kmeans-output')
-    os.mkdir('kmeans-output')
-    print(" ")
-finally:
-    print("Pushing clustered images to disk..............")    
-    os.chdir('kmeans-output')
-    counter = 0
-    for img in clustered_images_list:
-        print(" ")
-        cv2.imwrite(filename[0], img)
-        counter = counter + 1
-print("Clustered image stored .................")
+# except FileExistsError:
+#     print(" ")
+#     print("Folder already exists so removing the previous outputs and creating again")
+#     s.rmtree('kmeans-output')
+#     os.mkdir('kmeans-output')
+#     print(" ")
+# finally:
+#     print("Pushing clustered images to disk..............")    
+#     os.chdir('kmeans-output')
+#     counter = 0
+#     for img in clustered_images_list:
+#         print(" ")
+#         cv2.imwrite(filename[0], img)
+#         counter = counter + 1
+# print("Clustered image stored .................")
 
 #function to mask only the hotspot
 print("")
 print("Masking the image finding the best cluster")
 masked_image_list = []
 print("")
-for img in clustered_images_list:
-    masked_image = np.copy(img)
+for image in clustered_images_list:
+    masked_image = np.copy(image)
     # convert to the shape of a vector of pixel values
     masked_image = masked_image.reshape((-1, 3))
-    index_of_image = clustered_images_list.index(img)
+    index_of_image = clustered_images_list.index(image)
     best_cluster = fb.calculate_temperature(labels_of_all_image[index_of_image],filename[index_of_image])
     print("")
-    
     for i in range(0,6):
         if i == best_cluster:
             masked_image[labels == best_cluster] = [255,255,255]      
         # else:
         #     masked_image[labels == i] = [0,0,0]
+    masked_image = masked_image.reshape(image.shape)
     masked_image_list.append(masked_image)     
       
 
@@ -134,13 +134,13 @@ try:
     path = os.getcwd()
     parent_path = Path(path).parent
     os.chdir(parent_path)    
-    os.mkdir('kmeans-masked-output')
+    os.mkdir('kmeans-output')
 
 except FileExistsError:
     print(" ")
     print("Folder already exists so removing the previous outputs and creating again")
-    s.rmtree('kmeans-masked-output')
-    os.mkdir('kmeans-masked-output')
+    s.rmtree('kmeans-output')
+    os.mkdir('kmeans-output')
     print(" ")
 finally:
     print("Pushing clustered images to disk..............")    
