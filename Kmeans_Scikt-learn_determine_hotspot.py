@@ -106,9 +106,7 @@ print("  ")
 try:
     path = os.getcwd()
     parent_path = Path(path).parent
-    
     os.chdir(parent_path)    
-    os.chdir('csv')
     os.mkdir('kmeans-output')
 
 except FileExistsError:
