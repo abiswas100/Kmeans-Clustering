@@ -77,9 +77,8 @@ print(" ")
 end = time.time()
 print("Time consumed in clustering: ",end - start)
 
+
 #function to mask only the hotspot
-
-
 print("")
 print("Masking the image in binary by finding the best cluster")
 masked_image_list = []
