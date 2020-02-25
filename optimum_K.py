@@ -7,5 +7,5 @@ import pandas
 import progressbar
 
 
-def silhoette():
+def silhoette(pixel_values):
     pass
