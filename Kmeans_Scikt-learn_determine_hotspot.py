@@ -75,9 +75,13 @@ for image in pbar(image_list):
 
 print(" ")
 end = time.time()
-print("Time consumed in working: ",end - start)
+print("Time consumed in clustering: ",end - start)
 
 #function to mask only the hotspot
+
+
+print("")
+print("Masking the image in binary by finding the best cluster")
 masked_image_list = []
 
 for img in pbar(clustered_images_list):
