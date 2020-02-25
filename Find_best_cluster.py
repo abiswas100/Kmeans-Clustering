@@ -50,9 +50,11 @@ def calculate_temperature(labels,filename):
             Y_coordinate = int(pixel_label - (X_coordinate*512))    #Subtract the row * 512 to get the location of the y coord
             temp = float(temperature[X_coordinate][Y_coordinate])   
             temp_array.append(temp)
-            minimum = min(temp)
-            maximum = max(temp)
-            average = int(mean(temp))
-    cluster_averages.append(average)           
-    return max(cluster_averages)
+        minimum = min(temp_array)
+        print("minimum Temperature - ",minimum,"for label",pixel_label)
+        maximum = max(temp_array)
+        average = int(mean(temp_array))
+    cluster_averages.append(average)
+    max_average = max(cluster_averages)           
+    return cluster_averages.index(max_average)
 
