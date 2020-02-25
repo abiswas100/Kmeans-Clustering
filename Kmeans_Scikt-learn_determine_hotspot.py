@@ -25,6 +25,7 @@ for files in os.listdir():
             img = cv2.imread(str(files))
             image_list.append(img)
             filename.append(files)
+            print("")
             print("All Images loaded into array")
             counter = counter+1
         else:            
@@ -84,12 +85,14 @@ print("")
 print("Masking the image in binary by finding the best cluster")
 masked_image_list = []
 print("")
-for img in (clustered_images_list):
+for img in clustered_images_list:
     masked_image = np.copy(img)
     # convert to the shape of a vector of pixel values
     masked_image = masked_image.reshape((-1, 3))
     index_of_image = clustered_images_list.index(img)
     best_cluster = fb.calculate_temperature(labels_of_all_image[index_of_image],filename[index_of_image])
+    print("")
+    print(best_cluster)
     for i in range(0,6):
         if i == best_cluster:
             masked_image[labels == best_cluster] = [255,255,255]      
@@ -124,3 +127,5 @@ finally:
         cv2.imwrite(filename[0], img)
         counter = counter + 1
 print("Finished .................")
+print(" ")
+print(" ")
