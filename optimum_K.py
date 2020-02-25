@@ -12,10 +12,6 @@ def silhoette(pixel_array):
     for i in pbar(range(0,20)):
             clusterer = KMeans(n_clusters= i, random_state=0)
             cluster_labels = clusterer.fit_predict(pixel_array)
-
-
-def silhoette(pixel_values):
-    
             # The silhouette_score gives the average value for all the samples.
             #This gives a perspective into the density and separation of the formed
             # clusters
@@ -25,4 +21,3 @@ def silhoette(pixel_values):
             # Compute the silhouette scores for each sample
             sample_silhouette_values = silhouette_samples(pixel_array, cluster_labels)
             print("silhouette score for each sample",sample_silhouette_values)
-
