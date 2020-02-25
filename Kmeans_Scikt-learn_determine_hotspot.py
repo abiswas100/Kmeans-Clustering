@@ -65,12 +65,12 @@ for image in pbar(image_list):
     # convert back to 8 bit values
     centers = kmeans.cluster_centers_
     centers = np.uint8(centers)
-    print("The centers are ----",centers)
+    # print("The centers are ----",centers)
     # flatten the labels array
     labels = kmeans.labels_
     labels_of_all_image.append(labels)
-    print("The actual labels array",labels)
-    print("The labels set - ",set(labels),"   The length of the labels array",len(labels))
+    # print("The actual labels array",labels)
+    # print("The labels set - ",set(labels),"   The length of the labels array",len(labels))
     segmented_image = centers[labels]
     segmented_image = segmented_image.reshape(image.shape)
     clustered_images_list.append(segmented_image)
