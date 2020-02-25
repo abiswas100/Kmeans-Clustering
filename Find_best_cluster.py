@@ -43,6 +43,8 @@ def extract_temperature(csv_filename):
 #This function call the extract temperature function and calculates surface temperature and hottest cluster
 
 def calculate_temperature(labels,filename):
+    print("")
+    print("For image - ",filename)
     best_cluster = 0
     cluster_averages = []
     csv_filename = filename[:-4] + '.csv'
@@ -61,7 +63,6 @@ def calculate_temperature(labels,filename):
         minimum = min(temp_array)
         maximum = max(temp_array)
         average = mean(temp_array)
-        print("")
         print("For Cluster = ",cluster)
         print("minimum Surface Temperature = ",minimum)
         print("maximum Surface Temperature = ",maximum)
