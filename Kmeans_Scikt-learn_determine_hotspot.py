@@ -83,7 +83,7 @@ print("")
 print("Masking the image in binary by finding the best cluster")
 masked_image_list = []
 print("")
-for img in pbar(clustered_images_list):
+for img in (clustered_images_list):
     masked_image = np.copy(img)
     # convert to the shape of a vector of pixel values
     masked_image = masked_image.reshape((-1, 3))
