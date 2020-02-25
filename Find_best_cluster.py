@@ -61,6 +61,7 @@ def calculate_temperature(labels,filename):
         minimum = min(temp_array)
         maximum = max(temp_array)
         average = mean(temp_array)
+        print("")
         print("For Cluster = ",cluster)
         print("minimum Surface Temperature = ",minimum)
         print("maximum Surface Temperature = ",maximum)
