@@ -45,9 +45,10 @@ def calculate_temperature(labels,filename):
         temp_array = []
         pixel_labels = np.where(labels == cluster)
         for pixel_label in pixel_labels:
-            X_coordinate = int(pixel_label/512)
-            Y_coordinate = int(pixel_label/512) #change in the proper way
-            temp = float(temperature[X_coordinate][Y_coordinate])
+            print(pixel_label)                                      #assuming pixel_label is the index that is in the current cluster
+            X_coordinate = int(pixel_label/512)                     #the row in the CSV
+            Y_coordinate = int(pixel_label - (X_coordinate*512))    #Subtract the row * 512 to get the location of the y coord
+            temp = float(temperature[X_coordinate][Y_coordinate])   
             temp_array.append(temp)
             minimum = min(temp)
             maximum = max(temp)
