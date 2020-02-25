@@ -43,13 +43,14 @@ def extract_temperature(csv_filename):
 #This function call the extract temperature function and calculates surface temperature and hottest cluster
 
 def calculate_temperature(labels,filename):
+    best_cluster = 0
     cluster_averages = []
     csv_filename = filename[:-4] + '.csv'
     temperature = extract_temperature(csv_filename) #calling the extract temperature to give the all the pixel_temps in the temperature array
     for cluster in set(labels):         #set(labels) == (0,1,2,3,4,5)
         temp_array = []
         pixel_labels = np.where(labels == cluster)
-        for pixel_label in pixel_labels:
+        for pixel_label in pixel_labels: 
             for pixel in pixel_label : 
                 try:#assuming pixel_label is the index that is in the current cluster
                     X_coordinate = int(pixel/512)                     #the row in the CSV
@@ -60,13 +61,21 @@ def calculate_temperature(labels,filename):
         minimum = min(temp_array)
         maximum = max(temp_array)
         average = mean(temp_array)
-        print(cluster)
+        print("For Cluster = ",cluster)
         print("minimum Surface Temperature = ",minimum)
         print("maximum Surface Temperature = ",maximum)
         print("average Surface Temperature = ",average)
-    cluster_averages.append(average)
-    max_average = max(cluster_averages) 
-    print(max_average)          
-    print(cluster_averages.index(max_average))
-    return cluster_averages.index(max_average)
+        cluster_averages.append(average)
+    
+    print("")
+    max_avg = max(cluster_averages)
+    print("Maximum average temperature of all clusters = ",max_avg)
+    best_cluster = cluster_averages.index(max_avg)
+    print("The hottest cluster = ",best_cluster)
+    
+    return best_cluster
+    
+    
+             
+
 
