@@ -21,15 +21,15 @@ counter = 0
 os.chdir(r"Museum Clustering Tryouts//images")
 for files in os.listdir():
     if(files.endswith('.jpg')):
-        if(counter == 0):   # to input all the image just remove the conditional statements and use the below 4 lines
+        # if(counter == 0):   # to input all the image just remove the conditional statements and use the below 4 lines
             img = cv2.imread(str(files))
             image_list.append(img)
             filename.append(files)
-            print("")
-            print("All Images loaded into array")
-            counter = counter+1
-    else:            
-              break
+print("")
+print("All Images loaded into array")
+    #         counter = counter+1
+    # else:            
+    #           break
 
 #Restricting python to use only 2 cores
 cpu_nums = list(range(psutil.cpu_count()))
@@ -93,6 +93,7 @@ for image in clustered_images_list:
     masked_image = masked_image.reshape((-1, 3))
     # index_of_image = clustered_images_list.index(image)
     best_cluster = fb.calculate_temperature(labels_of_all_image[counter],filename[counter])
+    labels = labels_of_all_image[counter]
     for i in range(0,6):
         if i == best_cluster:
             masked_image[labels == best_cluster] = [255,255,255]      
@@ -123,6 +124,7 @@ finally:
     for img in masked_image_list:
         cv2.imwrite(filename[counter], img)
         counter = counter + 1
+        img = 0
 print("Finished .................")
 print(" ")
 print(" ")
