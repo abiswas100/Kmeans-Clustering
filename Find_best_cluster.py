@@ -46,7 +46,6 @@ def calculate_temperature(labels,filename):
     cluster_averages = []
     csv_filename = filename[:-4] + '.csv'
     temperature = extract_temperature(csv_filename) #calling the extract temperature to give the all the pixel_temps in the temperature array
-    print("length of temperature", len(temperature))
     for cluster in set(labels):         #set(labels) == (0,1,2,3,4,5)
         temp_array = []
         pixel_labels = np.where(labels == cluster)
@@ -62,12 +61,12 @@ def calculate_temperature(labels,filename):
         maximum = max(temp_array)
         average = mean(temp_array)
         print(cluster)
-        print("minimum Temperature = ",minimum)
-        print("maximum Temperature = ",maximum)
-        print("average Temperature = ",average)
+        print("minimum Surface Temperature = ",minimum)
+        print("maximum Surface Temperature = ",maximum)
+        print("average Surface Temperature = ",average)
     cluster_averages.append(average)
     max_average = max(cluster_averages) 
     print(max_average)          
     print(cluster_averages.index(max_average))
-    return 0
+    return cluster_averages.index(max_average)
 
