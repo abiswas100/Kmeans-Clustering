@@ -79,6 +79,35 @@ print(" ")
 end = time.time()
 print("Time consumed in clustering: ",end - start)
 
+#Saving the clustered images in output folder
+print("  ")
+try:
+    path = os.getcwd()
+    parent_path = Path(path).parent
+    os.chdir(parent_path)    
+    os.mkdir('kmeans-output')
+
+except FileExistsError:
+    print(" ")
+    print("Folder already exists so removing the previous outputs and creating again")
+    s.rmtree('kmeans-output')
+    os.mkdir('kmeans-output')
+    print(" ")
+finally:
+    print("Pushing clustered images to disk..............")    
+    os.chdir('kmeans-output')
+    counter = 0
+    for img in clustered_images_list:
+        print(" ")
+        cv2.imwrite(filename[0], img)
+        counter = counter + 1
+print("Clustered image stored .................")
+print(" ")
+print(" ")
+
+
+
+
 
 #function to mask only the hotspot
 print("")
@@ -96,27 +125,28 @@ for img in clustered_images_list:
     for i in range(0,6):
         if i == best_cluster:
             masked_image[labels == best_cluster] = [255,255,255]      
-        else:
-            masked_image[labels == i] = [0,0,0]
-    masked_image_list.append(masked_image)        
+        # else:
+        #     masked_image[labels == i] = [0,0,0]
+    masked_image_list.append(masked_image)     
+      
 
 
 print(" ")
 print(" ")
 
-#Saving the images in output folder
+#Saving the masked images in Kmeans-masked-output folder
 print("  ")
 try:
     path = os.getcwd()
     parent_path = Path(path).parent
     os.chdir(parent_path)    
-    os.mkdir('kmeans-output')
+    os.mkdir('kmeans-masked-output')
 
 except FileExistsError:
     print(" ")
     print("Folder already exists so removing the previous outputs and creating again")
-    s.rmtree('kmeans-output')
-    os.mkdir('kmeans-output')
+    s.rmtree('kmeans-masked-output')
+    os.mkdir('kmeans-masked-output')
     print(" ")
 finally:
     print("Pushing clustered images to disk..............")    
