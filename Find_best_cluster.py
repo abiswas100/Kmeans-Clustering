@@ -1,6 +1,8 @@
+import os
+from pathlib import Path
+
 import re
 import csv
-import os
 import numpy as np
 from statistics import mean
 #this function works just fine we can use this
@@ -13,7 +15,12 @@ def extract_temperature(csv_filename):
     :param csv_file_path: CSV filepath extension
     :return: List containing [512][640] = 327680 data points
     '''
-    os.chdir(r"Museum Clustering Tryouts//csv")
+    print(os.listdir())
+    print(Path(os.getcwd).parent)
+    path = os.getcwd()
+    print(path)
+    # path = Path(path).parent+'//csv'
+    os.chdir(path)
     csv_name = re.split(r'[_.\s ]', csv_filename)
     if('MWIR' in csv_name):
         with open(csv_filename) as csv_file:
