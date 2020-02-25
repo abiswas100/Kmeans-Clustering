@@ -52,10 +52,10 @@ for image in pbar(image_list):
     # convert to float
     pixel_values = np.float32(pixel_values)
     print("")
-    print("The pixel array is ")
-    print(pixel_values)
-    print("Length of the pixel value list",len(pixel_values))
-    print("")
+    # print("The pixel array is ")
+    # print(pixel_values)
+    # print("Length of the pixel value list",len(pixel_values))
+    # print("")
     #this function will return the best k for each image
     
     # cluster = op.silhoette(pixel_values)
@@ -115,7 +115,7 @@ for img in clustered_images_list:
     index_of_image = clustered_images_list.index(img)
     best_cluster = fb.calculate_temperature(labels_of_all_image[index_of_image],filename[index_of_image])
     print("")
-    print(best_cluster)
+    
     for i in range(0,6):
         if i == best_cluster:
             masked_image[labels == best_cluster] = [255,255,255]      
