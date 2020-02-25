@@ -25,8 +25,8 @@ for files in os.listdir():
             img = cv2.imread(str(files))
             image_list.append(img)
             filename.append(files)
-            print("")
-        #     print("All Images loaded into array")
+print("")
+print("All Images loaded into array")
         #     counter = counter+1
         # else:            
         #     break
@@ -78,6 +78,8 @@ for image in pbar(image_list):
 print(" ")
 end = time.time()
 print("Time consumed in clustering: ",end - start)
+
+
 #function to mask only the hotspot
 print("")
 print("Masking the image finding the best cluster")
@@ -89,9 +91,7 @@ for image in clustered_images_list:
     # convert to the shape of a vector of pixel values
     masked_image = masked_image.reshape((-1, 3))
     # index_of_image = clustered_images_list.index(image)
-    index_of_image = counter
-    best_cluster = fb.calculate_temperature(labels_of_all_image[index_of_image],filename[index_of_image])
-    print("")
+    best_cluster = fb.calculate_temperature(labels_of_all_image[counter],filename[counter])
     for i in range(0,6):
         if i == best_cluster:
             masked_image[labels == best_cluster] = [255,255,255]      
@@ -114,13 +114,12 @@ except FileExistsError:
     print("Folder already exists so removing the previous outputs and creating again")
     s.rmtree('kmeans-output')
     os.mkdir('kmeans-output')
-    print(" ")
+
 finally:
     print("Pushing clustered images to disk..............")    
     os.chdir('kmeans-output')
     counter = 0
     for img in masked_image_list:
-        print(" ")
         cv2.imwrite(filename[counter], img)
         counter = counter + 1
 print("Finished .................")
