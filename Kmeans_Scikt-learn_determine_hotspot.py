@@ -83,11 +83,13 @@ print("")
 print("Masking the image finding the best cluster")
 masked_image_list = []
 print("")
+counter = 0
 for image in clustered_images_list:
     masked_image = np.copy(image)
     # convert to the shape of a vector of pixel values
     masked_image = masked_image.reshape((-1, 3))
-    index_of_image = clustered_images_list.index(image)
+    # index_of_image = clustered_images_list.index(image)
+    index_of_image = counter
     best_cluster = fb.calculate_temperature(labels_of_all_image[index_of_image],filename[index_of_image])
     print("")
     for i in range(0,6):
@@ -97,7 +99,7 @@ for image in clustered_images_list:
         #     masked_image[labels == i] = [0,0,0]
     masked_image = masked_image.reshape(image.shape)
     masked_image_list.append(masked_image)     
-      
+    counter = counter+1  
 
 #Saving the masked images in Kmeans-masked-output folder
 print("  ")
@@ -119,7 +121,7 @@ finally:
     counter = 0
     for img in masked_image_list:
         print(" ")
-        cv2.imwrite(filename[0], img)
+        cv2.imwrite(filename[counter], img)
         counter = counter + 1
 print("Finished .................")
 print(" ")
