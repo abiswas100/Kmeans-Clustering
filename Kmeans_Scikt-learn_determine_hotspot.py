@@ -21,15 +21,15 @@ counter = 0
 os.chdir(r"Museum Clustering Tryouts//images")
 for files in os.listdir():
     if(files.endswith('.jpg')):
-        if(counter == 0):   # to input all the image just remove the conditional statements and use the below 4 lines
+        # if(counter == 0):   # to input all the image just remove the conditional statements and use the below 4 lines
             img = cv2.imread(str(files))
             image_list.append(img)
             filename.append(files)
             print("")
-            print("All Images loaded into array")
-            counter = counter+1
-        else:            
-            break
+        #     print("All Images loaded into array")
+        #     counter = counter+1
+        # else:            
+        #     break
 
 #Restricting python to use only 2 cores
 cpu_nums = list(range(psutil.cpu_count()))
