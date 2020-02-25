@@ -32,7 +32,7 @@ for files in os.listdir():
 #Restricting python to use only 2 cores
 cpu_nums = list(range(psutil.cpu_count()))
 proc = psutil.Process(os.getpid())
-proc.cpu_affinity(cpu_nums[:2])
+# proc.cpu_affinity(cpu_nums[:2])
 print("CPUS being consumed..",cpu_count())
 
 
@@ -83,7 +83,7 @@ print("Time consumed in clustering: ",end - start)
 print("")
 print("Masking the image in binary by finding the best cluster")
 masked_image_list = []
-
+print("")
 for img in pbar(clustered_images_list):
     masked_image = np.copy(img)
     # convert to the shape of a vector of pixel values
@@ -96,7 +96,11 @@ for img in pbar(clustered_images_list):
         else:
             masked_image[labels == i] = [0,0,0]
     masked_image_list.append(masked_image)        
-    
+
+
+print(" ")
+print(" ")
+
 #Saving the images in output folder
 print("  ")
 try:
