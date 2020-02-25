@@ -102,16 +102,10 @@ finally:
         cv2.imwrite(filename[0], img)
         counter = counter + 1
 print("Clustered image stored .................")
-print(" ")
-print(" ")
-
-
-
-
 
 #function to mask only the hotspot
 print("")
-print("Masking the image in binary by finding the best cluster")
+print("Masking the image finding the best cluster")
 masked_image_list = []
 print("")
 for img in clustered_images_list:
