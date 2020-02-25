@@ -78,20 +78,20 @@ end = time.time()
 print("Time consumed in working: ",end - start)
 
 #function to mask only the hotspot
-# masked_image_list = []
+masked_image_list = []
 
-# for img in clustered_images_list:
-#     masked_image = np.copy(img)
-#     # convert to the shape of a vector of pixel values
-#     masked_image = masked_image.reshape((-1, 3))
-#     index_of_image = clustered_images_list.index(img)
-#     best_cluster = fb.calculate_temperature(labels_of_all_image[index_of_image],filename[index_of_image])
-#     for i in range(0,6):
-#         if i == best_cluster:
-#             masked_image[labels == best_cluster] = [255,255,255]      
-#         else:
-#             masked_image[labels == i] = [0,0,0]
-#     masked_image_list.append(masked_image)        
+for img in pbar(clustered_images_list):
+    masked_image = np.copy(img)
+    # convert to the shape of a vector of pixel values
+    masked_image = masked_image.reshape((-1, 3))
+    index_of_image = clustered_images_list.index(img)
+    best_cluster = fb.calculate_temperature(labels_of_all_image[index_of_image],filename[index_of_image])
+    for i in range(0,6):
+        if i == best_cluster:
+            masked_image[labels == best_cluster] = [255,255,255]      
+        else:
+            masked_image[labels == i] = [0,0,0]
+    masked_image_list.append(masked_image)        
     
 #Saving the images in output folder
 print("  ")
@@ -107,7 +107,7 @@ finally:
     print("Pushing clustered images to disk..............")    
     os.chdir('kmeans-output')
     counter = 0
-    for img in clustered_images_list:
+    for img in masked_image_list:
         print(" ")
         cv2.imwrite(filename[0], img)
         counter = counter + 1
