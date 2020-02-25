@@ -103,7 +103,13 @@ print(" ")
 #Saving the images in output folder
 print("  ")
 try:
+    path = os.getcwd()
+    parent_path = Path(path).parent
+    
+    os.chdir(parent_path)    
+    os.chdir('csv')
     os.mkdir('kmeans-output')
+
 except FileExistsError:
     print(" ")
     print("Folder already exists so removing the previous outputs and creating again")
