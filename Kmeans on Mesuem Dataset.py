@@ -43,7 +43,6 @@ for image in pbar(image_list):
     criteria = (cv2.TERM_CRITERIA_EPS + cv2.TERM_CRITERIA_MAX_ITER, 100, 0.01)
     #KMEANS 
     clusters = 6
-    
     compactness, labels, centers = cv2.kmeans(pixel_values, clusters, None,criteria, 10, cv2.KMEANS_PP_CENTERS)
     # convert back to 8 bit values
     centers = np.uint8(centers)
