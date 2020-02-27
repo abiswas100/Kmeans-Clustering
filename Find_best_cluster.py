@@ -5,6 +5,7 @@ import re
 import csv
 import numpy as np
 from statistics import mean
+
 #this function works just fine we can use this
 def extract_temperature(csv_filename):
     '''
@@ -59,7 +60,7 @@ def calculate_temperature(labels,filename):
                     Y_coordinate = int(pixel - (X_coordinate*512))    #Subtract the row * 512 to get the location of the y coord
                     temp = float(temperature[X_coordinate][Y_coordinate])  
                     temp_array.append(temp)
-                except IndexError: break    
+                except IndexError: break               
         minimum = min(temp_array)
         maximum = max(temp_array)
         average = mean(temp_array)
@@ -68,7 +69,7 @@ def calculate_temperature(labels,filename):
         print("maximum Surface Temperature = ",maximum)
         print("average Surface Temperature = ",average)
         cluster_averages.append(average)
-    
+        
     print("")
     max_avg = max(cluster_averages)
     print("Maximum average temperature of all clusters = ",max_avg)
