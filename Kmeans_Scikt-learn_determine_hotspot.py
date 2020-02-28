@@ -5,23 +5,22 @@ import os
 from pathlib import Path
 import shutil as s
 import time
-import csv
+from multiprocessing import cpu_count
+
 import cv2
-import shutil as s
+import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
 import psutil
-import matplotlib.pyplot as plt
-from multiprocessing import cpu_count
 from progressbar import ProgressBar
 from sklearn.cluster import KMeans
 
 image_list = []
 filename = []
-counter = 0
-os.chdir(r"C:\Users\samuel.dressler\Desktop\Kmeans\Museum Clustering Tryouts\images")
+counter = 0  
+os.chdir(r"Museum Clustering Tryouts//images")
 for files in os.listdir():
-# if(files.endswith('.jpg')):
+    # if(files.endswith('.jpg')):
          if(counter == 0):   # to input all the image just remove the conditional statements and use the below 4 lines
             img = cv2.imread(str(files))
             image_list.append(img)
