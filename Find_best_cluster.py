@@ -4,6 +4,7 @@ from pathlib import Path
 import re
 import csv
 import numpy as np
+import pandas as pd
 from statistics import mean
 
 #this function works just fine we can use this
@@ -48,6 +49,7 @@ def calculate_temperature(labels,filename):
     print("For image - ",filename)
     best_cluster = 0
     cluster_averages = []
+    no_of_pixels = []
     csv_filename = filename[:-4] + '.csv'
     temperature = extract_temperature(csv_filename) #calling the extract temperature to give the all the pixel_temps in the temperature array
     for cluster in set(labels):         #set(labels) == (0,1,2,3,4,5)
@@ -60,7 +62,8 @@ def calculate_temperature(labels,filename):
                     Y_coordinate = int(pixel - (X_coordinate*512))    #Subtract the row * 512 to get the location of the y coord
                     temp = float(temperature[X_coordinate][Y_coordinate])  
                     temp_array.append(temp)
-                except IndexError: break               
+                except IndexError: break      
+        no_of_pixels.append(len(temp_array)+1)         
         minimum = min(temp_array)
         maximum = max(temp_array)
         average = mean(temp_array)
@@ -69,12 +72,14 @@ def calculate_temperature(labels,filename):
         print("maximum Surface Temperature = ",maximum)
         print("average Surface Temperature = ",average)
         cluster_averages.append(average)
-        
     print("")
     max_avg = max(cluster_averages)
     print("Maximum average temperature of all clusters = ",max_avg)
     best_cluster = cluster_averages.index(max_avg)
     print("The hottest cluster = ",best_cluster)
+    
+    density_of_hotspot = no_of_pixels[best_cluster]/327680
+    print("Density of Hotspot",density_of_hotspot*100) 
     
     return best_cluster
     
