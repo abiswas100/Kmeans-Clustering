@@ -268,6 +268,8 @@ print(" ")
 
 
 
+#BELOW CODE IS OF NO USE
+
 # # #Saving the clustered images in output folder
 # # print("  ")
 # # try:
