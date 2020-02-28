@@ -9,6 +9,8 @@ import psutil
 from progressbar import ProgressBar
 from sklearn.cluster import KMeans
 
+
+#run this file directly in the images folder of Twamley or Museum
 #Storing the images from File to an array named image_list
 image_list = []
 filename = []
@@ -41,7 +43,6 @@ for image in pbar(image_list):
     criteria = (cv2.TERM_CRITERIA_EPS + cv2.TERM_CRITERIA_MAX_ITER, 100, 0.01)
     #KMEANS 
     clusters = 6
-    
     compactness, labels, centers = cv2.kmeans(pixel_values, clusters, None,criteria, 10, cv2.KMEANS_PP_CENTERS)
     # convert back to 8 bit values
     centers = np.uint8(centers)
