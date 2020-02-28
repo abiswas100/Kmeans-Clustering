@@ -228,7 +228,7 @@ for image in clustered_images_list:
     # convert to the shape of a vector of pixel values
     masked_image = masked_image.reshape((-1, 3))
     # index_of_image = clustered_images_list.index(image)
-    best_cluster = fb.calculate_temperature(labels_of_all_image[counter],filename[counter])
+    best_cluster = fb.calculate_temperature(labels_of_all_image[counter],filenames[counter])
     labels = labels_of_all_image[counter]
     for i in range(0,6):
         if i == best_cluster:
