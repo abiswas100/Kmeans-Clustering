@@ -56,12 +56,14 @@ for image in pbar(image_list):
     # print(pixel_values)
     # print("Length of the pixel value list",len(pixel_values))
     # print("")
+    
     #this function will return the best k for each image
     
     # cluster = op.silhoette(pixel_values)
     
     #create an array for the number of clusters
-    kmeans = KMeans(n_clusters=6, random_state=0, n_jobs = -1).fit(pixel_values)
+    
+    kmeans = KMeans(n_clusters=10, random_state=0, n_jobs = -1).fit(pixel_values)
     # convert back to 8 bit values
     centers = kmeans.cluster_centers_
     centers = np.uint8(centers)
@@ -94,7 +96,7 @@ for image in clustered_images_list:
     # index_of_image = clustered_images_list.index(image)
     best_cluster = fb.calculate_temperature(labels_of_all_image[counter],filename[counter])
     labels = labels_of_all_image[counter]
-    for i in range(0,6):
+    for i in range(0,10):
         if i == best_cluster:
             masked_image[labels == best_cluster] = [255,255,255]      
         # else:
