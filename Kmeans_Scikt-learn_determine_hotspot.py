@@ -92,7 +92,7 @@ for image in clustered_images_list:
     # convert to the shape of a vector of pixel values
     masked_image = masked_image.reshape((-1, 3))
     # index_of_image = clustered_images_list.index(image)
-    best_cluster = fb.calculate_temperature(labels_of_all_image[counter],filename[counter])
+    best_cluster, no_of_labels = fb.calculate_temperature(labels_of_all_image[counter],filename[counter])
     labels = labels_of_all_image[counter]
     for i in range(0,6):
         if i == best_cluster:
@@ -102,7 +102,7 @@ for image in clustered_images_list:
     masked_image = masked_image.reshape(image.shape)
     masked_image_list.append(masked_image)     
     counter = counter+1  
-
+    density of pixels = 327800/
 #Saving the masked images in Kmeans-masked-output folder
 print("  ")
 try:
