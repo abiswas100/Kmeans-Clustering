@@ -80,13 +80,13 @@ def calculate_temperature(labels,filename):
     
     density_of_hotspot = no_of_pixels[best_cluster]/327680
     print("Density of Hotspot",density_of_hotspot*100) 
-    export_to_excel(best_cluster,density_of_hotspot*100,filename)
+    # export_to_excel(best_cluster,density_of_hotspot*100,filename)
     return best_cluster
     
-    def export_to_excel(best_cluster,density,filename):
-        print("export complete")
+    # def export_to_excel(best_cluster,density,filename):
+    #     print("export complete")
         
-        pass
+        # pass
              
 
 
