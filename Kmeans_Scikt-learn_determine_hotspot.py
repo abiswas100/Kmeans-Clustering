@@ -259,7 +259,7 @@ finally:
     os.chdir('kmeans-output')
     counter = 0
     for img in masked_image_list:
-        cv2.imwrite(filename[counter], img)
+        cv2.imwrite(filenames[counter], img)
         counter = counter + 1
         img = 0
 print("Finished .................")
