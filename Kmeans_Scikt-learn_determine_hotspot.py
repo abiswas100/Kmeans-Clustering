@@ -84,43 +84,43 @@ def start_parsing(json_files, project_name):
             
         print(len(new_list))
         
-start_parsing("test", "test")
+# start_parsing("test", "test")
 #         for i in len(x_coordiantes):
             
 # counter = 0  
 #     #         counter = counter+1
 #     # else:            
 #     #           break
-# #Restricting python to use only 2 cores
-# cpu_nums = list(range(psutil.cpu_count()))
-# proc = psutil.Process(os.getpid())
-# # proc.cpu_affinity(cpu_nums[:2]) #will use all CPU cores uncomment to use 2 cores
-# print("CPUS being consumed..",cpu_count())
+#Restricting python to use only 2 cores
+cpu_nums = list(range(psutil.cpu_count()))
+proc = psutil.Process(os.getpid())
+proc.cpu_affinity(cpu_nums[:-2]) #will use all CPU cores uncomment to use 2 cores
+print("CPUS being consumed..",cpu_count())
 
 
-# pbar = ProgressBar()
-# start = time.time()
-# clustered_images_list = [] #list containing all the clustered outputs
-#  # Running 6 clusters on each image of Museum
-#  # For Twamley keep cluster above 10 
-# print("")
-# print("Clustering the image ")
-# labels_of_all_image = []
-# for image in pbar(image_list):
-#     # reshape the image to a 2D array of pixels and 3 color values (RGB)
-#     pixel_values = image.reshape((-1, 3))
-#     # convert to float
-#     pixel_values = np.float32(pixel_values)
-#     print("")
-#     # print("The pixel array is ")
-#     # print(pixel_values)
-#     # print("Length of the pixel value list",len(pixel_values))
-#     # print("")
-#     #this function will return the best k for each image
+pbar = ProgressBar()
+start = time.time()
+clustered_images_list = [] #list containing all the clustered outputs
+ # Running 6 clusters on each image of Museum
+ # For Twamley keep cluster above 10 
+print("")
+print("Clustering the image ")
+labels_of_all_image = []
+for image in pbar(new_list):
+    # reshape the image to a 2D array of pixels and 3 color values (RGB)
+    pixel_values = image.reshape((-1, 3))
+    # convert to float
+    pixel_values = np.float32(pixel_values)
+    print("")
+    # print("The pixel array is ")
+    # print(pixel_values)
+    # print("Length of the pixel value list",len(pixel_values))
+    # print("")
+    #this function will return the best k for each image
     
-#     # cluster = op.silhoette(pixel_values)
+    # cluster = op.silhoette(pixel_values)
     
-<<<<<<< Updated upstream
+
     #create an array for the number of clusters
     kmeans = KMeans(n_clusters=6, random_state=0, n_jobs = -1).fit(pixel_values)
     # convert back to 8 bit values
