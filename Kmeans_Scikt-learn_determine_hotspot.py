@@ -20,8 +20,8 @@ filename = []
 counter = 0  
 os.chdir(r"Museum Clustering Tryouts//images")
 for files in os.listdir():
-    if(files.endswith('.jpg')):
-        # if(counter == 0):   # to input all the image just remove the conditional statements and use the below 4 lines
+    # if(files.endswith('.jpg')):
+         if(counter == 0):   # to input all the image just remove the conditional statements and use the below 4 lines
             img = cv2.imread(str(files))
             image_list.append(img)
             filename.append(files)
@@ -29,7 +29,7 @@ print("")
 print("All Images loaded into array")
     #         counter = counter+1
     # else:            
-    #           break
+    #     break
 
 #Restricting python to use only 2 cores
 cpu_nums = list(range(psutil.cpu_count()))
@@ -88,6 +88,7 @@ print("Masking the image finding the best cluster")
 masked_image_list = []
 print("")
 counter = 0
+hotspot_densities = []
 for image in clustered_images_list:
     masked_image = 0
     masked_image = np.copy(image)
@@ -98,7 +99,7 @@ for image in clustered_images_list:
     labels = labels_of_all_image[counter]
     for i in range(0,10):
         if i == best_cluster:
-            masked_image[labels == best_cluster] = [255,255,255]      
+            masked_image[labels == best_cluster] = [255,255,255]        
         # else:
         #     masked_image[labels == i] = [0,0,0]
     masked_image = masked_image.reshape(image.shape)
