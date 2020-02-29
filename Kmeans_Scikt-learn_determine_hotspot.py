@@ -63,7 +63,7 @@ for image in pbar(image_list):
     
     #create an array for the number of clusters
     
-    kmeans = KMeans(n_clusters=20, random_state=0, n_jobs = -1).fit(pixel_values)
+    kmeans = KMeans(n_clusters=10, random_state=0, n_jobs = -1).fit(pixel_values)
     # convert back to 8 bit values
     centers = kmeans.cluster_centers_
     centers = np.uint8(centers)
