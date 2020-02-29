@@ -59,12 +59,10 @@ def calculate_temperature(labels,filename):
                     X_coordinate = int(pixel/512)                     #the row in the CSV
                     Y_coordinate = int(pixel - (X_coordinate*512))    #Subtract the row * 512 to get the location of the y coord
                     temp = float(temperature[X_coordinate][Y_coordinate])  
-                    # print(temp)
                     temp_array.append(temp)
                 except IndexError: 
                     break   
         try:
-
             minimum = min(temp_array)
             maximum = max(temp_array)
             average = mean(temp_array)
@@ -82,16 +80,14 @@ def calculate_temperature(labels,filename):
     best_cluster = cluster_averages.index(max_avg)
     print("The hottest cluster = ",best_cluster)
     
+
+
+
     # density_of_hotspot = no_of_pixels[best_cluster]/327680
     # print("Density of Hotspot",density_of_hotspot*100) 
-    # export_to_excel(best_cluster,density_of_hotspot*100,filename)
+
 
     return best_cluster
-    
-    # def export_to_excel(best_cluster,density,filename):
-    #     print("export complete")
-        
-        # pass
-             
+
 
 
