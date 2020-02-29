@@ -105,7 +105,11 @@ for image in clustered_images_list:
     masked_image = masked_image.reshape(image.shape)
     masked_image_list.append(masked_image)     
     counter = counter+1  
+    count = 0
+    for label in labels:
+        if (label == best_cluster):count = count + 1
 
+    print("Density of hotspot..",round((count/327860)*100),'%')
 #Saving the masked images in Kmeans-masked-output folder
 print("  ")
 try:
