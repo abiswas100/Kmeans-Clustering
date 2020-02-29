@@ -77,7 +77,7 @@ def calculate_temperature(labels,filename):
     best_cluster = cluster_averages.index(max_avg)
     print("The hottest cluster = ",best_cluster)
     
-    return best_cluster, no_of_pixel
+    return best_cluster
     
     
              
