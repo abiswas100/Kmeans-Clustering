@@ -38,7 +38,7 @@ def extract_temperature(csv_filename):
             for i, data in enumerate(csv_file_content):
                 if(i >= 1):
                     pixel_temperature.append(data[0:])
-
+    
     return pixel_temperature
 
 #This function call the extract temperature function and calculates surface temperature and hottest cluster
@@ -59,30 +59,33 @@ def calculate_temperature(labels,filename):
                     X_coordinate = int(pixel/512)                     #the row in the CSV
                     Y_coordinate = int(pixel - (X_coordinate*512))    #Subtract the row * 512 to get the location of the y coord
                     temp = float(temperature[X_coordinate][Y_coordinate])  
+                    # print(temp)
                     temp_array.append(temp)
-                except IndexError: break   
-        if cluster == 6:
-            no_of_pixel = len(temp_array)+1+1
-        minimum = min(temp_array)
-        maximum = max(temp_array)
-        average = mean(temp_array)
-        print("For Cluster = ",cluster)
-        print("minimum Surface Temperature = ",minimum)
-        print("maximum Surface Temperature = ",maximum)
-        print("average Surface Temperature = ",average)
-        cluster_averages.append(average)
+                except IndexError: 
+                    break   
+        try:
+
+            minimum = min(temp_array)
+            maximum = max(temp_array)
+            average = mean(temp_array)
+        except ValueError:
+            pass
+        finally:    
+            print("For Cluster = ",cluster)
+            print("minimum Surface Temperature = ",minimum)
+            print("maximum Surface Temperature = ",maximum)
+            print("average Surface Temperature = ",average)
+            cluster_averages.append(average)
     print("")
     max_avg = max(cluster_averages)
     print("Maximum average temperature of all clusters = ",max_avg)
     best_cluster = cluster_averages.index(max_avg)
     print("The hottest cluster = ",best_cluster)
     
-<<<<<<< HEAD
-=======
-    density_of_hotspot = no_of_pixels[best_cluster]/327680
-    print("Density of Hotspot",density_of_hotspot*100) 
+    # density_of_hotspot = no_of_pixels[best_cluster]/327680
+    # print("Density of Hotspot",density_of_hotspot*100) 
     # export_to_excel(best_cluster,density_of_hotspot*100,filename)
->>>>>>> 9c2f77625f42d6cd2396d82e4925bd759d049f87
+
     return best_cluster
     
     # def export_to_excel(best_cluster,density,filename):
