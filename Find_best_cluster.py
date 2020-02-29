@@ -61,7 +61,7 @@ def calculate_temperature(labels,filename):
                     temp = float(temperature[X_coordinate][Y_coordinate])  
                     temp_array.append(temp)
                 except IndexError: 
-                    break   
+                    break       
         try:
             minimum = min(temp_array)
             maximum = max(temp_array)
@@ -79,6 +79,7 @@ def calculate_temperature(labels,filename):
     print("Maximum average temperature of all clusters = ",max_avg)
     best_cluster = cluster_averages.index(max_avg)
     print("The hottest cluster = ",best_cluster)
+    
     
 
 
