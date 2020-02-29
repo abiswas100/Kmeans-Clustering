@@ -77,9 +77,18 @@ def calculate_temperature(labels,filename):
     best_cluster = cluster_averages.index(max_avg)
     print("The hottest cluster = ",best_cluster)
     
+<<<<<<< HEAD
+=======
+    density_of_hotspot = no_of_pixels[best_cluster]/327680
+    print("Density of Hotspot",density_of_hotspot*100) 
+    # export_to_excel(best_cluster,density_of_hotspot*100,filename)
+>>>>>>> 9c2f77625f42d6cd2396d82e4925bd759d049f87
     return best_cluster
     
-    
+    # def export_to_excel(best_cluster,density,filename):
+    #     print("export complete")
+        
+        # pass
              
 
 
