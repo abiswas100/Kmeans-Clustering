@@ -14,8 +14,7 @@ import pandas as pd
 import psutil
 from progressbar import ProgressBar
 from sklearn.cluster import KMeans
-
-from openpyxl import Workbook, load_workbook
+import csv
 
 image_list = []
 filename = []
@@ -111,8 +110,8 @@ for image in clustered_images_list:
     for label in labels:
         if label ==  best_cluster: count = count +1
 
-
-    print("Density of hotspot..",round((count/327860)*100),'%')
+    density = round((count/327860)*100)
+    print("Density of hotspot..",density,'%')
 #Saving the masked images in Kmeans-masked-output folder
 print("  ")
 try:
@@ -120,14 +119,6 @@ try:
     parent_path = Path(path).parent
     os.chdir(parent_path)    
     os.mkdir('kmeans-output')
-    wb = Workbook()
-    wb.save("Museum")
-
-    try:
-        Mueseum_data = wb.create_sheet('Mueseum',1)
-    except FileExistsError: 
-        ref = wb['Museum_data']
-        wb.remove(ref)
 except FileExistsError:
     print(" ")
     print("Folder already exists so removing the previous outputs and creating again")
@@ -142,6 +133,24 @@ finally:
         cv2.imwrite(filename[counter], img)
         counter = counter + 1
         img = 0
+print("Images loaded to disk..pushing clustering information to disk")
+print("")   
+
+try:
+    file = 'kmeans'
+    with open(file + 'mueseum.csv' , 'a' ,newline='') as csvfile :
+        writer = csv.writer(csvfile)
+        writer.writerow(['Filename','cluster','minimum','maximum','average','density'])
+        # for data in data_of_all_cluster[best_cluster]:
+            # print(type(data))
+        cluster = data_of_all_cluster[best_cluster][0]
+        minimum = data_of_all_cluster[best_cluster][1]
+        maximum = data_of_all_cluster[best_cluster][2]
+        average = data_of_all_cluster[best_cluster][3]
+        writer.writerow([filename[0],cluster,minimum,maximum,average,str(density)+'%'])
+except FileExistsError:
+    os.remove('mueseum.csv')    
+
 print("Finished .................")
 print(" ")
 print(" ")
