@@ -147,27 +147,3 @@ print(" ")
 print(" ")
 
 
-# #Saving the clustered images in output folder
-# print("  ")
-# try:
-#     path = os.getcwd()
-#     parent_path = Path(path).parent
-#     os.chdir(parent_path)    
-#     os.mkdir('kmeans-output')
-
-# except FileExistsError:
-#     print(" ")
-#     print("Folder already exists so removing the previous outputs and creating again")
-#     s.rmtree('kmeans-output')
-#     os.mkdir('kmeans-output')
-#     print(" ")
-# finally:
-#     print("Pushing clustered images to disk..............")    
-#     os.chdir('kmeans-output')
-#     counter = 0
-#     for img in clustered_images_list:
-#         print(" ")
-#         cv2.imwrite(filename[0], img)
-#         counter = counter + 1
-# print("Clustered image stored .................")
-
