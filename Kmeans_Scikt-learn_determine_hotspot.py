@@ -22,15 +22,15 @@ counter = 0
 os.chdir(r"Museum Clustering Tryouts//images")
 for files in os.listdir():
     if(files.endswith('.jpg')):
-         if(counter == 0):   # to input all the image just remove the conditional statements and use the below 4 lines
+         #if(counter == 0):   # to input all the image just remove the conditional statements and use the below 4 lines
             img = cv2.imread(str(files))
             image_list.append(img)
             filename.append(files)
-            print("")
-            print("All Images loaded into array")
-            counter = counter+1
-    else:            
-        break
+print("")
+print("All Images loaded into array")
+    #         counter = counter+1
+    # else:            
+    #     break
 
 #Restricting python to use only 2 cores
 cpu_nums = list(range(psutil.cpu_count()))
@@ -89,7 +89,8 @@ print("Masking the image finding the best cluster")
 masked_image_list = []
 print("")
 counter = 0
-
+best_cluster_of_all_image = []
+density_of_all_image = []
 for image in clustered_images_list:
     masked_image = 0
     masked_image = np.copy(image)
@@ -97,6 +98,7 @@ for image in clustered_images_list:
     masked_image = masked_image.reshape((-1, 3))
     # index_of_image = clustered_images_list.index(image)
     best_cluster,data_of_all_cluster = fb.calculate_temperature(labels_of_all_image[counter],filename[counter])
+    best_cluster_of_all_image.append(best_cluster)
     labels = labels_of_all_image[counter]
     for i in range(0,10):
         if i == best_cluster:
@@ -112,6 +114,8 @@ for image in clustered_images_list:
 
     density = round((count/327860)*100)
     print("Density of hotspot..",density,'%')
+    density_of_all_image.append(density)
+    
 #Saving the masked images in Kmeans-masked-output folder
 print("  ")
 try:
@@ -134,23 +138,23 @@ finally:
         counter = counter + 1
         img = 0
 print("Images loaded to disk..pushing clustering information to disk")
-print("")   
-
+print("")    
 try:
     file = 'kmeans'
-    with open(file + 'mueseum.csv' , 'a' ,newline='') as csvfile :
+    with open(file + 'museum.csv' , 'a' ,newline='') as csvfile :
         writer = csv.writer(csvfile)
-        writer.writerow(['Filename','cluster','minimum','maximum','average','density'])
-        # for data in data_of_all_cluster[best_cluster]:
-            # print(type(data))
-        cluster = data_of_all_cluster[best_cluster][0]
-        minimum = data_of_all_cluster[best_cluster][1]
-        maximum = data_of_all_cluster[best_cluster][2]
-        average = data_of_all_cluster[best_cluster][3]
-        writer.writerow([filename[0],cluster,minimum,maximum,average,str(density)+'%'])
+        writer.writerow(['Filename','Hotspot-cluster','minimum','maximum','average','density']) 
+        for i in range(0,len(filename)):
+            file = filename[i]
+            cluster = data_of_all_cluster[best_cluster_of_all_image[i]][0]
+            minimum = data_of_all_cluster[best_cluster_of_all_image[i]][1]
+            maximum = data_of_all_cluster[best_cluster_of_all_image[i]][2]
+            average = data_of_all_cluster[best_cluster_of_all_image[i]][3]
+            density = density_of_all_image[i]
+            writer.writerow([file,cluster,minimum,maximum,average,str(density)+'%'])
 except FileExistsError:
-    os.remove('mueseum.csv')    
-
+    os.remove('mueseum.csv')   
+    
 print("Finished .................")
 print(" ")
 print(" ")
