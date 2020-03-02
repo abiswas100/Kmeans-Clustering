@@ -21,6 +21,7 @@ import json
 
 #Importing the images
 
+
 image_list = []
 filenames = []
 counter = 0  
@@ -41,7 +42,7 @@ for files in os.listdir():
 
 image_list = ann.start_parsing(image_list,filenames)
 
-
+#return updated 
 
 #Restricting python to use only 2 cores
 cpu_nums = list(range(psutil.cpu_count()))
