@@ -123,17 +123,6 @@ try:
     parent_path = Path(path).parent
     os.chdir(parent_path)    
     os.mkdir('kmeans-output')
-<<<<<<< HEAD
-    wb = Workbook()
-    wb.save("Museum")
-
-    try:
-        Mueseum_data = wb.create_sheet('Mueseum',1)
-    except FileExistsError: 
-        ref = wb['Museum_data']
-        wb.remove(ref)
-=======
->>>>>>> 08a5a2af422d0e013035b34abb9445c90e1ac358
 except FileExistsError:
     print(" ")
     print("Folder already exists so removing the previous outputs and creating again")
