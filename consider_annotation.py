@@ -38,7 +38,7 @@ def start_parsing(image_list,filenames): #json_files , project_name
     with open('Data/json/' + "0633_MWIR.jpg.json") as json_content:
         json_data = json.load(json_content)
         for entry in json_data['objects']:
-            if (entry['classTitle'] == 'Facet' or entry['classTitle'] == 'Facade' or entry['classTitle'] == 'Facades'):
+            if (entry['classTitle'] == 'Facet' or entry['classTitle'] == 'Windows' or entry['classTitle'] == 'Facades'):
                 x_values = []
                 y_values = []
                 points = entry['points']
