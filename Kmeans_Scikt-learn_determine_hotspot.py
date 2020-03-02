@@ -6,8 +6,7 @@ from pathlib import Path
 import shutil as s
 import time
 from multiprocessing import cpu_count
-
-import cv2
+from cv2 import cv2
 import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
@@ -45,55 +44,60 @@ Main function used to parse/open/initiate calculations for all files within the 
 TODO: Rewrite so this function is called each time you want to do calculation, not it looping through all files
 '''
 import json
-def start_parsing(json_files, project_name):
+def start_parsing(json_filenames, project_name):
     draw_window = []
     draw_face = []
-    filename = json_files.split('.')
+    #filename = json_files.split('.')
+    
+    for jfile in json_filenames:
+        with open(jfile) as json_content:
+            json_data = json.load(json_content)
+            for entry in json_data['objects']:
+                if (entry['classTitle'] == 'Facet' or entry['classTitle'] == 'Facade' or entry['classTitle'] == 'Facades'):
+                    x_values = []
+                    y_values = []
+                    points = entry['points']
+                    exterior = points['exterior']
+                    for i, coordinates in enumerate(exterior):
+                        x_values.append(exterior[i][1])
+                        y_values.append(exterior[i][0])
+                    if (len(x_values) < 4):
+                        print("ERROR: LESS THAN 4 POINTS ANNOTATED FOR WINDOW. NUMBER OF POINTS: {}".format(
+                            len(x_values)))
+                    else:
+                        x_coordinates, y_coordinates = polygon_area_calculation(x_values, y_values)
+        
+        
+            #X_coordiantes and y_coordiantes now hold points of interest
+            print(os.getcwd())
+            path = os.getcwd()
+            parent_path = Path(path).parent
+            os.chdir(os.path.join(parent_path,'images')) 
+            print(os.getcwd())
+            
+            filenames = []
+            for files in os.listdir():
+                if(files.endswith('.jpg')):
+                    img = cv2.imread(str(files))
+                    filenames.append(files)
+            new_list = []
+            for i in range(len(x_coordinates)):
+                #print("{} {}".format(x_coordinates[i], y_coordinates[i]))
+                #new_list.append(img[x_coordinates[i][y_coordinates[i]]])
+                r ,g,b = img[x_coordinates[i], y_coordinates[i]]
+                new_list.append([r,g,b])
+                    
+        print("\n",len(new_list),filenames)
+        return new_list,filenames
 
- 
-    with open('Data/json/' + "0633_MWIR.jpg.json") as json_content:
-        json_data = json.load(json_content)
-        for entry in json_data['objects']:
-            if (entry['classTitle'] == 'Facet' or entry['classTitle'] == 'Facade' or entry['classTitle'] == 'Facades'):
-                x_values = []
-                y_values = []
-                points = entry['points']
-                exterior = points['exterior']
-                for i, coordinates in enumerate(exterior):
-                    x_values.append(exterior[i][1])
-                    y_values.append(exterior[i][0])
-                if (len(x_values) < 4):
-                    print("ERROR: LESS THAN 4 POINTS ANNOTATED FOR WINDOW. NUMBER OF POINTS: {}".format(
-                        len(x_values)))
-                else:
-                    x_coordinates, y_coordinates = polygon_area_calculation(x_values, y_values)
-        
-        
-        #X_coordiantes and y_coordiantes now hold points of interes
-        os.chdir(r"Museum Clustering Tryouts//images")
-        for files in os.listdir():
-            if(files.endswith('.jpg')):
-                img = cv2.imread(str(files))
-                filenames.append(files)
-        new_list = []
-        for i in range(len(x_coordinates)):
-            print("{} {}".format(x_coordinates[i], y_coordinates[i]))
-            #new_list.append(img[x_coordinates[i][y_coordinates[i]]])
-            r ,g,b = img[x_coordinates[i], y_coordinates[i]]
-            new_list.append([r,g,b])
-            
-            
-        print(len(new_list)),filenames
-        
-# start_parsing("test", "test")
-#         for i in len(x_coordiantes):
-            
-# counter = 0  
-#     #         counter = counter+1
-#     # else:            
-#     #           break
-
-new_image_list,filenames = start_parsing()
+json_filenames = []
+os.chdir(r"Data\\json")
+for files in os.listdir():
+    if(files.endswith('json')):
+        json_filenames.append(files)
+for jfilename in json_filenames:
+    print(jfilename)
+new_image_list ,filenames = start_parsing(json_filenames, "Project")
 #Restricting python to use only 2 cores
 cpu_nums = list(range(psutil.cpu_count()))
 proc = psutil.Process(os.getpid())
