@@ -14,8 +14,7 @@ import pandas as pd
 import psutil
 from progressbar import ProgressBar
 from sklearn.cluster import KMeans
-
-from openpyxl import Workbook, load_workbook
+import csv
 
 image_list = []
 filename = []
@@ -23,15 +22,15 @@ counter = 0
 os.chdir(r"Museum Clustering Tryouts//images")
 for files in os.listdir():
     if(files.endswith('.jpg')):
-         if(counter == 0):   # to input all the image just remove the conditional statements and use the below 4 lines
+         #if(counter == 0):   # to input all the image just remove the conditional statements and use the below 4 lines
             img = cv2.imread(str(files))
             image_list.append(img)
             filename.append(files)
-            print("")
-            print("All Images loaded into array")
-            counter = counter+1
-    else:            
-        break
+print("")
+print("All Images loaded into array")
+    #         counter = counter+1
+    # else:            
+    #     break
 
 #Restricting python to use only 2 cores
 cpu_nums = list(range(psutil.cpu_count()))
@@ -90,7 +89,8 @@ print("Masking the image finding the best cluster")
 masked_image_list = []
 print("")
 counter = 0
-
+best_cluster_of_all_image = []
+density_of_all_image = []
 for image in clustered_images_list:
     masked_image = 0
     masked_image = np.copy(image)
@@ -98,6 +98,7 @@ for image in clustered_images_list:
     masked_image = masked_image.reshape((-1, 3))
     # index_of_image = clustered_images_list.index(image)
     best_cluster,data_of_all_cluster = fb.calculate_temperature(labels_of_all_image[counter],filename[counter])
+    best_cluster_of_all_image.append(best_cluster)
     labels = labels_of_all_image[counter]
     for i in range(0,10):
         if i == best_cluster:
@@ -111,8 +112,10 @@ for image in clustered_images_list:
     for label in labels:
         if label ==  best_cluster: count = count +1
 
-
-    print("Density of hotspot..",round((count/327860)*100),'%')
+    density = round((count/327860)*100)
+    print("Density of hotspot..",density,'%')
+    density_of_all_image.append(density)
+    
 #Saving the masked images in Kmeans-masked-output folder
 print("  ")
 try:
@@ -120,6 +123,7 @@ try:
     parent_path = Path(path).parent
     os.chdir(parent_path)    
     os.mkdir('kmeans-output')
+<<<<<<< HEAD
     wb = Workbook()
     wb.save("Museum")
 
@@ -128,6 +132,8 @@ try:
     except FileExistsError: 
         ref = wb['Museum_data']
         wb.remove(ref)
+=======
+>>>>>>> 08a5a2af422d0e013035b34abb9445c90e1ac358
 except FileExistsError:
     print(" ")
     print("Folder already exists so removing the previous outputs and creating again")
@@ -142,32 +148,26 @@ finally:
         cv2.imwrite(filename[counter], img)
         counter = counter + 1
         img = 0
+print("Images loaded to disk..pushing clustering information to disk")
+print("")    
+try:
+    file = 'kmeans'
+    with open(file + 'museum.csv' , 'a' ,newline='') as csvfile :
+        writer = csv.writer(csvfile)
+        writer.writerow(['Filename','Hotspot-cluster','minimum','maximum','average','density']) 
+        for i in range(0,len(filename)):
+            file = filename[i]
+            cluster = data_of_all_cluster[best_cluster_of_all_image[i]][0]
+            minimum = data_of_all_cluster[best_cluster_of_all_image[i]][1]
+            maximum = data_of_all_cluster[best_cluster_of_all_image[i]][2]
+            average = data_of_all_cluster[best_cluster_of_all_image[i]][3]
+            density = density_of_all_image[i]
+            writer.writerow([file,cluster,minimum,maximum,average,str(density)+'%'])
+except FileExistsError:
+    os.remove('mueseum.csv')   
+    
 print("Finished .................")
 print(" ")
 print(" ")
 
-
-# #Saving the clustered images in output folder
-# print("  ")
-# try:
-#     path = os.getcwd()
-#     parent_path = Path(path).parent
-#     os.chdir(parent_path)    
-#     os.mkdir('kmeans-output')
-
-# except FileExistsError:
-#     print(" ")
-#     print("Folder already exists so removing the previous outputs and creating again")
-#     s.rmtree('kmeans-output')
-#     os.mkdir('kmeans-output')
-#     print(" ")
-# finally:
-#     print("Pushing clustered images to disk..............")    
-#     os.chdir('kmeans-output')
-#     counter = 0
-#     for img in clustered_images_list:
-#         print(" ")
-#         cv2.imwrite(filename[0], img)
-#         counter = counter + 1
-# print("Clustered image stored .................")
 
