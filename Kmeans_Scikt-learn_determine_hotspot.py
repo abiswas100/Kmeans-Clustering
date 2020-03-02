@@ -22,7 +22,7 @@ import json
 #Importing the images
 
 image_list = []
-filename = []
+filenames = []
 counter = 0  
 os.chdir(r"Museum Clustering Tryouts//images")
 for files in os.listdir():
@@ -30,7 +30,7 @@ for files in os.listdir():
          if(counter == 0):   # to input all the image just remove the conditional statements and use the below 4 lines
             img = cv2.imread(str(files))
             image_list.append(img)
-            filename.append(files)
+            filenames.append(files)
             print("")
             print("All Images loaded into array")
             counter = counter+1
@@ -39,7 +39,7 @@ for files in os.listdir():
 
 #adding annotations and changing the image_list array
 
-image_list = ann.start_parsing(image_list,filename)
+image_list = ann.start_parsing(image_list,filenames)
 
 
 
