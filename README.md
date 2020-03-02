@@ -13,5 +13,8 @@ The file Optimum-K finds the best number of clusters for a dataset which is curr
 <li>progressbar</li>
 <li>re</li>
 <li>Scikit-Learn</li>
+<li>Scikit-image</li>
+<li>matplotlib</li>
+<li></li>
 </ol>
 
