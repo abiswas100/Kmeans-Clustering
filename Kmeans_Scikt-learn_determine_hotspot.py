@@ -47,6 +47,8 @@ import json
 def start_parsing(json_filenames, project_name):
     draw_window = []
     draw_face = []
+    filenames = []
+    new_list = []
     #filename = json_files.split('.')
     
     for jfile in json_filenames:
@@ -58,7 +60,8 @@ def start_parsing(json_filenames, project_name):
                     y_values = []
                     points = entry['points']
                     exterior = points['exterior']
-                    for i, coordinates in enumerate(exterior):
+                    #ignore warning about coordinate not being used. Code doesn't work without that there
+                    for i, coordinate in enumerate(exterior):
                         x_values.append(exterior[i][1])
                         y_values.append(exterior[i][0])
                     if (len(x_values) < 4):
@@ -66,7 +69,8 @@ def start_parsing(json_filenames, project_name):
                             len(x_values)))
                     else:
                         x_coordinates, y_coordinates = polygon_area_calculation(x_values, y_values)
-        
+                    print(x_values,"\n")
+                    print(y_values,"\n")
         
             #X_coordiantes and y_coordiantes now hold points of interest
             print(os.getcwd())
@@ -75,12 +79,12 @@ def start_parsing(json_filenames, project_name):
             os.chdir(os.path.join(parent_path,'images')) 
             print(os.getcwd())
             
-            filenames = []
+
             for files in os.listdir():
                 if(files.endswith('.jpg')):
                     img = cv2.imread(str(files))
                     filenames.append(files)
-            new_list = []
+
             for i in range(len(x_coordinates)):
                 #print("{} {}".format(x_coordinates[i], y_coordinates[i]))
                 #new_list.append(img[x_coordinates[i][y_coordinates[i]]])
@@ -89,7 +93,7 @@ def start_parsing(json_filenames, project_name):
                     
         print("\n",len(new_list),filenames)
         return new_list,filenames
-
+#endof Function
 json_filenames = []
 os.chdir(r"Data\\json")
 for files in os.listdir():
