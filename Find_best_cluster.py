@@ -82,9 +82,8 @@ def calculate_temperature(labels,filename):
     print("Maximum average temperature of all clusters = ",max_avg)
     best_cluster = cluster_averages.index(max_avg)
     print("The hottest cluster = ",best_cluster)
-    #print(data_of_all_cluster)
 
-    return best_cluster, data
+    return best_cluster, data_of_all_cluster
 
 
 
