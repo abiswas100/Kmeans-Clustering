@@ -124,7 +124,7 @@ try:
     wb.save("Museum")
 
     try:
-        Mueseum_data = wb.create_sheet('Mueseum'1)
+        Mueseum_data = wb.create_sheet('Mueseum',1)
     except FileExistsError: 
         ref = wb['Museum_data']
         wb.remove(ref)
