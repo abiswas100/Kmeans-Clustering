@@ -7,7 +7,7 @@ The file Optimum-K finds the best number of clusters for a dataset which is curr
 #Install the Requirements Files
 <ol>
 <li>Open-CV</li>
-<li>nunpy</li>
+<li>numpy</li>
 <li>pandas</li>
 <li>psutil</li>
 <li>progressbar</li>
