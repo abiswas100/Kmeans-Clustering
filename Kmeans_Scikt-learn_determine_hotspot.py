@@ -15,6 +15,8 @@ import psutil
 from progressbar import ProgressBar
 from sklearn.cluster import KMeans
 
+from openpyxl import Workbook, load_workbook
+
 image_list = []
 filename = []
 counter = 0  
@@ -34,7 +36,7 @@ for files in os.listdir():
 #Restricting python to use only 2 cores
 cpu_nums = list(range(psutil.cpu_count()))
 proc = psutil.Process(os.getpid())
-# proc.cpu_affinity(cpu_nums[:2]) #will use all CPU cores uncomment to use 2 cores
+#proc.cpu_affinity(cpu_nums[:2]) #will use all CPU cores uncomment to use 2 cores
 print("CPUS being consumed..",cpu_count())
 
 
@@ -88,7 +90,7 @@ print("Masking the image finding the best cluster")
 masked_image_list = []
 print("")
 counter = 0
-hotspot_densities = []
+
 for image in clustered_images_list:
     masked_image = 0
     masked_image = np.copy(image)
@@ -118,7 +120,14 @@ try:
     parent_path = Path(path).parent
     os.chdir(parent_path)    
     os.mkdir('kmeans-output')
+    wb = Workbook()
+    wb.save("Museum")
 
+    try:
+        Mueseum_data = wb.create_sheet('Mueseum'1)
+    except FileExistsError: 
+        ref = wb['Museum_data']
+        wb.remove(ref)
 except FileExistsError:
     print(" ")
     print("Folder already exists so removing the previous outputs and creating again")
@@ -136,7 +145,6 @@ finally:
 print("Finished .................")
 print(" ")
 print(" ")
-
 
 
 # #Saving the clustered images in output folder
