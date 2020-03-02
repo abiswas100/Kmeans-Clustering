@@ -21,8 +21,6 @@ import csv
 import json
 
 #Importing the images
-
-
 image_list = []
 filenames = []
 counter = 0  
@@ -38,7 +36,7 @@ for files in os.listdir():
             counter = counter+1
     else:            
         break
-
+    
 #adding annotations and changing the image_list array
 
 image_list = ann.start_parsing(image_list,filenames)
@@ -141,7 +139,7 @@ finally:
         cv2.imwrite(filenames[counter], img)
         counter = counter + 1
         img = 0
-print("Images loaded to disk..pushing clustering information to disk")
+print("Images loaded to disk..pushing clustering information to csv file")
 print("")    
 try:
     file = 'kmeans'
