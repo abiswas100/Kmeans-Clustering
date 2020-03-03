@@ -1,11 +1,12 @@
 import os
-
+from pathlib import Path
 
 import csv
 import json
 import cv2
 from skimage import draw
 import numpy as np
+import re
 
 '''
 Functions used for different calculations on the objects. 
@@ -28,44 +29,51 @@ def polygon_area_calculation(x_inputs, y_inputs):
     x_coordinates, y_coordinates = draw.polygon(r, c)
     return x_coordinates, y_coordinates
 
-def start_parsing(image_list,filenames): #json_files , project_name
-    
-    draw_window = []
-    draw_face = []
-    # filename = json_files.split('.')
 
- 
-    with open('Data/json/' + "0633_MWIR.jpg.json") as json_content:
-        json_data = json.load(json_content)
-        for entry in json_data['objects']:
-            if (entry['classTitle'] == 'Facet' or entry['classTitle'] == 'Windows' or entry['classTitle'] == 'Facades'):
-                x_values = []
-                y_values = []
-                points = entry['points']
-                exterior = points['exterior']
-                for i, coordinates in enumerate(exterior):
-                    x_values.append(exterior[i][1])
-                    y_values.append(exterior[i][0])
-                if (len(x_values) < 4):
-                    print("ERROR: LESS THAN 4 POINTS ANNOTATED FOR WINDOW. NUMBER OF POINTS: {}".format(
-                        len(x_values)))
-                else:
-                    x_coordinates, y_coordinates = polygon_area_calculation(x_values, y_values)
+image_list = []
+def start_parsing(image_list,filenames): #json_files , project_name
+    #changing into the json directory in data folder
+    path = os.getcwd()
+    parent_path = Path(path).parent
+    os.chdir(parent_path)    
+    os.chdir('json')
+    i = 0
+    for i in range(0,len(filenames)):
+        img = image_list[i]
+        file = filenames[i]
+        json_filename = file[:-4] + '.jpg.json'
         
+        draw_window = []
+        draw_face = []
         
-        #X_coordiantes and y_coordiantes now hold points of interest
-        os.chdir(r"Museum Clustering Tryouts//images")
-        for files in os.listdir():
-            if(files.endswith('.jpg')):
-                img = cv2.imread(str(files))
-                filenames.append(files)
-        new_list = []
-        for i in range(len(x_coordinates)):
-            print("{} {}".format(x_coordinates[i], y_coordinates[i]))
-            #new_list.append(img[x_coordinates[i][y_coordinates[i]]])
-            r ,g,b = img[x_coordinates[i], y_coordinates[i]]
-            new_list.append([r,g,b])
-            
-            
-        return new_list
+        with open(json_filename) as json_content:
+            json_data = json.load(json_content)
+            for entry in json_data['objects']:
+                if (entry['classTitle'] == 'Window' or entry['classTitle'] == 'Windows'):
+                    x_values = []
+                    y_values = []
+                    points = entry['points']
+                    exterior = points['exterior']
+                    for k, coordinates in enumerate(exterior):
+                        x_values.append(exterior[k][1])
+                        y_values.append(exterior[k][0])
+                    if (len(x_values) < 4):
+                        print("ERROR: LESS THAN 4 POINTS ANNOTATED FOR WINDOW. NUMBER OF POINTS: {}".format(
+                            len(x_values)))
+                    else:
+                        x_coordinates, y_coordinates = polygon_area_calculation(x_values, y_values)
+                        
+            temp = []        
+            for j in range(len(x_coordinates)):
+                # print("{} {}".format(x_coordinates[i], y_coordinates[i]))
+                #new_list.append(img[x_coordinates[i][y_coordinates[i]]])
+                r ,g,b = img[x_coordinates[j], y_coordinates[j]]
+                temp.append(list([r,g,b]))     
+            for i in range(0,6): print(temp[i])
+            print("") 
+            print("Length of temp",len(temp))    
+            # #converting into numpy-array
+            # new_list = npa = np.asarray(image_list, dtype=np.float32)     
+    return image_list
+    
         
