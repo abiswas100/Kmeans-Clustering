@@ -75,5 +75,5 @@ def start_parsing(image_list,filenames): #json_files , project_name
             # #converting into numpy-array
             # new_list = npa = np.asarray(image_list, dtype=np.float32)     
     return image_list
-    
+     
         
