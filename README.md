@@ -4,7 +4,7 @@ The functions in Find_best_cluster finds the pixel_temperature for every image a
 From that it finds the maximum average of all the clusters and masks that cluster with (255,255,255).
 The file Optimum-K finds the best number of clusters for a dataset which is currently in progress.
 <br>
-the file Consider_annotation.py adds annotation into consideration returns image an array with only annotations of all the iamges
+the file Consider_annotation.py adds annotation into consideration returns image an array with only annotations of all the images
 </br>
 #Install the Requirements Files
 <ol>
