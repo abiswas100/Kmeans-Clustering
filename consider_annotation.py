@@ -30,23 +30,21 @@ def polygon_area_calculation(x_inputs, y_inputs):
     return x_coordinates, y_coordinates
 
 
-image_list = []
-def start_parsing(image_list,filenames): #json_files , project_name
+# image_list = []
+def start_parsing(image,filename): #json_files , project_name
     #changing into the json directory in data folder
     path = os.getcwd()
     parent_path = Path(path).parent
     os.chdir(parent_path)    
     os.chdir('json')
-    i = 0
-    for i in range(0,len(filenames)):
-        img = image_list[i]
-        file = filenames[i]
-        json_filename = file[:-4] + '.jpg.json'
+    #i = 0
+    #for i in range(0,len(filename)):
+    img = image #image_list[i]
+    json_filename = filename[:-4] + '.jpg.json'
         
-        draw_window = []
-        draw_face = []
-        
-        with open(json_filename) as json_content:
+    draw_window = []
+    draw_face = []
+    with open(json_filename) as json_content:
             json_data = json.load(json_content)
             for entry in json_data['objects']:
                 if (entry['classTitle'] == 'Window' or entry['classTitle'] == 'Windows'):
@@ -58,22 +56,16 @@ def start_parsing(image_list,filenames): #json_files , project_name
                         x_values.append(exterior[k][1])
                         y_values.append(exterior[k][0])
                     if (len(x_values) < 4):
-                        print("ERROR: LESS THAN 4 POINTS ANNOTATED FOR WINDOW. NUMBER OF POINTS: {}".format(
-                            len(x_values)))
+                        print("ERROR: LESS THAN 4 POINTS ANNOTATED FOR WINDOW. NUMBER OF POINTS: {}".format(len(x_values)))
                     else:
                         x_coordinates, y_coordinates = polygon_area_calculation(x_values, y_values)
                         
-            temp = []        
+            temp_image = []        
             for j in range(len(x_coordinates)):
                 # print("{} {}".format(x_coordinates[i], y_coordinates[i]))
                 #new_list.append(img[x_coordinates[i][y_coordinates[i]]])
                 r ,g,b = img[x_coordinates[j], y_coordinates[j]]
-                temp.append(list([r,g,b]))     
-            for i in range(0,6): print(temp[i])
-            print("") 
-            print("Length of temp",len(temp))    
-            # #converting into numpy-array
-            # new_list = npa = np.asarray(image_list, dtype=np.float32)     
-    return image_list
+                temp_image.append(list([r,g,b]))          
+    return temp_image
      
         
