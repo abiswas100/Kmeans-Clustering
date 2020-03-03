@@ -71,10 +71,10 @@ def calculate_temperature(labels,filename):
         except ValueError:
             pass
         finally:    
-            print("For Cluster = ",cluster)
-            print("minimum Surface Temperature = ",minimum)
-            print("maximum Surface Temperature = ",maximum)
-            print("average Surface Temperature = ",average)
+            # print("For Cluster = ",cluster)
+            # print("minimum Surface Temperature = ",minimum)
+            # print("maximum Surface Temperature = ",maximum)
+            # print("average Surface Temperature = ",average)
             cluster_averages.append(average)
             data_of_all_cluster.append(data)        
     print("")

@@ -37,13 +37,12 @@ def start_parsing(image,filename): #json_files , project_name
     parent_path = Path(path).parent
     os.chdir(parent_path)    
     os.chdir('json')
-    #i = 0
-    #for i in range(0,len(filename)):
-    img = image #image_list[i]
-    json_filename = filename[:-4] + '.jpg.json'
-        
+    
+    img = image 
+    json_filename = filename[:-4] + '.jpg.json'  
     draw_window = []
     draw_face = []
+    coordinates = []
     with open(json_filename) as json_content:
             json_data = json.load(json_content)
             for entry in json_data['objects']:
@@ -59,13 +58,26 @@ def start_parsing(image,filename): #json_files , project_name
                         print("ERROR: LESS THAN 4 POINTS ANNOTATED FOR WINDOW. NUMBER OF POINTS: {}".format(len(x_values)))
                     else:
                         x_coordinates, y_coordinates = polygon_area_calculation(x_values, y_values)
-                        
+            print("X-coordinate length",len(x_coordinates),"",type(x_coordinates[1]))
+            print("Y-coordinate length",len(y_coordinates))   
+            
+            for i in range(len(x_coordinates)):
+                l = list([np.asscalar(x_coordinates[i]),np.asscalar(y_coordinates[i])])
+                coordinates.append(l)
+                print(type(l))
+            # print("Length of Coordinates",type(coordinates[0]),"asdas",coordinates[0])       
+            # for i in range (len(coordinates)):
+            #     if(len(coordinates[i]) != 2 ):
+            #         print("weird",coordinates[i])
+            #     else: pass#print("pixels",coordinates[i])  
             temp_image = []        
             for j in range(len(x_coordinates)):
                 # print("{} {}".format(x_coordinates[i], y_coordinates[i]))
                 #new_list.append(img[x_coordinates[i][y_coordinates[i]]])
                 r ,g,b = img[x_coordinates[j], y_coordinates[j]]
-                temp_image.append(list([r,g,b]))          
-    return temp_image
+                temp_image.append(list([r,g,b])) 
+    #print(type(x_coordinates[0])) 
+                
+    return temp_image,x_coordinates, y_coordinates
      
         
