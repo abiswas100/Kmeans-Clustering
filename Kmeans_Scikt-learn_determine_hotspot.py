@@ -21,7 +21,11 @@ from PIL import Image, ImageDraw, ImageFont
 import csv
 import json
 
-#Importing the images
+
+#############################
+#  Importing the images   ###
+#############################
+
 image_list = []
 filenames = []
 counter = 0
@@ -37,7 +41,8 @@ for files in os.listdir():
             counter = counter+1
     else:            
         break
-    
+
+############################################################    
 
 # Restricting python to use only 2 cores
 cpu_nums = list(range(psutil.cpu_count()))
@@ -50,8 +55,10 @@ pbar = ProgressBar()
 start = time.time()
 clustered_images_list = [] #list containing all the clustered outputs
 
- # Running 6 clusters on each image of Museum
- # For Twamley keep cluster above 10 
+ # Running 10 clusters on each image of Museum
+ # For Twamley keep cluster above 20 
+
+
 print("")
 print("Clustering the image ")
 labels_of_all_image = []
@@ -75,8 +82,6 @@ for image in pbar(image_list):
     # flatten the labels array
     labels = kmeans.labels_
     labels_of_all_image.append(labels)
-    # print("The actual labels array",labels)
-    # print("The labels set - ",set(labels),"   The length of the labels array",len(labels))
     segmented_image = centers[labels]
     print("")
     print("Length of Segmented Image",len(segmented_image))
@@ -88,26 +93,31 @@ print(" ")
 end = time.time()
 print("Time consumed in clustering: ",end - start)
 
-
-#function to mask only the hotspot
+########################################
+## function to mask only the hotspot  ##
+########################################
 print("")
 print("Finding the Cluster containing the hotspot and Masking it ...")
-masked_image_list = []
 print("")
+
 counter = 0
+masked_image_list = []
 best_cluster_of_all_image = []
 density_of_all_image = []
+
+
 for image in clustered_images_list:
-    print("image shape",image.shape)
+    print("image shape",image.shape)              ### size of the window in the image as a 1D array
     masked_image = 0
     masked_image = np.copy(image)
     # convert to the shape of a vector of pixel values
     # masked_image = masked_image.reshape((-1, 3))
-    print("Masked image shape in the begiunning",masked_image.shape)
-    # index_of_image = clustered_images_list.index(image)
+
     best_cluster,data_of_all_cluster = fb.calculate_temperature(labels_of_all_image[counter],filenames[counter])
     best_cluster_of_all_image.append(best_cluster)
+    
     labels = labels_of_all_image[counter]
+    
     img = image_list[counter]  # img is the original raw image in (512,640)
     print("Original image shape",img.shape)
     
@@ -140,10 +150,10 @@ for image in clustered_images_list:
     
 
     
-    # masked_image = masked_image.reshape(image.shape)
-    # print(masked_image.shape)
-    # masked_image_list.append(masked_image)     
-    # counter = counter+1  
+    masked_image = masked_image.reshape(image.shape)
+    print(masked_image.shape)
+    masked_image_list.append(masked_image)     
+    counter = counter+1  
     # for i in range(len(x_coord)):
     #     print("{} {}".format())
     
