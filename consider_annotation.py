@@ -58,26 +58,29 @@ def start_parsing(image,filename): #json_files , project_name
                         print("ERROR: LESS THAN 4 POINTS ANNOTATED FOR WINDOW. NUMBER OF POINTS: {}".format(len(x_values)))
                     else:
                         x_coordinates, y_coordinates = polygon_area_calculation(x_values, y_values)
-            print("X-coordinate length",len(x_coordinates),"",type(x_coordinates[1]))
-            print("Y-coordinate length",len(y_coordinates))   
+            # print("X-coordinate length",len(x_coordinates),"",type(x_coordinates[1]))
+            # print("Y-coordinate length",len(y_coordinates))   
             
             for i in range(len(x_coordinates)):
-                l = list([np.asscalar(x_coordinates[i]),np.asscalar(y_coordinates[i])])
+                x = np.asscalar(x_coordinates[i])
+                y = np.asscalar(y_coordinates[i])
+                l = list([x,y])
                 coordinates.append(l)
-                print(type(l))
-            # print("Length of Coordinates",type(coordinates[0]),"asdas",coordinates[0])       
-            # for i in range (len(coordinates)):
-            #     if(len(coordinates[i]) != 2 ):
-            #         print("weird",coordinates[i])
-            #     else: pass#print("pixels",coordinates[i])  
+            
+            weird_index = []       
+            for i in range (len(coordinates)):
+                if isinstance (coordinates[i],list):
+                    pass
+                else: weird_index.append(i)  
+
+            for i in weird_index:
+                coordinates.remove(coordinates[i])
+                
             temp_image = []        
             for j in range(len(x_coordinates)):
-                # print("{} {}".format(x_coordinates[i], y_coordinates[i]))
-                #new_list.append(img[x_coordinates[i][y_coordinates[i]]])
                 r ,g,b = img[x_coordinates[j], y_coordinates[j]]
                 temp_image.append(list([r,g,b])) 
-    #print(type(x_coordinates[0])) 
-                
-    return temp_image,x_coordinates, y_coordinates
+
+    return temp_image,coordinates
      
         

@@ -58,151 +58,150 @@ labels_of_all_image = []
 a = 0 #just a loop counter
 for image in pbar(image_list):
     #adding annotations and changing the image_list array
-    pixel_values,x_coord, y_coord = ann.start_parsing(image,filenames[a])
-    print("hello")
+    pixel_values,coordinates = ann.start_parsing(image,filenames[a])
     # print(len(pixel_values))
     # reshape the image to a 2D array of pixels and 3 color values (RGB)
     # pixel_values = image.reshape((-1, 3))
     # convert to float
-#     print("shape of pixel values",len(pixel_values))
-#     pixel_values = np.float32(pixel_values)
-#     print("")
-#     #create an array for the number of clusters
-#     kmeans = KMeans(n_clusters=10, random_state=0, n_jobs = -1).fit(pixel_values)
-#     # convert back to 8 bit values
-#     centers = kmeans.cluster_centers_
-#     centers = np.uint8(centers)
-#     # print("The centers are ----",centers)
-#     # flatten the labels array
-#     labels = kmeans.labels_
-#     labels_of_all_image.append(labels)
-#     # print("The actual labels array",labels)
-#     # print("The labels set - ",set(labels),"   The length of the labels array",len(labels))
-#     segmented_image = centers[labels]
-#     print("")
-#     print("Length of Segmented Image",len(segmented_image))
-#     # segmented_image = segmented_image.reshape(pixel_values.shape)    #image.shape = (512,640)
-#     # print("Length of Segment iamge after reshape",len(segmented_image))
-#     clustered_images_list.append(segmented_image)
-#     a = a + 1
-# print(" ")
-# end = time.time()
-# print("Time consumed in clustering: ",end - start)
+    print("shape of pixel values",len(pixel_values))
+    pixel_values = np.float32(pixel_values)
+    print("")
+    #create an array for the number of clusters
+    kmeans = KMeans(n_clusters=10, random_state=0, n_jobs = -1).fit(pixel_values)
+    # convert back to 8 bit values
+    centers = kmeans.cluster_centers_
+    centers = np.uint8(centers)
+    # print("The centers are ----",centers)
+    # flatten the labels array
+    labels = kmeans.labels_
+    labels_of_all_image.append(labels)
+    # print("The actual labels array",labels)
+    # print("The labels set - ",set(labels),"   The length of the labels array",len(labels))
+    segmented_image = centers[labels]
+    print("")
+    print("Length of Segmented Image",len(segmented_image))
+    # segmented_image = segmented_image.reshape(pixel_values.shape)    #image.shape = (512,640)
+    # print("Length of Segment iamge after reshape",len(segmented_image))
+    clustered_images_list.append(segmented_image)
+    a = a + 1
+print(" ")
+end = time.time()
+print("Time consumed in clustering: ",end - start)
 
 
-# #function to mask only the hotspot
-# print("")
-# print("Finding the Cluster containing the hotspot and Masking it ...")
-# masked_image_list = []
-# print("")
-# counter = 0
-# best_cluster_of_all_image = []
-# density_of_all_image = []
-# for image in clustered_images_list:
-#     print("image shape",image.shape)
-#     masked_image = 0
-#     masked_image = np.copy(image)
-#     # convert to the shape of a vector of pixel values
-#     # masked_image = masked_image.reshape((-1, 3))
-#     print("Masked image shape in the begiunning",masked_image.shape)
-#     # index_of_image = clustered_images_list.index(image)
-#     best_cluster,data_of_all_cluster = fb.calculate_temperature(labels_of_all_image[counter],filenames[counter])
-#     best_cluster_of_all_image.append(best_cluster)
-#     labels = labels_of_all_image[counter]
-#     img = image_list[counter]  # img is the original raw image in (512,640)
-#     print("Original image shape",img.shape)
+#function to mask only the hotspot
+print("")
+print("Finding the Cluster containing the hotspot and Masking it ...")
+masked_image_list = []
+print("")
+counter = 0
+best_cluster_of_all_image = []
+density_of_all_image = []
+for image in clustered_images_list:
+    print("image shape",image.shape)
+    masked_image = 0
+    masked_image = np.copy(image)
+    # convert to the shape of a vector of pixel values
+    # masked_image = masked_image.reshape((-1, 3))
+    print("Masked image shape in the begiunning",masked_image.shape)
+    # index_of_image = clustered_images_list.index(image)
+    best_cluster,data_of_all_cluster = fb.calculate_temperature(labels_of_all_image[counter],filenames[counter])
+    best_cluster_of_all_image.append(best_cluster)
+    labels = labels_of_all_image[counter]
+    img = image_list[counter]  # img is the original raw image in (512,640)
+    print("Original image shape",img.shape)
     
-#     # #Add reconstruction of Image code here
-#     numbers = []
-#     counters = 0
-#     indexes = 0
-#     for i in range(len(x_coord)):
-#         for x in range(len(x_coord)):
+    # # #Add reconstruction of Image code here
+    # numbers = []
+    # counters = 0
+    # indexes = 0
+    # for i in range(len(x_coord)):
+    #     for x in range(len(x_coord)):
             
-#             if(x_coord[x] ==  indexes):
-#                 #print("GETTING HERE")
-#                 for j in range(len(y_coord)):
-#                     counters = counters + 1
-#                     #print("GETTINGHERE")
-#                     #print("{} {}".format(x_coord[i].item,y_coord[i].item))
-#                 #print(counters)
-#         numbers.append(counters)
-#         counters = 0
-#         indexes = indexes + 1
-#     for number in numbers:
-#         print(number)
+    #         if(x_coord[x] ==  indexes):
+    #             #print("GETTING HERE")
+    #             for j in range(len(y_coord)):
+    #                 counters = counters + 1
+    #                 #print("GETTINGHERE")
+    #                 #print("{} {}".format(x_coord[i].item,y_coord[i].item))
+    #             #print(counters)
+    #     numbers.append(counters)
+    #     counters = 0
+    #     indexes = indexes + 1
+    # for number in numbers:
+    #     print(number)
 
-#     # for i in range(0,10):
-#     #     if i == best_cluster:
-#     #         #testim = Image.open('../images/' + filenames[counter])
-#     #         #pixels = testim.load()
-#     #         masked_image[labels == best_cluster] = [255,255,255] 
-#     #         #pixels[y, x] = (255,255,255)       
+    # for i in range(0,10):
+    #     if i == best_cluster:
+    #         #testim = Image.open('../images/' + filenames[counter])
+    #         #pixels = testim.load()
+    #         masked_image[labels == best_cluster] = [255,255,255] 
+    #         #pixels[y, x] = (255,255,255)       
     
 
     
-#     # masked_image = masked_image.reshape(image.shape)
-#     # print(masked_image.shape)
-#     # masked_image_list.append(masked_image)     
-#     # counter = counter+1  
-#     # for i in range(len(x_coord)):
-#     #     print("{} {}".format())
+    # masked_image = masked_image.reshape(image.shape)
+    # print(masked_image.shape)
+    # masked_image_list.append(masked_image)     
+    # counter = counter+1  
+    # for i in range(len(x_coord)):
+    #     print("{} {}".format())
     
     
-#     #Finding the Density of Hotspot in the region
-#     count = 0
-#     for label in labels:
-#         if label ==  best_cluster: count = count +1
+    #Finding the Density of Hotspot in the region
+    count = 0
+    for label in labels:
+        if label ==  best_cluster: count = count +1
 
-#     density = round((count/len(pixel_values))*100)
-#     print("Density of hotspot..",density,'%')
-#     density_of_all_image.append(density)
+    density = round((count/len(pixel_values))*100)
+    print("Density of hotspot..",density,'%')
+    density_of_all_image.append(density)
 
 
 
-# #################################################
-# ##    Saving Images and storing into CSVs      ##
-# #################################################
+#################################################
+##    Saving Images and storing into CSVs      ##
+#################################################
 
     
-# #Saving the masked images in Kmeans-masked-output folder
-# print("  ")
-# try:
-#     path = os.getcwd()
-#     parent_path = Path(path).parent
-#     os.chdir(parent_path)    
-#     os.mkdir('kmeans-output')
-# except FileExistsError:
-#     print(" ")
-#     print("Folder already exists so removing the previous outputs and creating again")
-#     s.rmtree('kmeans-output')
-#     os.mkdir('kmeans-output')
+#Saving the masked images in Kmeans-masked-output folder
+print("  ")
+try:
+    path = os.getcwd()
+    parent_path = Path(path).parent
+    os.chdir(parent_path)    
+    os.mkdir('kmeans-output')
+except FileExistsError:
+    print(" ")
+    print("Folder already exists so removing the previous outputs and creating again")
+    s.rmtree('kmeans-output')
+    os.mkdir('kmeans-output')
 
-# finally:
-#     print("Pushing clustered images to disk..............")    
-#     os.chdir('kmeans-output')
-#     counter = 0
-#     for img in masked_image_list:
-#         cv2.imwrite(filenames[counter], img)
-#         counter = counter + 1
-#         img = 0
-# print("Images loaded to disk..pushing clustering information to csv file")
-# print("")    
-# try:
-#     file = 'kmeans'
-#     with open(file + 'museum.csv' , 'a' ,newline='') as csvfile :
-#         writer = csv.writer(csvfile)
-#         writer.writerow(['Filename','Hotspot-cluster','minimum','maximum','average','density']) 
-#         for i in range(0,len(filenames)):
-#             file = filenames[i]
-#             cluster = data_of_all_cluster[best_cluster_of_all_image[i]][0]
-#             minimum = data_of_all_cluster[best_cluster_of_all_image[i]][1]
-#             maximum = data_of_all_cluster[best_cluster_of_all_image[i]][2]
-#             average = data_of_all_cluster[best_cluster_of_all_image[i]][3]
-#             density = density_of_all_image[i]
-#             writer.writerow([file,cluster,minimum,maximum,average,str(density)+'%'])
-# except FileExistsError:
-#     os.remove('mueseum.csv')   
+finally:
+    print("Pushing clustered images to disk..............")    
+    os.chdir('kmeans-output')
+    counter = 0
+    for img in masked_image_list:
+        cv2.imwrite(filenames[counter], img)
+        counter = counter + 1
+        img = 0
+print("Images loaded to disk..pushing clustering information to csv file")
+print("")    
+try:
+    file = 'kmeans'
+    with open(file + 'museum.csv' , 'a' ,newline='') as csvfile :
+        writer = csv.writer(csvfile)
+        writer.writerow(['Filename','Hotspot-cluster','minimum','maximum','average','density']) 
+        for i in range(0,len(filenames)):
+            file = filenames[i]
+            cluster = data_of_all_cluster[best_cluster_of_all_image[i]][0]
+            minimum = data_of_all_cluster[best_cluster_of_all_image[i]][1]
+            maximum = data_of_all_cluster[best_cluster_of_all_image[i]][2]
+            average = data_of_all_cluster[best_cluster_of_all_image[i]][3]
+            density = density_of_all_image[i]
+            writer.writerow([file,cluster,minimum,maximum,average,str(density)+'%'])
+except FileExistsError:
+    os.remove('mueseum.csv')   
     
 print("Finished .................")
 print(" ")
