@@ -43,7 +43,7 @@ def extract_temperature(csv_filename):
 
 #This function call the extract temperature function and calculates surface temperature and hottest cluster
 
-def calculate_temperature(labels,filename):
+def calculate_temperature(labels,filename,coordinates):
     print("")
     print("For image - ",filename)
     best_cluster = 0
@@ -55,11 +55,22 @@ def calculate_temperature(labels,filename):
         temp_array = []
         pixel_labels = np.where(labels == cluster)
         for pixel_label in pixel_labels: 
+            counter = 0
             for pixel in pixel_label : 
                 try:#assuming pixel_label is the index that is in the current cluster
-                    X_coordinate = int(pixel/512)                     #the row in the CSV
-                    Y_coordinate = int(pixel - (X_coordinate*512))    #Subtract the row * 512 to get the location of the y coord
-                    temp = float(temperature[X_coordinate][Y_coordinate])  
+                    try:
+                        ordinate = coordinates[counter] 
+                        print(ordinate)
+                        x = ordinate[0]
+                        y = ordinate[1]
+                        counter = counter+1
+                        print(x,y)
+                    except TypeError:
+                        x = 0
+                        y = 0
+                    #X_coordinate = int(pixel/512)                     #the row in the CSV
+                    #Y_coordinate = int(pixel - (X_coordinate*512))    #Subtract the row * 512 to get the location of the y coord
+                    temp = float(temperature[x][y])  
                     temp_array.append(temp)
                 except IndexError: 
                     break       
@@ -68,8 +79,8 @@ def calculate_temperature(labels,filename):
             maximum = max(temp_array)
             average = mean(temp_array)
             data = list([cluster,minimum,maximum,average])        
-        except ValueError:
-            pass
+        except ValueError and UnboundLocalError:
+            minimum,maximum,average = 0,0,   0
         finally:    
             # print("For Cluster = ",cluster)
             # print("minimum Surface Temperature = ",minimum)

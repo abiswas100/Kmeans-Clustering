@@ -32,15 +32,15 @@ counter = 0
 os.chdir(r"data//images")
 for files in os.listdir():
     if(files.endswith('.jpg')):
-        #if(counter == 0):   # to input all the image just remove the conditional statements and use the below 4 lines and comment from counter to break
+        if(counter == 0):   # to input all the image just remove the conditional statements and use the below 4 lines and comment from counter to break
             img = cv2.imread(str(files))
             image_list.append(img)
             filenames.append(files)
-print("")
-print("All Images loaded into array")
-    #         counter = counter+1
-    # else:            
-    #     break
+            print("")
+            print("All Images loaded into array")
+            counter = counter+1
+    else:            
+        break
 
 ############################################################    
 
@@ -118,7 +118,7 @@ for image in clustered_images_list:
     # convert to the shape of a vector of pixel values
     # masked_image = masked_image.reshape((-1, 3))
 
-    best_cluster,data_of_all_cluster = fb.calculate_temperature(labels_of_all_image[counter],filenames[counter])
+    best_cluster,data_of_all_cluster = fb.calculate_temperature(labels_of_all_image[counter],filenames[counter],coordinates)
     best_cluster_of_all_image.append(best_cluster)
     
     labels = labels_of_all_image[counter]

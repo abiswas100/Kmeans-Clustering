@@ -58,24 +58,24 @@ def start_parsing(image,filename): #json_files , project_name
                         print("ERROR: LESS THAN 4 POINTS ANNOTATED FOR WINDOW. NUMBER OF POINTS: {}".format(len(x_values)))
                     else:
                         x_coordinates, y_coordinates = polygon_area_calculation(x_values, y_values)
-            # print("X-coordinate length",len(x_coordinates),"",type(x_coordinates[1]))
-            # print("Y-coordinate length",len(y_coordinates))   
+            #print("X-coordinate length",len(x_coordinates),"",type(x_coordinates[1]))
+            #print("Y-coordinate length",len(y_coordinates))   
             
-            # for i in range(len(x_coordinates)):
-            #     x = np.asscalar(x_coordinates[i])
-            #     y = np.asscalar(y_coordinates[i])
-            #     l = list([x,y])
-            #     coordinates.append(l)
+            for i in range(len(x_coordinates)):
+                x = np.asscalar(x_coordinates[i])
+                y = np.asscalar(y_coordinates[i])
+                l = list([x,y])
+                coordinates.append(l)
             
-            # weird_index = []       
-            # for i in range (len(coordinates)):cls
+            weird_index = []       
+            for i in range (len(coordinates)):
             
-            #     if isinstance (coordinates[i],list):
-            #         pass
-            #     else: weird_index.append(i)  
+                if isinstance (coordinates[i],list):
+                    pass
+                else: weird_index.append(i)  
 
-            # for i in weird_index:
-            #     coordinates.remove(coordinates[i])
+            for i in weird_index:
+                coordinates.remove(coordinates[i])
             try:    
                 temp_image = []        
                 for j in range(len(x_coordinates)):
@@ -84,7 +84,7 @@ def start_parsing(image,filename): #json_files , project_name
             except UnboundLocalError : 
                 print(filename)
                 print("")
-
+    print(len(coordinates),coordinates[0])
     return temp_image,coordinates
      
         
