@@ -1,0 +1,1 @@
+{"description": "", "tags": [{"name": "roof", "value": null}], "size": {"height": 512, "width": 640}, "objects": [{"description": "", "tags": [], "classTitle": "Facade", "points": {"exterior": [[0, 215], [640, 5], [640, 303], [86, 512], [0, 512]], "interior": []}}]}

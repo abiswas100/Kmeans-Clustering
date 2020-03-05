@@ -61,25 +61,29 @@ def start_parsing(image,filename): #json_files , project_name
             # print("X-coordinate length",len(x_coordinates),"",type(x_coordinates[1]))
             # print("Y-coordinate length",len(y_coordinates))   
             
-            for i in range(len(x_coordinates)):
-                x = np.asscalar(x_coordinates[i])
-                y = np.asscalar(y_coordinates[i])
-                l = list([x,y])
-                coordinates.append(l)
+            # for i in range(len(x_coordinates)):
+            #     x = np.asscalar(x_coordinates[i])
+            #     y = np.asscalar(y_coordinates[i])
+            #     l = list([x,y])
+            #     coordinates.append(l)
             
-            weird_index = []       
-            for i in range (len(coordinates)):
-                if isinstance (coordinates[i],list):
-                    pass
-                else: weird_index.append(i)  
+            # weird_index = []       
+            # for i in range (len(coordinates)):cls
+            
+            #     if isinstance (coordinates[i],list):
+            #         pass
+            #     else: weird_index.append(i)  
 
-            for i in weird_index:
-                coordinates.remove(coordinates[i])
-                
-            temp_image = []        
-            for j in range(len(x_coordinates)):
-                r ,g,b = img[x_coordinates[j], y_coordinates[j]]
-                temp_image.append(list([r,g,b])) 
+            # for i in weird_index:
+            #     coordinates.remove(coordinates[i])
+            try:    
+                temp_image = []        
+                for j in range(len(x_coordinates)):
+                    r ,g,b = img[x_coordinates[j], y_coordinates[j]]
+                    temp_image.append(list([r,g,b]))    
+            except UnboundLocalError : 
+                print(filename)
+                print("")
 
     return temp_image,coordinates
      

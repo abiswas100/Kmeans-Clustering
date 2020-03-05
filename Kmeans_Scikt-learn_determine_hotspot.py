@@ -1,7 +1,7 @@
 import optimum_K as op
 import Find_best_cluster as fb
 import consider_annotation as ann
-
+import getpass
 import os
 from pathlib import Path
 import shutil as s
@@ -70,25 +70,30 @@ for image in pbar(image_list):
     # reshape the image to a 2D array of pixels and 3 color values (RGB)
     # pixel_values = image.reshape((-1, 3))
     # convert to float
-    print("shape of pixel values",len(pixel_values))
+    #print("shape of pixel values",len(pixel_values))
     pixel_values = np.float32(pixel_values)
-    print("")
+    #print("")
     #create an array for the number of clusters
-    kmeans = KMeans(n_clusters=10, random_state=0, n_jobs = -1).fit(pixel_values)
-    # convert back to 8 bit values
-    centers = kmeans.cluster_centers_
-    centers = np.uint8(centers)
-    # print("The centers are ----",centers)
-    # flatten the labels array
-    labels = kmeans.labels_
-    labels_of_all_image.append(labels)
-    segmented_image = centers[labels]
-    print("")
-    print("Length of Segmented Image",len(segmented_image))
-    # segmented_image = segmented_image.reshape(pixel_values.shape)    #image.shape = (512,640)
-    # print("Length of Segment iamge after reshape",len(segmented_image))
-    clustered_images_list.append(segmented_image)
-    a = a + 1
+    try:
+        kmeans = KMeans(n_clusters=20, random_state=0, n_jobs = -1).fit(pixel_values)
+        # convert back to 8 bit values
+        centers = kmeans.cluster_centers_
+        centers = np.uint8(centers)
+        # print("The centers are ----",centers)
+        # flatten the labels array
+        labels = kmeans.labels_
+        labels_of_all_image.append(labels)
+        segmented_image = centers[labels]
+        #print("")
+        #print("Length of Segmented Image",len(segmented_image))
+        # segmented_image = segmented_image.reshape(pixel_values.shape)    #image.shape = (512,640)
+        # print("Length of Segment iamge after reshape",len(segmented_image))
+        clustered_images_list.append(segmented_image)
+        a = a + 1
+    except ValueError: 
+        getpass.getpass('Delete that file and press Enter')
+        continue
+
 print(" ")
 end = time.time()
 print("Time consumed in clustering: ",end - start)
@@ -107,7 +112,7 @@ density_of_all_image = []
 
 
 for image in clustered_images_list:
-    print("image shape",image.shape)              ### size of the window in the image as a 1D array
+    #print("image shape",image.shape)              ### size of the window in the image as a 1D array
     masked_image = 0
     masked_image = np.copy(image)
     # convert to the shape of a vector of pixel values
@@ -119,7 +124,7 @@ for image in clustered_images_list:
     labels = labels_of_all_image[counter]
     
     img = image_list[counter]  # img is the original raw image in (512,640)
-    print("Original image shape",img.shape)
+    #print("Original image shape",img.shape)
     
     # # #Add reconstruction of Image code here
     # numbers = []
@@ -151,7 +156,7 @@ for image in clustered_images_list:
 
     
     masked_image = masked_image.reshape(image.shape)
-    print(masked_image.shape)
+    # print(masked_image.shape)
     masked_image_list.append(masked_image)     
     counter = counter+1  
     # for i in range(len(x_coord)):
