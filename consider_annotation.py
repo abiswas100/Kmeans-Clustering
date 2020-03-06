@@ -66,16 +66,25 @@ def start_parsing(image,filename): #json_files , project_name
                 y = np.asscalar(y_coordinates[i])
                 l = list([x,y])
                 coordinates.append(l)
+        
             
-            weird_index = []       
-            for i in range (len(coordinates)):
-            
-                if isinstance (coordinates[i],list):
-                    pass
-                else: weird_index.append(i)  
+            print("")
+            try: 
+                for i in range(len(coordinates)):
+                    try:
+                        coordiante = coordinates[i] 
+                        #print(coordiante)
+                        n = coordiante[0]
+                    except TypeError:
+                        print("weird coordinate is",coordinates[i])
+                        object = coordinates.pop(i)
+                        print("object popped",object)
+            except IndexError:
+                print(i)
+                pass        
 
-            for i in weird_index:
-                coordinates.remove(coordinates[i])
+            print("coordinates length",len(coordinates))
+            print("coordinate at 0........",coordinates[0])
             try:    
                 temp_image = []        
                 for j in range(len(x_coordinates)):
@@ -84,7 +93,7 @@ def start_parsing(image,filename): #json_files , project_name
             except UnboundLocalError : 
                 print(filename)
                 print("")
-    print(len(coordinates),coordinates[0])
+    #print(len(coordinates),coordinates[0])
     return temp_image,coordinates
      
         
