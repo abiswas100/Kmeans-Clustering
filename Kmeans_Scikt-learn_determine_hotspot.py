@@ -75,7 +75,7 @@ for image in pbar(image_list):
     #print("")
     #create an array for the number of clusters
     try:
-        kmeans = KMeans(n_clusters=20, random_state=0, n_jobs = -1).fit(pixel_values)
+        kmeans = KMeans(n_clusters=5, random_state=0, n_jobs = -1).fit(pixel_values)
         # convert back to 8 bit values
         centers = kmeans.cluster_centers_
         centers = np.uint8(centers)
@@ -167,8 +167,8 @@ for image in clustered_images_list:
     count = 0
     for label in labels:
         if label ==  best_cluster: count = count +1
-
-    density = round((count/len(pixel_values))*100)
+    print(count)
+    density = (count/len(pixel_values))*100
     print("Density of hotspot..",density,'%')
     density_of_all_image.append(density)
 

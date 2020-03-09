@@ -58,33 +58,19 @@ def start_parsing(image,filename): #json_files , project_name
                         print("ERROR: LESS THAN 4 POINTS ANNOTATED FOR WINDOW. NUMBER OF POINTS: {}".format(len(x_values)))
                     else:
                         x_coordinates, y_coordinates = polygon_area_calculation(x_values, y_values)
-            #print("X-coordinate length",len(x_coordinates),"",type(x_coordinates[1]))
-            #print("Y-coordinate length",len(y_coordinates))   
             
             for i in range(len(x_coordinates)):
                 x = np.asscalar(x_coordinates[i])
                 y = np.asscalar(y_coordinates[i])
                 l = list([x,y])
                 coordinates.append(l)
-        
+            useful_coordinate = []
+            for ordinate in coordinates:
+                if islist(ordinate) == True:
+                    useful_coordinate.append(ordinate)
+                else:
+                    continue
             
-            print("")
-            try: 
-                for i in range(len(coordinates)):
-                    try:
-                        coordiante = coordinates[i] 
-                        #print(coordiante)
-                        n = coordiante[0]
-                    except TypeError:
-                        print("weird coordinate is",coordinates[i])
-                        object = coordinates.pop(i)
-                        print("object popped",object)
-            except IndexError:
-                print(i)
-                pass        
-
-            print("coordinates length",len(coordinates))
-            print("coordinate at 0........",coordinates[0])
             try:    
                 temp_image = []        
                 for j in range(len(x_coordinates)):
@@ -94,6 +80,9 @@ def start_parsing(image,filename): #json_files , project_name
                 print(filename)
                 print("")
     #print(len(coordinates),coordinates[0])
-    return temp_image,coordinates
+    return temp_image,useful_coordinate
      
-        
+
+def islist(obj):
+    if "list" in str(type(obj)): return True
+    else: return False

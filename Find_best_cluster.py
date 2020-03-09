@@ -38,8 +38,56 @@ def extract_temperature(csv_filename):
             for i, data in enumerate(csv_file_content):
                 if(i >= 1):
                     pixel_temperature.append(data[0:])
-    print("Length of Pixel_temperature",len(pixel_temperature))
     return pixel_temperature
+
+
+#the function only return only the min,max avg of the annotated region
+
+def calculate_temperature(labels,filename,coordinates):   
+    filename = filename[:-4] + '.csv'
+    temperature =  extract_temperature(filename)
+    
+    cluster_averages = []
+    data_of_all_clusters = []
+    
+    
+    list_labels = labels.tolist()
+    
+    useful_temp = []
+    for i in coordinates:
+        x = i[0]
+        y = i[1]
+        
+        temp = float(temperature[x][y])
+        useful_temp.append(temp)
+    
+    no_of_labels = set(labels)
+    
+    for cluster in no_of_labels:
+        temp_array = []
+        for j in range(len(list_labels)): 
+            if list_labels[j] == cluster:
+                temp_array.append(useful_temp[j])        
+        
+        minimum = min(temp_array)
+        maximum = max(temp_array)
+        average = mean(temp_array)
+        data = list([cluster,minimum,maximum,average])            
+        print("For Cluster = ",cluster)
+        print("minimum Surface Temperature = ",minimum)
+        print("maximum Surface Temperature = ",maximum)
+        print("average Surface Temperature = ",average)
+        cluster_averages.append(average)
+        data_of_all_clusters.append(data)        
+    print("")
+    max_avg = max(cluster_averages)
+    print("Maximum average temperature of all clusters = ",max_avg)
+    best_cluster = cluster_averages.index(max_avg)
+    print("The hottest cluster = ",best_cluster)
+
+    return best_cluster , data_of_all_clusters
+
+
 
 #This function call the extract temperature function and calculates surface temperature and hottest cluster
 
@@ -89,9 +137,4 @@ def extract_temperature(csv_filename):
 #     return best_cluster , data_of_all_cluster
 
 
-def calculate_temperature(labels,filename,coordinates):
-    #print(labels,type(labels),labels.ndim)
-    list_labels = labels.tolist()
-    print(len(list_labels))
-    # print(len(coordinates),type(coordinates))
-    print(coordinates[0])
+            
