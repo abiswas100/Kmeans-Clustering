@@ -38,15 +38,17 @@ def extract_temperature(csv_filename):
             for i, data in enumerate(csv_file_content):
                 if(i >= 1):
                     pixel_temperature.append(data[0:])
+    print("length of Pixel temp",len(pixel_temperature))
     return pixel_temperature
 
 
 #the function only return only the min,max avg of the annotated region
 
 def calculate_temperature(labels,filename,coordinates):   
-    filename = filename[:-4] + '.csv'
-    temperature =  extract_temperature(filename)
-    
+    csv_filename = filename[:-4] + '.csv'
+    temperature =  extract_temperature(csv_filename)
+    print("")
+    print("Working on file",filename) 
     cluster_averages = []
     data_of_all_clusters = []
     
@@ -57,22 +59,37 @@ def calculate_temperature(labels,filename,coordinates):
     for i in coordinates:
         x = i[0]
         y = i[1]
-        
-        temp = float(temperature[x][y])
-        useful_temp.append(temp)
-    
+        #print(x,y)
+        try:
+            temp = float(temperature[x][y])
+            useful_temp.append(temp)
+        except IndexError: continue
+    print("Length of useful_temp",len(useful_temp),"Length of List_labels",len(list_labels))
     no_of_labels = set(labels)
-    
+
     for cluster in no_of_labels:
         temp_array = []
-        for j in range(len(list_labels)): 
-            if list_labels[j] == cluster:
-                temp_array.append(useful_temp[j])        
         
-        minimum = min(temp_array)
+        for j in range(len(useful_temp)): 
+            try:
+                if list_labels[j] == cluster:
+                    temp_array.append(useful_temp[j])        
+            except IndexError:
+                print("")
+                print("Jth index",j)
+                exit()
+        min2 = [] 
+        #calculate minimum values
+        for val in temp_array:
+            if val>= 0:
+                min2.append(val)        
+            else:continue
+            
+        minimum = min(min2)
         maximum = max(temp_array)
         average = mean(temp_array)
-        data = list([cluster,minimum,maximum,average])            
+        data = list([cluster,minimum,maximum,average])    
+               
         print("For Cluster = ",cluster)
         print("minimum Surface Temperature = ",minimum)
         print("maximum Surface Temperature = ",maximum)

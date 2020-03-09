@@ -32,7 +32,7 @@ counter = 0
 os.chdir(r"data//images")
 for files in os.listdir():
     if(files.endswith('.jpg')):
-        #if(counter == 0):   # to input all the image just remove the conditional statements and use the below 4 lines and comment from counter to break
+        # if(counter == 0):   # to input all the image just remove the conditional statements and use the below 4 lines and comment from counter to break
             img = cv2.imread(str(files))
             image_list.append(img)
             filenames.append(files)
@@ -75,7 +75,7 @@ for image in pbar(image_list):
     #print("")
     #create an array for the number of clusters
     try:
-        kmeans = KMeans(n_clusters=5, random_state=0, n_jobs = -1).fit(pixel_values)
+        kmeans = KMeans(n_clusters=10, random_state=0, n_jobs = -1).fit(pixel_values)
         # convert back to 8 bit values
         centers = kmeans.cluster_centers_
         centers = np.uint8(centers)
@@ -167,7 +167,7 @@ for image in clustered_images_list:
     count = 0
     for label in labels:
         if label ==  best_cluster: count = count +1
-    print(count)
+    #print(count)
     density = (count/len(pixel_values))*100
     print("Density of hotspot..",density,'%')
     density_of_all_image.append(density)

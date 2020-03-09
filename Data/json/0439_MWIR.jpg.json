@@ -1,1 +1,0 @@
-{"description": "", "tags": [], "size": {"height": 512, "width": 640}, "objects": [{"description": "", "tags": [], "classTitle": "Roof", "points": {"exterior": [[0, 0], [0, 192], [581, 0]], "interior": []}}, {"description": "", "tags": [{"name": "roof", "value": null}], "classTitle": "Roof", "points": {"exterior": [[640, 35], [640, 4], [0, 0], [0, 205]], "interior": []}}]}

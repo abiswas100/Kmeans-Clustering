@@ -64,6 +64,7 @@ def start_parsing(image,filename): #json_files , project_name
                 y = np.asscalar(y_coordinates[i])
                 l = list([x,y])
                 coordinates.append(l)
+           
             useful_coordinate = []
             for ordinate in coordinates:
                 if islist(ordinate) == True:
