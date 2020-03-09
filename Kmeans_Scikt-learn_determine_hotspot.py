@@ -19,7 +19,7 @@ import csv
 image_list = []
 filename = []
 counter = 0  
-os.chdir(r"Museum Clustering Tryouts//images")
+os.chdir(r"Data//images")
 for files in os.listdir():
     if(files.endswith('.jpg')):
          #if(counter == 0):   # to input all the image just remove the conditional statements and use the below 4 lines
