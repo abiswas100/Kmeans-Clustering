@@ -64,7 +64,12 @@ def calculate_temperature(labels,filename):
                 except IndexError: 
                     break       
         try:
-            minimum = min(temp_array)
+            min2 = [] 
+            #calculate minimum values
+            for val in temp_array:
+                 if val>= 0:min2.append(val)          
+            else: continue
+            minimum = min(min2)
             maximum = max(temp_array)
             average = mean(temp_array)
             data = list([cluster,minimum,maximum,average])        
