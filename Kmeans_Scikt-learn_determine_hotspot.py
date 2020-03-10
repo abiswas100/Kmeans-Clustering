@@ -1,6 +1,7 @@
 import optimum_K as op
 import Find_best_cluster as fb
-
+import consider_annotation as ann
+import getpass
 import os
 from pathlib import Path
 import shutil as s
@@ -14,95 +15,35 @@ import psutil
 from progressbar import ProgressBar
 from sklearn.cluster import KMeans
 from skimage import draw
+from PIL import Image, ImageDraw, ImageFont 
 
-
-'''
-Functions used for different calculations on the objects. 
-1. Calcualting all coordinates within a polygon given the edge coordinates
-2. Calculate v_values from the generated coordinates
-3. Calculating the mean of all u_values calculated within an object (polygon)
-'''
-def polygon_area_calculation(x_inputs, y_inputs):
-    '''
-    Function generate a list of all coordinates that are found within the polygon object.
-    Generates a list of x and y coordinates of the same length (they are pairs). In order to
-    access the coordinates, step through each list (x_coordiantes, y_coordinates) at the same rate
-    ie. one for loop with len(x_coordinates)
-    :param x_inputs: list of x coordinates from the annotated json file
-    :param y_inputs: list of y coordinates from the annotated json file
-    :return: x_coordinates, y_coordinates which hold the x and y, respectively, coordinates of the polygon.
-    '''
-    r = np.array(x_inputs)
-    c = np.array(y_inputs)
-    x_coordinates, y_coordinates = draw.polygon(r, c)
-    return x_coordinates, y_coordinates
-
-
-
-'''
-Main function used to parse/open/initiate calculations for all files within the chosen project
-TODO: Rewrite so this function is called each time you want to do calculation, not it looping through all files
-'''
+import csv
 import json
-def start_parsing(json_filenames, project_name):
-    draw_window = []
-    draw_face = []
-    filenames = []
-    new_list = []
-    #filename = json_files.split('.')
-    
-    for jfile in json_filenames:
-        with open(jfile) as json_content:
-            json_data = json.load(json_content)
-            for entry in json_data['objects']:
-                if (entry['classTitle'] == 'Facet' or entry['classTitle'] == 'Facade' or entry['classTitle'] == 'Facades'):
-                    x_values = []
-                    y_values = []
-                    points = entry['points']
-                    exterior = points['exterior']
-                    #ignore warning about coordinate not being used. Code doesn't work without that there
-                    for i, coordinate in enumerate(exterior):
-                        x_values.append(exterior[i][1])
-                        y_values.append(exterior[i][0])
-                    if (len(x_values) < 4):
-                        print("ERROR: LESS THAN 4 POINTS ANNOTATED FOR WINDOW. NUMBER OF POINTS: {}".format(
-                            len(x_values)))
-                    else:
-                        x_coordinates, y_coordinates = polygon_area_calculation(x_values, y_values)
-                    print(x_values,"\n")
-                    print(y_values,"\n")
-        
-            #X_coordiantes and y_coordiantes now hold points of interest
-            print(os.getcwd())
-            path = os.getcwd()
-            parent_path = Path(path).parent
-            os.chdir(os.path.join(parent_path,'images')) 
-            print(os.getcwd())
-            
 
-            for files in os.listdir():
-                if(files.endswith('.jpg')):
-                    img = cv2.imread(str(files))
-                    filenames.append(files)
 
-            for i in range(len(x_coordinates)):
-                #print("{} {}".format(x_coordinates[i], y_coordinates[i]))
-                #new_list.append(img[x_coordinates[i][y_coordinates[i]]])
-                r ,g,b = img[x_coordinates[i], y_coordinates[i]]
-                new_list.append([r,g,b])
-                    
-        print("\n",len(new_list),filenames)
-        return new_list,filenames
-#endof Function
-json_filenames = []
-os.chdir(r"Data\\json")
+#############################
+#  Importing the images   ###
+#############################
+
+image_list = []
+filenames = []
+counter = 0
+os.chdir(r"data//images")
 for files in os.listdir():
-    if(files.endswith('json')):
-        json_filenames.append(files)
-for jfilename in json_filenames:
-    print(jfilename)
-new_image_list ,filenames = start_parsing(json_filenames, "Project")
-#Restricting python to use only 2 cores
+    if(files.endswith('.jpg')):
+        # if(counter == 0):   # to input all the image just remove the conditional statements and use the below 4 lines and comment from counter to break
+            img = cv2.imread(str(files))
+            image_list.append(img)
+            filenames.append(files)
+print("")
+print("All Images loaded into array")
+    #         counter = counter+1
+    # else:            
+    #     break
+
+############################################################    
+
+# Restricting python to use only 2 cores
 cpu_nums = list(range(psutil.cpu_count()))
 proc = psutil.Process(os.getpid())
 proc.cpu_affinity(cpu_nums[:-2]) #will use all CPU cores uncomment to use 2 cores
@@ -112,68 +53,131 @@ print("CPUS being consumed..",cpu_count())
 pbar = ProgressBar()
 start = time.time()
 clustered_images_list = [] #list containing all the clustered outputs
- # Running 6 clusters on each image of Museum
- # For Twamley keep cluster above 10 
+
+ # Running 10 clusters on each image of Museum
+ # For Twamley keep cluster above 20 
+
+
 print("")
 print("Clustering the image ")
 labels_of_all_image = []
-for image in pbar(new_image_list):
+a = 0 #just a loop counter
+for image in pbar(image_list):
+    #adding annotations and changing the image_list array
+    pixel_values,coordinates = ann.start_parsing(image,filenames[a])
+    # print(len(pixel_values))
     # reshape the image to a 2D array of pixels and 3 color values (RGB)
-    pixel_values = image.reshape((-1, 3))
+    # pixel_values = image.reshape((-1, 3))
     # convert to float
+    #print("shape of pixel values",len(pixel_values))
     pixel_values = np.float32(pixel_values)
-    print("")
-    # print("The pixel array is ")
-    # print(pixel_values)
-    # print("Length of the pixel value list",len(pixel_values))
-    # print("")
-    #this function will return the best k for each image
-    
-    # cluster = op.silhoette(pixel_values)
-    
-
+    #print("")
     #create an array for the number of clusters
-    kmeans = KMeans(n_clusters=6, random_state=0, n_jobs = -1).fit(pixel_values)
-    # convert back to 8 bit values
-    centers = kmeans.cluster_centers_
-    centers = np.uint8(centers)
-    # print("The centers are ----",centers)
-    # flatten the labels array
-    labels = kmeans.labels_
-    labels_of_all_image.append(labels)
-    # print("The actual labels array",labels)
-    # print("The labels set - ",set(labels),"   The length of the labels array",len(labels))
-    segmented_image = centers[labels]
-    segmented_image = segmented_image.reshape(image.shape)
-    clustered_images_list.append(segmented_image)
+    try:
+        kmeans = KMeans(n_clusters=10, random_state=0, n_jobs = -1).fit(pixel_values)
+        # convert back to 8 bit values
+        centers = kmeans.cluster_centers_
+        centers = np.uint8(centers)
+        # print("The centers are ----",centers)
+        # flatten the labels array
+        labels = kmeans.labels_
+        labels_of_all_image.append(labels)
+        segmented_image = centers[labels]
+        #print("")
+        #print("Length of Segmented Image",len(segmented_image))
+        # segmented_image = segmented_image.reshape(pixel_values.shape)    #image.shape = (512,640)
+        # print("Length of Segment iamge after reshape",len(segmented_image))
+        clustered_images_list.append(segmented_image)
+        a = a + 1
+    except ValueError: 
+        getpass.getpass('Delete that file and press Enter')
+        continue
 
 print(" ")
 end = time.time()
 print("Time consumed in clustering: ",end - start)
 
+########################################
+## function to mask only the hotspot  ##
+########################################
+print("")
+print("Finding the Cluster containing the hotspot and Masking it ...")
+print("")
 
-#function to mask only the hotspot
-print("")
-print("Masking the image finding the best cluster")
-masked_image_list = []
-print("")
 counter = 0
+masked_image_list = []
+best_cluster_of_all_image = []
+density_of_all_image = []
+
+
 for image in clustered_images_list:
+    #print("image shape",image.shape)              ### size of the window in the image as a 1D array
     masked_image = 0
     masked_image = np.copy(image)
     # convert to the shape of a vector of pixel values
-    masked_image = masked_image.reshape((-1, 3))
-    # index_of_image = clustered_images_list.index(image)
-    best_cluster, no_of_labels = fb.calculate_temperature(labels_of_all_image[counter],filenames[counter])
+    # masked_image = masked_image.reshape((-1, 3))
+
+    best_cluster,data_of_all_cluster = fb.calculate_temperature(labels_of_all_image[counter],filenames[counter],coordinates)
+    best_cluster_of_all_image.append(best_cluster)
+    
     labels = labels_of_all_image[counter]
-    for i in range(0,6):
-        if i == best_cluster:
-            masked_image[labels == best_cluster] = [255,255,255]      
-        # else:
-        #     masked_image[labels == i] = [0,0,0]
+    
+    img = image_list[counter]  # img is the original raw image in (512,640)
+    #print("Original image shape",img.shape)
+    
+    # # #Add reconstruction of Image code here
+    # numbers = []
+    # counters = 0
+    # indexes = 0
+    # for i in range(len(x_coord)):
+    #     for x in range(len(x_coord)):
+            
+    #         if(x_coord[x] ==  indexes):
+    #             #print("GETTING HERE")
+    #             for j in range(len(y_coord)):
+    #                 counters = counters + 1
+    #                 #print("GETTINGHERE")
+    #                 #print("{} {}".format(x_coord[i].item,y_coord[i].item))
+    #             #print(counters)
+    #     numbers.append(counters)
+    #     counters = 0
+    #     indexes = indexes + 1
+    # for number in numbers:
+    #     print(number)
+
+    # for i in range(0,10):
+    #     if i == best_cluster:
+    #         #testim = Image.open('../images/' + filenames[counter])
+    #         #pixels = testim.load()
+    #         masked_image[labels == best_cluster] = [255,255,255] 
+    #         #pixels[y, x] = (255,255,255)       
+    
+
+    
     masked_image = masked_image.reshape(image.shape)
+    # print(masked_image.shape)
     masked_image_list.append(masked_image)     
     counter = counter+1  
+    # for i in range(len(x_coord)):
+    #     print("{} {}".format())
+    
+    
+    #Finding the Density of Hotspot in the region
+    count = 0
+    for label in labels:
+        if label ==  best_cluster: count = count +1
+    #print(count)
+    density = (count/len(pixel_values))*100
+    print("Density of hotspot..",density,'%')
+    density_of_all_image.append(density)
+
+
+
+#################################################
+##    Saving Images and storing into CSVs      ##
+#################################################
+
+    
 #Saving the masked images in Kmeans-masked-output folder
 print("  ")
 try:
@@ -181,7 +185,6 @@ try:
     parent_path = Path(path).parent
     os.chdir(parent_path)    
     os.mkdir('kmeans-output')
-
 except FileExistsError:
     print(" ")
     print("Folder already exists so removing the previous outputs and creating again")
@@ -196,109 +199,24 @@ finally:
         cv2.imwrite(filenames[counter], img)
         counter = counter + 1
         img = 0
-print("Finished .................")
-print(" ")
-print(" ")
-
-
-
-# #Saving the clustered images in output folder
-
-#     #create an array for the number of clusters
-#     kmeans = KMeans(n_clusters=6, random_state=0, n_jobs = -1).fit(pixel_values)
-#     # convert back to 8 bit values
-#     centers = kmeans.cluster_centers_
-#     centers = np.uint8(centers)
-#     # print("The centers are ----",centers)
-#     # flatten the labels array
-#     labels = kmeans.labels_
-#     labels_of_all_image.append(labels)
-#     # print("The actual labels array",labels)
-#     # print("The labels set - ",set(labels),"   The length of the labels array",len(labels))
-#     segmented_image = centers[labels]
-#     segmented_image = segmented_image.reshape(image.shape)
-#     clustered_images_list.append(segmented_image)
-
-# print(" ")
-# end = time.time()
-# print("Time consumed in clustering: ",end - start)
-
-
-#function to mask only the hotspot
-print("")
-print("Masking the image finding the best cluster")
-masked_image_list = []
-print("")
-counter = 0
-for image in clustered_images_list:
-    masked_image = 0
-    masked_image = np.copy(image)
-    # convert to the shape of a vector of pixel values
-    masked_image = masked_image.reshape((-1, 3))
-    # index_of_image = clustered_images_list.index(image)
-    best_cluster = fb.calculate_temperature(labels_of_all_image[counter],filenames[counter])
-    labels = labels_of_all_image[counter]
-    for i in range(0,6):
-        if i == best_cluster:
-            masked_image[labels == best_cluster] = [255,255,255]      
-        # else:
-        #     masked_image[labels == i] = [0,0,0]
-    masked_image = masked_image.reshape(image.shape)
-    masked_image_list.append(masked_image)     
-    counter = counter+1  
-
-# #Saving the masked images in Kmeans-masked-output folder
-
-print("  ")
+print("Images loaded to disk..pushing clustering information to csv file")
+print("")    
 try:
-    path = os.getcwd()
-    parent_path = Path(path).parent
-    os.chdir(parent_path)    
-    os.mkdir('kmeans-output')
-
+    file = 'kmeans'
+    with open(file + 'museum.csv' , 'a' ,newline='') as csvfile :
+        writer = csv.writer(csvfile)
+        writer.writerow(['Filename','Hotspot-cluster','minimum','maximum','average','density']) 
+        for i in range(0,len(filenames)):
+            file = filenames[i]
+            cluster = data_of_all_cluster[best_cluster_of_all_image[i]][0]
+            minimum = data_of_all_cluster[best_cluster_of_all_image[i]][1]
+            maximum = data_of_all_cluster[best_cluster_of_all_image[i]][2]
+            average = data_of_all_cluster[best_cluster_of_all_image[i]][3]
+            density = density_of_all_image[i]
+            writer.writerow([file,cluster,minimum,maximum,average,str(density)+'%'])
 except FileExistsError:
-    print(" ")
-    print("Folder already exists so removing the previous outputs and creating again")
-    s.rmtree('kmeans-output')
-    os.mkdir('kmeans-output')
-
-finally:
-    print("Pushing clustered images to disk..............")    
-    os.chdir('kmeans-output')
-    counter = 0
-    for img in masked_image_list:
-        cv2.imwrite(filenames[counter], img)
-        counter = counter + 1
-        img = 0
+    os.remove('mueseum.csv')   
+    
 print("Finished .................")
 print(" ")
 print(" ")
-
-
-
-#BELOW CODE IS OF NO USE
-
-# # #Saving the clustered images in output folder
-# # print("  ")
-# # try:
-# #     path = os.getcwd()
-# #     parent_path = Path(path).parent
-# #     os.chdir(parent_path)    
-# #     os.mkdir('kmeans-output')
-
-# # except FileExistsError:
-# #     print(" ")
-# #     print("Folder already exists so removing the previous outputs and creating again")
-# #     s.rmtree('kmeans-output')
-# #     os.mkdir('kmeans-output')
-# #     print(" ")
-# # finally:
-# #     print("Pushing clustered images to disk..............")    
-# #     os.chdir('kmeans-output')
-# #     counter = 0
-# #     for img in clustered_images_list:
-# #         print(" ")
-# #         cv2.imwrite(filename[0], img)
-# #         counter = counter + 1
-# # print("Clustered image stored .................")
-
