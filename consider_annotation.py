@@ -7,7 +7,7 @@ import cv2
 from skimage import draw
 import numpy as np
 import re
-
+not_working = []
 '''
 Functions used for different calculations on the objects. 
 1. Calcualting all coordinates within a polygon given the edge coordinates
@@ -43,10 +43,12 @@ def start_parsing(image,filename): #json_files , project_name
     draw_window = []
     draw_face = []
     coordinates = []
+    
     with open(json_filename) as json_content:
             json_data = json.load(json_content)
             for entry in json_data['objects']:
                 if (entry['classTitle'] == 'Window' or entry['classTitle'] == 'Windows'):
+                    #print(filename)
                     x_values = []
                     y_values = []
                     points = entry['points']
@@ -58,13 +60,14 @@ def start_parsing(image,filename): #json_files , project_name
                         print("ERROR: LESS THAN 4 POINTS ANNOTATED FOR WINDOW. NUMBER OF POINTS: {}".format(len(x_values)))
                     else:
                         x_coordinates, y_coordinates = polygon_area_calculation(x_values, y_values)
-            
-            for i in range(len(x_coordinates)):
-                x = np.asscalar(x_coordinates[i])
-                y = np.asscalar(y_coordinates[i])
-                l = list([x,y])
-                coordinates.append(l)
-           
+                        
+            try:            
+                for i in range(len(x_coordinates)):
+                    x = np.asscalar(x_coordinates[i])
+                    y = np.asscalar(y_coordinates[i])
+                    l = list([x,y])
+                    coordinates.append(l)
+            except UnboundLocalError: print(filename)
             useful_coordinate = []
             for ordinate in coordinates:
                 if islist(ordinate) == True:

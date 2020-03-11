@@ -62,18 +62,15 @@ clustered_images_list = [] #list containing all the clustered outputs
 print("")
 print("Clustering the image ")
 labels_of_all_image = []
+coordinates_of_all_images = []
 a = 0 #just a loop counter
 for image in pbar(image_list):
     #adding annotations and changing the image_list array
     pixel_values,coordinates = ann.start_parsing(image,filenames[a])
-    # print(len(pixel_values))
-    # reshape the image to a 2D array of pixels and 3 color values (RGB)
-    # pixel_values = image.reshape((-1, 3))
-    # convert to float
-    #print("shape of pixel values",len(pixel_values))
+    coordinates_of_all_images.append(coordinates)
     pixel_values = np.float32(pixel_values)
-    #print("")
-    #create an array for the number of clusters
+
+    #create an array for the number of clusters  
     try:
         kmeans = KMeans(n_clusters=10, random_state=0, n_jobs = -1).fit(pixel_values)
         # convert back to 8 bit values
@@ -84,10 +81,6 @@ for image in pbar(image_list):
         labels = kmeans.labels_
         labels_of_all_image.append(labels)
         segmented_image = centers[labels]
-        #print("")
-        #print("Length of Segmented Image",len(segmented_image))
-        # segmented_image = segmented_image.reshape(pixel_values.shape)    #image.shape = (512,640)
-        # print("Length of Segment iamge after reshape",len(segmented_image))
         clustered_images_list.append(segmented_image)
         a = a + 1
     except ValueError: 
@@ -118,7 +111,7 @@ for image in clustered_images_list:
     # convert to the shape of a vector of pixel values
     # masked_image = masked_image.reshape((-1, 3))
 
-    best_cluster,data_of_all_cluster = fb.calculate_temperature(labels_of_all_image[counter],filenames[counter],coordinates)
+    best_cluster,data_of_all_cluster = fb.calculate_temperature(labels_of_all_image[counter],filenames[counter],coordinates_of_all_images[counter])
     best_cluster_of_all_image.append(best_cluster)
     
     labels = labels_of_all_image[counter]
@@ -217,7 +210,8 @@ try:
             writer.writerow([file,cluster,minimum,maximum,average,str(density)+'%'])
 except FileExistsError:
     os.remove('mueseum.csv')   
-    
+
+print(ann.not_working)
 print("Finished .................")
 print(" ")
 print(" ")

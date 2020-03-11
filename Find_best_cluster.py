@@ -29,7 +29,7 @@ def extract_temperature(csv_filename):
             pixel_temperature = []
 
             for i, data in enumerate(csv_file_content):
-                if(i >= 9):
+                if(i >= 8):
                     pixel_temperature.append(data[0:])
     else:
         with open(csv_filename) as csv_file:
@@ -81,11 +81,12 @@ def calculate_temperature(labels,filename,coordinates):
         min2 = [] 
         #calculate minimum values
         for val in temp_array:
-            if val>= 0:
+            if val >= 0:
                 min2.append(val)        
             else:continue
-            
-        minimum = min(min2)
+        try:
+            minimum = min(min2)
+        except ValueError:minimum = min(temp_array)
         maximum = max(temp_array)
         average = mean(temp_array)
         data = list([cluster,minimum,maximum,average])    
