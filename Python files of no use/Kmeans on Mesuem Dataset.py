@@ -13,12 +13,20 @@ from sklearn.cluster import KMeans
 #run this file directly in the images folder of Twamley or Museum
 #Storing the images from File to an array named image_list
 image_list = []
-filename = []
+filenames = []
+counter = 0
+os.chdir(r"data//images")
 for files in os.listdir():
     if(files.endswith('.jpg')):
-        img = cv2.imread(str(files))
-        image_list.append(img)
-        filename.append(files)
+        if(counter == 0):   # to input all the image just remove the conditional statements and use the below 4 lines and comment from counter to break
+            img = cv2.imread(str(files))
+            image_list.append(img)
+            filenames.append(files)
+            print("")
+            print("All Images loaded into array")
+            counter = counter+1
+    else:            
+        break
 
 #Restricting python to use only 2 cores
 cpu_nums = list(range(psutil.cpu_count()))
@@ -42,7 +50,7 @@ for image in pbar(image_list):
     #Criteria for Stopping the clustering
     criteria = (cv2.TERM_CRITERIA_EPS + cv2.TERM_CRITERIA_MAX_ITER, 100, 0.01)
     #KMEANS 
-    clusters = 20
+    clusters = 10
     compactness, labels, centers = cv2.kmeans(pixel_values, clusters, None,criteria, 10, cv2.KMEANS_PP_CENTERS)
     # convert back to 8 bit values
     centers = np.uint8(centers)

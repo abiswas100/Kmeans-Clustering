@@ -38,19 +38,20 @@ def extract_temperature(csv_filename):
             for i, data in enumerate(csv_file_content):
                 if(i >= 1):
                     pixel_temperature.append(data[0:])
-    
+    #print(pixel_temperature[0],len(pixel_temperature[0]))
     return pixel_temperature
 
 #This function call the extract temperature function and calculates surface temperature and hottest cluster
 
 def calculate_temperature(labels,filename):
     print("")
-    print("For image - ",filename)
+    #print("For image - ",filename)
     best_cluster = 0
     cluster_averages = []
     data_of_all_cluster = []
     csv_filename = filename[:-4] + '.csv'
-    temperature = extract_temperature(csv_filename) #calling the extract temperature to give the all the pixel_temps in the temperature array
+    temperature = extract_temperature(csv_filename)
+     #calling the extract temperature to give the all the pixel_temps in the temperature array
     for cluster in set(labels):         #set(labels) == (0,1,2,3,4,5)
         temp_array = []
         pixel_labels = np.where(labels == cluster)

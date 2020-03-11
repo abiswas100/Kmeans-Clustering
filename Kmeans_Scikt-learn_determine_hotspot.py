@@ -22,15 +22,15 @@ counter = 0
 os.chdir(r"Data//images")
 for files in os.listdir():
     if(files.endswith('.jpg')):
-         #if(counter == 0):   # to input all the image just remove the conditional statements and use the below 4 lines
+        if(counter == 0):   # to input all the image just remove the conditional statements and use the below 4 lines
             img = cv2.imread(str(files))
             image_list.append(img)
             filename.append(files)
-print("")
-print("All Images loaded into array")
-    #         counter = counter+1
-    # else:            
-    #     break
+            print("")
+            print("All Images loaded into array")
+            counter = counter+1
+    else:            
+        break
 
 #Restricting python to use only 2 cores
 cpu_nums = list(range(psutil.cpu_count()))
@@ -64,7 +64,7 @@ for image in pbar(image_list):
     
     #create an array for the number of clusters
     
-    kmeans = KMeans(n_clusters=20, random_state=0, n_jobs = -1).fit(pixel_values)
+    kmeans = KMeans(n_clusters=1, random_state=0, n_jobs = -1).fit(pixel_values)
     # convert back to 8 bit values
     centers = kmeans.cluster_centers_
     centers = np.uint8(centers)
