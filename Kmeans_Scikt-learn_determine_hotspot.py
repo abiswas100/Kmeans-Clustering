@@ -125,6 +125,10 @@ for image in clustered_images_list:
     indexes = 0
     picture = Image.open("C:\\Users\\avhishek.biswas\\Documents\\Avhishek\\HeatLossProject\\Github\\Kmeans\\Data\\images\\0174_MWIR.jpg")
     pix = picture.load()
+    for i, data in enumerate(coordinates):
+        print("i: {} x:{} y:{} ")
+        pix[x,y] = 
+    
     for i in range(0,10):
         if i == best_cluster:
             #testim = Image.open('../images/' + filenames[counter])
