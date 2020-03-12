@@ -119,35 +119,21 @@ for image in clustered_images_list:
     img = image_list[counter]  # img is the original raw image in (512,640)
     #print("Original image shape",img.shape)
     
-    # # #Add reconstruction of Image code here
-    # numbers = []
-    # counters = 0
-    # indexes = 0
-    # for i in range(len(x_coord)):
-    #     for x in range(len(x_coord)):
-            
-    #         if(x_coord[x] ==  indexes):
-    #             #print("GETTING HERE")
-    #             for j in range(len(y_coord)):
-    #                 counters = counters + 1
-    #                 #print("GETTINGHERE")
-    #                 #print("{} {}".format(x_coord[i].item,y_coord[i].item))
-    #             #print(counters)
-    #     numbers.append(counters)
-    #     counters = 0
-    #     indexes = indexes + 1
-    # for number in numbers:
-    #     print(number)
-
-    # for i in range(0,10):
-    #     if i == best_cluster:
-    #         #testim = Image.open('../images/' + filenames[counter])
-    #         #pixels = testim.load()
-    #         masked_image[labels == best_cluster] = [255,255,255] 
-    #         #pixels[y, x] = (255,255,255)       
+    # #Add reconstruction of Image code here
+    numbers = []
+    counters = 0
+    indexes = 0
+    picture = Image.open("C:\\Users\\avhishek.biswas\\Documents\\Avhishek\\HeatLossProject\\Github\\Kmeans\\Data\\images\\0174_MWIR.jpg")
+    pix = picture.load()
+    for i in range(0,10):
+        if i == best_cluster:
+            #testim = Image.open('../images/' + filenames[counter])
+            #pixels = testim.load()
+            masked_image[labels == best_cluster] = [255,255,255] 
+            #pixels[y, x] = (255,255,255)       
     
 
-    
+    print("THISSSSSSSSSSSSSSSS {}".format(len(masked_image)))
     masked_image = masked_image.reshape(image.shape)
     # print(masked_image.shape)
     masked_image_list.append(masked_image)     

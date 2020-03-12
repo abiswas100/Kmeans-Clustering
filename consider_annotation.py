@@ -54,39 +54,41 @@ def start_parsing(image,filename): #json_files , project_name
                     points = entry['points']
                     exterior = points['exterior']
                     for k, coordinates in enumerate(exterior):
-                        x_values.append(exterior[k][1])
-                        y_values.append(exterior[k][0])
+                        x_values.append(exterior[k][0])
+                        y_values.append(exterior[k][1])
                     if (len(x_values) < 4):
                         print("ERROR: LESS THAN 4 POINTS ANNOTATED FOR WINDOW. NUMBER OF POINTS: {}".format(len(x_values)))
                     else:
                         x_coordinates, y_coordinates = polygon_area_calculation(x_values, y_values)
                         
-            try:            
+            try:  
+                counter = 1  
+                new_coord = []      
                 for i in range(len(x_coordinates)):
-                    x = np.asscalar(x_coordinates[i])
-                    y = np.asscalar(y_coordinates[i])
-                    l = list([x,y])
-                    coordinates.append(l)
+                    x = x_coordinates[i].item()
+                    y = y_coordinates[i].item()
+    
+                    counter = counter + 1
+                    new_coord.append([x,y])
+                
+                
+                
+                #print("x: {} y: {} z: {}".format(x_coordinates[0], y_coordinates[1], len(new_coord)))
+                    
             except UnboundLocalError: print(filename)
-            useful_coordinate = []
-            for ordinate in coordinates:
-                if islist(ordinate) == True:
-                    useful_coordinate.append(ordinate)
-                else:
-                    continue
+
             
             try:    
                 temp_image = []        
-                for j in range(len(x_coordinates)):
-                    r ,g,b = img[x_coordinates[j], y_coordinates[j]]
+                for j in new_coord:
+                    r ,g,b = img[j[1],j[0]]
                     temp_image.append(list([r,g,b]))    
             except UnboundLocalError : 
                 print(filename)
                 print("")
     #print(len(coordinates),coordinates[0])
-    return temp_image,useful_coordinate
-     
 
-def islist(obj):
-    if "list" in str(type(obj)): return True
-    else: return False
+        #print(i)
+        #print(i)
+    return temp_image, new_coord
+     
