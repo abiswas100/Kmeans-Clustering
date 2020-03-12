@@ -59,7 +59,7 @@ print("All Images loaded into array")
     #         counter = counter+1
     # else:            
     #     break
-print(len(filename))
+
 data_of_all_images = []
 for img in range(len(image_list)):
     temperature = []
@@ -71,12 +71,12 @@ for img in range(len(image_list)):
     file = filename[img]
     csvfilename = file[:-4] + '.csv'
     temperature = extract_temperature(csvfilename)      #Getting pixel_temperature from Extract Temp function
-    
+
     for row in temperature:  #iterating over temperature which is 512*640
         for i in range(len(row)-1):
             pixel_temp = float(row[i])
             #U value calculation
-            u_value_1, u_value_2, u_value_3, u_value_4 = uval.u_value_calculation(float(i))
+            u_value_1, u_value_2, u_value_3, u_value_4 = uval.u_value_calculation(pixel_temp)
             # temp_array.append(float(i))
             u_value_eq1_points.append(u_value_1)
             u_value_eq2_points.append(u_value_2)
