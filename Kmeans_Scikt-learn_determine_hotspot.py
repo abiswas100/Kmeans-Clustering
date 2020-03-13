@@ -1,6 +1,7 @@
 import optimum_K as op
 import Find_best_cluster as fb
 import consider_annotation as ann
+
 import getpass
 import os
 from pathlib import Path
@@ -56,9 +57,7 @@ start = time.time()
 clustered_images_list = [] #list containing all the clustered outputs
 
  # Running 10 clusters on each image of Museum
- # For Twamley keep cluster above 20 
-
-
+ # For Twamley keep cluster above 20
 print("")
 print("Clustering the image ")
 labels_of_all_image = []
