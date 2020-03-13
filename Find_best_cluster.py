@@ -61,11 +61,12 @@ def calculate_temperature(labels,filename,coordinates):
     u_value_eq2_points = []
     u_value_eq3_points = []
     u_value_eq4_points = []
+
     for row in temperature:  #iterating over temperature which is 512*640
         for i in range(len(row)-1):
             pixel_temp = float(row[i])
             #U value calculation
-            u_value_1, u_value_2, u_value_3, u_value_4 = uval.u_value_calculation(pixel_temp)
+            u_value_1, u_value_2, u_value_3, u_value_4 = U_val.u_value_calculation(pixel_temp)
             # temp_array.append(float(i))
             u_value_eq1_points.append(u_value_1)
             u_value_eq2_points.append(u_value_2)
@@ -76,6 +77,7 @@ def calculate_temperature(labels,filename,coordinates):
     u3 = mean(u_value_eq3_points)
     u4 = mean(u_value_eq4_points)
     
+
 
 
     list_labels = labels.tolist()
@@ -89,6 +91,9 @@ def calculate_temperature(labels,filename,coordinates):
             temp = float(temperature[x][y])
             useful_temp.append(temp)
         except IndexError: continue
+
+
+    
     print("Length of useful_temp",len(useful_temp),"Length of List_labels",len(list_labels))
     no_of_labels = set(labels)
 
