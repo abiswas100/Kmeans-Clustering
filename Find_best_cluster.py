@@ -53,8 +53,31 @@ def calculate_temperature(labels,filename,coordinates):
     print("Working on file",filename) 
     cluster_averages = []
     data_of_all_clusters = []
+    u1,u2,u3,u4 = 0,0,0,0
+    '''
+    Adding U -value codes
+    '''
+    u_value_eq1_points = []
+    u_value_eq2_points = []
+    u_value_eq3_points = []
+    u_value_eq4_points = []
+    for row in temperature:  #iterating over temperature which is 512*640
+        for i in range(len(row)-1):
+            pixel_temp = float(row[i])
+            #U value calculation
+            u_value_1, u_value_2, u_value_3, u_value_4 = uval.u_value_calculation(pixel_temp)
+            # temp_array.append(float(i))
+            u_value_eq1_points.append(u_value_1)
+            u_value_eq2_points.append(u_value_2)
+            u_value_eq3_points.append(u_value_3)
+            u_value_eq4_points.append(u_value_4)
+    u1 = mean(u_value_eq1_points)
+    u2 = mean(u_value_eq2_points)
+    u3 = mean(u_value_eq3_points)
+    u4 = mean(u_value_eq4_points)
     
-    
+
+
     list_labels = labels.tolist()
     
     useful_temp = []
@@ -81,7 +104,7 @@ def calculate_temperature(labels,filename,coordinates):
                 print("Jth index",j)
                 exit()
 
-        min2 = [] 
+        min2 = []  # to store only those values which are positive to calculate minimum
         #calculate minimum values
         for val in temp_array:
             if val >= 0:
@@ -94,10 +117,10 @@ def calculate_temperature(labels,filename,coordinates):
         maximum = max(temp_array)
         average = mean(temp_array)
         data = list([cluster,minimum,maximum,average])    
-        # print("For Cluster = ",cluster)
-        # print("minimum Surface Temperature = ",minimum)
-        # print("maximum Surface Temperature = ",maximum)
-        # print("average Surface Temperature = ",average)
+        print("For Cluster = ",cluster)
+        print("minimum Surface Temperature = ",minimum)
+        print("maximum Surface Temperature = ",maximum)
+        print("average Surface Temperature = ",average)
         cluster_averages.append(average)
         data_of_all_clusters.append(data)        
     print("")
