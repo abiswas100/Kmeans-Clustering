@@ -118,18 +118,19 @@ for image in clustered_images_list:
     temp_image = image_list[counter]
     masked_image = np.copy(temp_image)
     
-    masked_image = masked_image.reshape((-1,3))
+    #masked_image = masked_image.reshape((-1,3))
     try:    
         temp_image = []        
         for j in coordinates:
+            #print(j)
             masked_image[j[1],j[0]] = [255,255,255]
-                  
+   
     except UnboundLocalError : 
             print(filenames[counter])
             print("")
 
-    masked_image = masked_image.reshape(image.shape)
-    masked_image_list.append()
+    #masked_image = masked_image.reshape(image.shape)
+    masked_image_list.append(masked_image)
     #Finding the Density of Hotspot for the 
     count = 0
     for label in labels:
