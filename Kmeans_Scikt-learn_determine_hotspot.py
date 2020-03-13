@@ -34,15 +34,15 @@ counter = 0
 os.chdir(r"data//images")
 for files in os.listdir():
     if(files.endswith('.jpg')):
-         if(counter == 0):   # to input all the image just remove the conditional statements and use the below 4 lines and comment from counter to break
+        # if(counter == 0):   # to input all the image just remove the conditional statements and use the below 4 lines and comment from counter to break
             img = cv2.imread(str(files))
             image_list.append(img)
             filenames.append(files)
-            print("")
-            print("All Images loaded into array")
-            counter = counter+1
-    else:            
-        break
+print("")
+print("All Images loaded into array")
+    #         counter = counter+1
+    # else:            
+    #     break
 
 ############################################################    
 
@@ -65,14 +65,14 @@ labels_of_all_image = []
 coordinates_of_all_images = []
 a = 0 #just a loop counter
 for image in pbar(image_list):
+    
     #adding annotations and changing the image_list array
     pixel_values,coordinates = ann.start_parsing(image,filenames[a])
     coordinates_of_all_images.append(coordinates)
     pixel_values = np.float32(pixel_values)
-
-    #create an array for the number of clusters  
+    
     try:
-        kmeans = KMeans(n_clusters=2, random_state=0, n_jobs = -1).fit(pixel_values)
+        kmeans = KMeans(n_clusters=3, random_state=0, n_jobs = -1).fit(pixel_values)
         # convert back to 8 bit values
         centers = kmeans.cluster_centers_
         centers = np.uint8(centers)
@@ -113,19 +113,20 @@ the images in the masked image list..
 for image in clustered_images_list:
     best_cluster,data_of_all_cluster = fb.calculate_temperature(labels_of_all_image[counter],filenames[counter],coordinates_of_all_images[counter])
     best_cluster_of_all_image.append(best_cluster)
-    labels = labels_of_all_image[counter]
+    l = labels_of_all_image[counter]
+    coordinate = coordinates_of_all_images[counter]
     
     temp_image = image_list[counter]
     masked_image = np.copy(temp_image)
     
-    #masked_image = masked_image.reshape((-1,3))
-    for i in range(len(labels)):
-        if labels[i] != best_cluster:coordinates[i] = [-1,-1] 
+    
+    for i in range(len(l)):
+        if l[i] != best_cluster:coordinate[i] = [-1,-1] 
         else:continue
     
     try:    
         temp_image = []        
-        for j in coordinates:
+        for j in coordinate:
             if j != [-1,-1]:
                 masked_image[j[1],j[0]] = [255,255,255]
    
@@ -137,19 +138,17 @@ for image in clustered_images_list:
     masked_image_list.append(masked_image)
     #Finding the Density of Hotspot for the 
     count = 0
-    for label in labels:
+    for label in l:
         if label ==  best_cluster: count = count +1
     #print(count)
     density = (count/len(labels))*100
     print("Density of hotspot..",density,'%')
     density_of_all_image.append(density)
-
-
+    counter = counter + 1
 
 #################################################
 ##    Saving Images and storing into CSVs      ##
 #################################################
-
     
 #Saving the masked images in Kmeans-masked-output folder
 print("  ")
@@ -178,19 +177,23 @@ try:
     file = 'kmeans'
     with open(file + 'museum.csv' , 'a' ,newline='') as csvfile :
         writer = csv.writer(csvfile)
-        writer.writerow(['Filename','Hotspot-cluster','minimum','maximum','average','density']) 
+        writer.writerow(['Filename','Hotspot-cluster','minimum','maximum','average','U1','U2','U3','U4','density']) 
         for i in range(0,len(filenames)):
             file = filenames[i]
             cluster = data_of_all_cluster[best_cluster_of_all_image[i]][0]
             minimum = data_of_all_cluster[best_cluster_of_all_image[i]][1]
             maximum = data_of_all_cluster[best_cluster_of_all_image[i]][2]
             average = data_of_all_cluster[best_cluster_of_all_image[i]][3]
+            u1 = data_of_all_cluster[best_cluster_of_all_image[i]][4]  
+            u2 = data_of_all_cluster[best_cluster_of_all_image[i]][5]
+            u3 = data_of_all_cluster[best_cluster_of_all_image[i]][6]
+            u4 = data_of_all_cluster[best_cluster_of_all_image[i]][7]
+            
             density = density_of_all_image[i]
-            writer.writerow([file,cluster,minimum,maximum,average,str(density)+'%'])
+            writer.writerow([file,cluster,minimum,maximum,average,u1,u2,u3,u4,str(density)+'%'])
 except FileExistsError:
     os.remove('mueseum.csv')   
 
-print(ann.not_working)
 print("Finished .................")
 print(" ")
 print(" ")
