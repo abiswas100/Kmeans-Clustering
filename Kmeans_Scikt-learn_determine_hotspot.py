@@ -32,15 +32,15 @@ counter = 0
 os.chdir(r"data//images")
 for files in os.listdir():
     if(files.endswith('.jpg')):
-        # if(counter == 0):   # to input all the image just remove the conditional statements and use the below 4 lines and comment from counter to break
+         if(counter == 0):   # to input all the image just remove the conditional statements and use the below 4 lines and comment from counter to break
             img = cv2.imread(str(files))
             image_list.append(img)
             filenames.append(files)
-print("")
-print("All Images loaded into array")
-    #         counter = counter+1
-    # else:            
-    #     break
+            print("")
+            print("All Images loaded into array")
+            counter = counter+1
+    else:            
+        break
 
 ############################################################    
 
@@ -104,54 +104,38 @@ best_cluster_of_all_image = []
 density_of_all_image = []
 
 
-for image in clustered_images_list:
-    #print("image shape",image.shape)              ### size of the window in the image as a 1D array
-    masked_image = 0
-    masked_image = np.copy(image)
-    # convert to the shape of a vector of pixel values
-    # masked_image = masked_image.reshape((-1, 3))
+'''
+The lines below iterates over the cluster_image list and converts the pixel to the hotspot_cluster and store 
+the images in the masked image list.. 
+   
+'''
 
+for image in clustered_images_list:
     best_cluster,data_of_all_cluster = fb.calculate_temperature(labels_of_all_image[counter],filenames[counter],coordinates_of_all_images[counter])
     best_cluster_of_all_image.append(best_cluster)
-    
     labels = labels_of_all_image[counter]
     
-    img = image_list[counter]  # img is the original raw image in (512,640)
-    #print("Original image shape",img.shape)
+    temp_image = image_list[counter]
+    masked_image = np.copy(temp_image)
     
-    # #Add reconstruction of Image code here
-    numbers = []
-    counters = 0
-    indexes = 0
-    picture = Image.open("C:\\Users\\avhishek.biswas\\Documents\\Avhishek\\HeatLossProject\\Github\\Kmeans\\Data\\images\\0174_MWIR.jpg")
-    pix = picture.load()
-    for i, data in enumerate(coordinates):
-        print("i: {} x:{} y:{} ")
-        pix[x,y] = 
-    
-    for i in range(0,10):
-        if i == best_cluster:
-            #testim = Image.open('../images/' + filenames[counter])
-            #pixels = testim.load()
-            masked_image[labels == best_cluster] = [255,255,255] 
-            #pixels[y, x] = (255,255,255)       
-    
+    masked_image = masked_image.reshape((-1,3))
+    try:    
+        temp_image = []        
+        for j in coordinates:
+            masked_image[j[1],j[0]] = [255,255,255]
+                  
+    except UnboundLocalError : 
+            print(filenames[counter])
+            print("")
 
-    print("THISSSSSSSSSSSSSSSS {}".format(len(masked_image)))
     masked_image = masked_image.reshape(image.shape)
-    # print(masked_image.shape)
-    masked_image_list.append(masked_image)     
-    counter = counter+1  
-    # for i in range(len(x_coord)):
-    #     print("{} {}".format())
-    
-    
-    #Finding the Density of Hotspot in the region
+    masked_image_list.append()
+    #Finding the Density of Hotspot for the 
     count = 0
     for label in labels:
         if label ==  best_cluster: count = count +1
     #print(count)
-    density = (count/len(pixel_values))*100
+    density = (count/len(labels))*100
     print("Density of hotspot..",density,'%')
     density_of_all_image.append(density)
 

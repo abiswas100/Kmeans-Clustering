@@ -70,14 +70,11 @@ def start_parsing(image,filename): #json_files , project_name
     
                     counter = counter + 1
                     new_coord.append([x,y])
-                
-                
-                
+                                
                 #print("x: {} y: {} z: {}".format(x_coordinates[0], y_coordinates[1], len(new_coord)))
                     
             except UnboundLocalError: print(filename)
 
-            
             try:    
                 temp_image = []        
                 for j in new_coord:
