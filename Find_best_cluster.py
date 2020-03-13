@@ -1,3 +1,5 @@
+import U_value as U_val
+
 import os
 from pathlib import Path
 
@@ -78,6 +80,7 @@ def calculate_temperature(labels,filename,coordinates):
                 print("")
                 print("Jth index",j)
                 exit()
+
         min2 = [] 
         #calculate minimum values
         for val in temp_array:
@@ -86,11 +89,11 @@ def calculate_temperature(labels,filename,coordinates):
             else:continue
         try:
             minimum = min(min2)
-        except ValueError:minimum = min(temp_array)
+        except ValueError:
+            minimum = min(temp_array)
         maximum = max(temp_array)
         average = mean(temp_array)
         data = list([cluster,minimum,maximum,average])    
-               
         # print("For Cluster = ",cluster)
         # print("minimum Surface Temperature = ",minimum)
         # print("maximum Surface Temperature = ",maximum)
@@ -104,6 +107,20 @@ def calculate_temperature(labels,filename,coordinates):
     print("The hottest cluster = ",best_cluster)
 
     return best_cluster , data_of_all_clusters
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
