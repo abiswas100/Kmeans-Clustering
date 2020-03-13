@@ -118,13 +118,10 @@ for image in clustered_images_list:
     masked_image = np.copy(temp_image)
     
     #masked_image = masked_image.reshape((-1,3))
-    test = 0
     for i in range(len(labels)):
-        if labels[i] != best_cluster:
-            coordinates[i] = [-1,-1] 
-            test = test+1
+        if labels[i] != best_cluster:coordinates[i] = [-1,-1] 
         else:continue
-    #print("test",test,"    labels",len(labels),"   coordinates",len(coordinates))
+    
     try:    
         temp_image = []        
         for j in coordinates:
