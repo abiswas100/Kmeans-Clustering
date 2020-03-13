@@ -38,7 +38,7 @@ def extract_temperature(csv_filename):
             for i, data in enumerate(csv_file_content):
                 if(i >= 1):
                     pixel_temperature.append(data[0:])
-    print("length of Pixel temp",len(pixel_temperature))
+    #print("length of Pixel temp",len(pixel_temperature))
     return pixel_temperature
 
 
@@ -91,10 +91,10 @@ def calculate_temperature(labels,filename,coordinates):
         average = mean(temp_array)
         data = list([cluster,minimum,maximum,average])    
                
-        print("For Cluster = ",cluster)
-        print("minimum Surface Temperature = ",minimum)
-        print("maximum Surface Temperature = ",maximum)
-        print("average Surface Temperature = ",average)
+        # print("For Cluster = ",cluster)
+        # print("minimum Surface Temperature = ",minimum)
+        # print("maximum Surface Temperature = ",maximum)
+        # print("average Surface Temperature = ",average)
         cluster_averages.append(average)
         data_of_all_clusters.append(data)        
     print("")

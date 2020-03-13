@@ -71,7 +71,7 @@ for image in pbar(image_list):
 
     #create an array for the number of clusters  
     try:
-        kmeans = KMeans(n_clusters=10, random_state=0, n_jobs = -1).fit(pixel_values)
+        kmeans = KMeans(n_clusters=2, random_state=0, n_jobs = -1).fit(pixel_values)
         # convert back to 8 bit values
         centers = kmeans.cluster_centers_
         centers = np.uint8(centers)
@@ -118,11 +118,18 @@ for image in clustered_images_list:
     masked_image = np.copy(temp_image)
     
     #masked_image = masked_image.reshape((-1,3))
+    test = 0
+    for i in range(len(labels)):
+        if labels[i] != best_cluster:
+            coordinates[i] = [-1,-1] 
+            test = test+1
+        else:continue
+    #print("test",test,"    labels",len(labels),"   coordinates",len(coordinates))
     try:    
         temp_image = []        
         for j in coordinates:
-            #print(j)
-            masked_image[j[1],j[0]] = [255,255,255]
+            if j != [-1,-1]:
+                masked_image[j[1],j[0]] = [255,255,255]
    
     except UnboundLocalError : 
             print(filenames[counter])
