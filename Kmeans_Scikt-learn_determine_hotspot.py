@@ -33,8 +33,8 @@ filenames = []
 counter = 0
 os.chdir(r"data//images")
 for files in os.listdir():
-    if(files.endswith('.jpg')):
-        # if(counter == 0):   # to input all the image just remove the conditional statements and use the below 4 lines and comment from counter to break
+    #if(files.endswith('.jpg')):
+        if(counter == 0):   # to input all the image just remove the conditional statements and use the below 4 lines and comment from counter to break
             img = cv2.imread(str(files))
             image_list.append(img)
             filenames.append(files)
@@ -177,7 +177,7 @@ try:
     file = 'kmeans'
     with open(file + 'museum.csv' , 'a' ,newline='') as csvfile :
         writer = csv.writer(csvfile)
-        writer.writerow(['Filename','Hotspot-cluster','minimum','maximum','average','U1','U2','U3','U4','density']) 
+        writer.writerow(['Filename','Hotspot-cluster','minimum','maximum','average','U1','U2','U3','U4','Hotspot-U1','Hotspot-U2','Hotspot-U3','Hotspot-U4','density']) 
         for i in range(0,len(filenames)):
             file = filenames[i]
             cluster = data_of_all_cluster[best_cluster_of_all_image[i]][0]
@@ -188,9 +188,13 @@ try:
             u2 = data_of_all_cluster[best_cluster_of_all_image[i]][5]
             u3 = data_of_all_cluster[best_cluster_of_all_image[i]][6]
             u4 = data_of_all_cluster[best_cluster_of_all_image[i]][7]
+            hu1 = data_of_all_cluster[best_cluster_of_all_image[i]][8]
+            hu2 = data_of_all_cluster[best_cluster_of_all_image[i]][9]
+            hu3 = data_of_all_cluster[best_cluster_of_all_image[i]][10]
+            hu4 = data_of_all_cluster[best_cluster_of_all_image[i]][11]
             
             density = density_of_all_image[i]
-            writer.writerow([file,cluster,minimum,maximum,average,u1,u2,u3,u4,str(density)+'%'])
+            writer.writerow([file,cluster,minimum,maximum,average,u1,u2,u3,u4,hu1,hu2,hu3,hu4,str(density)+'%'])
 except FileExistsError:
     os.remove('mueseum.csv')   
 

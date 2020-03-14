@@ -68,13 +68,13 @@ def calculate_temperature(labels,filename,coordinates):
             # print(filename,len(temperature),len(coordinates))
             # exit()        
     '''
-    Adding U -value codes
+    Adding  Overall U-values for the object 
     '''
     u_value_eq1_points = []
     u_value_eq2_points = []
     u_value_eq3_points = []
     u_value_eq4_points = []
-    u1,u2,u3,u4 = 0,0,0,0
+    ou1,ou2,ou3,ou4 = 0,0,0,0
     
     for row in temperature:  #iterating over temperature which is 512*640
         for i in range(len(row)-1):
@@ -86,13 +86,15 @@ def calculate_temperature(labels,filename,coordinates):
             u_value_eq2_points.append(u_value_2)
             u_value_eq3_points.append(u_value_3)
             u_value_eq4_points.append(u_value_4)
-    u1 = mean(u_value_eq1_points)/5.678
-    u2 = mean(u_value_eq2_points)/5.678
-    u3 = mean(u_value_eq3_points)/5.678
-    u4 = mean(u_value_eq4_points)/5.678
+    ou1 = mean(u_value_eq1_points)/5.678
+    ou2 = mean(u_value_eq2_points)/5.678
+    ou3 = mean(u_value_eq3_points)/5.678
+    ou4 = mean(u_value_eq4_points)/5.678
+    print(ou1,ou2,ou3,ou4)
     '''
-    Getting Min Max average for objects and selecting the best cluster
+    Getting Min Max average for objects and selecting the best cluster and U-values of hotspot
     '''
+
     no_of_labels = set(labels) 
     for cluster in no_of_labels:
         temp_array = []
@@ -105,7 +107,7 @@ def calculate_temperature(labels,filename,coordinates):
                 print("")
                 print("Jth index",j)
                 exit()
-
+        
         min2 = []  # to store only those values which are positive to calculate minimum
         #calculate minimum values
         for val in temp_array:
@@ -118,7 +120,26 @@ def calculate_temperature(labels,filename,coordinates):
             minimum = min(temp_array)
         maximum = max(temp_array)
         average = mean(temp_array)
-        data = list([cluster,minimum,maximum,average,u1,u2,u3,u4])    
+        
+        '''
+        Finding the U-values for Hotspots
+        '''
+        hu_value_eq1_points,hu_value_eq2_points,hu_value_eq3_points,hu_value_eq4_points = [],[],[],[]
+        for t in temp_array:
+            #U value calculation
+            hu_value_1, hu_value_2, hu_value_3, hu_value_4 = U_val.u_value_calculation(float(t))
+            # temp_array.append(float(i))
+            hu_value_eq1_points.append(hu_value_1)
+            hu_value_eq2_points.append(hu_value_2)
+            hu_value_eq3_points.append(hu_value_3)
+            hu_value_eq4_points.append(hu_value_4)
+        
+        hu1 = mean(hu_value_eq1_points)/5.678
+        hu2 = mean(hu_value_eq2_points)/5.678
+        hu3 = mean(hu_value_eq3_points)/5.678
+        hu4 = mean(hu_value_eq4_points)/5.678     
+        
+        data = list([cluster,minimum,maximum,average,ou1,ou2,ou3,ou4,hu1,hu2,hu3,hu4])    
         print("For Cluster = ",cluster)
         print("minimum Surface Temperature = ",minimum)
         print("maximum Surface Temperature = ",maximum)
@@ -130,7 +151,6 @@ def calculate_temperature(labels,filename,coordinates):
     print("Maximum average temperature of all clusters = ",max_avg)
     best_cluster = cluster_averages.index(max_avg)
     print("The hottest cluster = ",best_cluster)
-    
     return best_cluster , data_of_all_clusters
 
 
