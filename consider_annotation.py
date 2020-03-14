@@ -43,7 +43,7 @@ def start_parsing(image,filename): #json_files , project_name
     draw_window = []
     draw_face = []
     coordinates = []
-    
+
     with open(json_filename) as json_content:
             json_data = json.load(json_content)
             for entry in json_data['objects']:

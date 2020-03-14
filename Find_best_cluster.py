@@ -46,7 +46,7 @@ def extract_temperature(csv_filename):
 
 #the function only return only the min,max avg of the annotated region
 
-def calculate_temperature(labels,filename,coordinates):   
+def calculate_temperature(labels,filename,coordinates): 
     csv_filename = filename[:-4] + '.csv'
     temperature =  extract_temperature(csv_filename)
     print("")

@@ -33,8 +33,9 @@ filenames = []
 counter = 0
 os.chdir(r"data//images")
 for files in os.listdir():
-    #if(files.endswith('.jpg')):
-        if(counter == 0):   # to input all the image just remove the conditional statements and use the below 4 lines and comment from counter to break
+    if(files.endswith('.jpg')):
+        #if(counter == 0): 
+            # to input all the image just remove the conditional statements and use the below 4 lines and comment from counter to break
             img = cv2.imread(str(files))
             image_list.append(img)
             filenames.append(files)
