@@ -50,7 +50,8 @@ def calculate_temperature(labels,filename,coordinates):
     csv_filename = filename[:-4] + '.csv'
     temperature =  extract_temperature(csv_filename)
     print("")
-     
+
+ 
     cluster_averages = []
     data_of_all_clusters = []
 
@@ -90,7 +91,6 @@ def calculate_temperature(labels,filename,coordinates):
     ou2 = mean(u_value_eq2_points)/5.678
     ou3 = mean(u_value_eq3_points)/5.678
     ou4 = mean(u_value_eq4_points)/5.678
-    print(ou1,ou2,ou3,ou4)
     '''
     Getting Min Max average for objects and selecting the best cluster and U-values of hotspot
     '''
@@ -152,19 +152,3 @@ def calculate_temperature(labels,filename,coordinates):
     best_cluster = cluster_averages.index(max_avg)
     print("The hottest cluster = ",best_cluster)
     return best_cluster , data_of_all_clusters
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
