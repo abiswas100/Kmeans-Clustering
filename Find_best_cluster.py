@@ -66,8 +66,7 @@ def calculate_temperature(labels,filename,coordinates):
             temp = float(temperature[x][y])
             useful_temp.append(temp)
         except IndexError: continue 
-            # print(filename,len(temperature),len(coordinates))
-            # exit()        
+
     '''
     Adding  Overall U-values for the object 
     '''
@@ -77,12 +76,10 @@ def calculate_temperature(labels,filename,coordinates):
     u_value_eq4_points = []
     ou1,ou2,ou3,ou4 = 0,0,0,0
     
-    for row in temperature:  #iterating over temperature which is 512*640
-        for i in range(len(row)-1):
-            pixel_temp = float(row[i])
+    for pixel_temp in useful_temp:  #iterating over useful temperature of the annotated object
+            pixel_temp = float(pixel_temp)
             #U value calculation
             u_value_1, u_value_2, u_value_3, u_value_4 = U_val.u_value_calculation(pixel_temp)
-            # temp_array.append(float(i))
             u_value_eq1_points.append(u_value_1)
             u_value_eq2_points.append(u_value_2)
             u_value_eq3_points.append(u_value_3)
@@ -91,6 +88,7 @@ def calculate_temperature(labels,filename,coordinates):
     ou2 = mean(u_value_eq2_points)/5.678
     ou3 = mean(u_value_eq3_points)/5.678
     ou4 = mean(u_value_eq4_points)/5.678
+
     '''
     Getting Min Max average for objects and selecting the best cluster and U-values of hotspot
     '''

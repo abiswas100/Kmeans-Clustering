@@ -34,7 +34,7 @@ counter = 0
 os.chdir(r"data//images")
 for files in os.listdir():
     if(files.endswith('.jpg')):
-        #if(counter == 0): 
+        # if(counter == 0): 
             # to input all the image just remove the conditional statements and use the below 4 lines and comment from counter to break
             img = cv2.imread(str(files))
             image_list.append(img)
@@ -50,7 +50,7 @@ print("All Images loaded into array")
 # Restricting python to use only 2 cores
 cpu_nums = list(range(psutil.cpu_count()))
 proc = psutil.Process(os.getpid())
-proc.cpu_affinity(cpu_nums[:-2]) #will use all CPU cores uncomment to use 2 cores
+#proc.cpu_affinity(cpu_nums[:-2]) #will use all CPU cores uncomment to use 2 cores
 print("CPUS being consumed..",cpu_count())
 
 
@@ -73,7 +73,7 @@ for image in pbar(image_list):
     pixel_values = np.float32(pixel_values)
     
     try:
-        kmeans = KMeans(n_clusters=3, random_state=0, n_jobs = -1).fit(pixel_values)
+        kmeans = KMeans(n_clusters=1, random_state=0, n_jobs = -1).fit(pixel_values)
         # convert back to 8 bit values
         centers = kmeans.cluster_centers_
         centers = np.uint8(centers)
@@ -178,7 +178,7 @@ try:
     file = 'kmeans'
     with open(file + 'museum.csv' , 'a' ,newline='') as csvfile :
         writer = csv.writer(csvfile)
-        writer.writerow(['Filename','Hotspot-cluster','minimum','maximum','average','U1','U2','U3','U4','Hotspot-U1','Hotspot-U2','Hotspot-U3','Hotspot-U4','density']) 
+        writer.writerow(['Filename','Hotspot-cluster','minimum','maximum','average','U1','U2','U3','U4']) 
         for i in range(0,len(filenames)):
             file = filenames[i]
             cluster = data_of_all_cluster[best_cluster_of_all_image[i]][0]
@@ -189,13 +189,13 @@ try:
             u2 = data_of_all_cluster[best_cluster_of_all_image[i]][5]
             u3 = data_of_all_cluster[best_cluster_of_all_image[i]][6]
             u4 = data_of_all_cluster[best_cluster_of_all_image[i]][7]
-            hu1 = data_of_all_cluster[best_cluster_of_all_image[i]][8]
-            hu2 = data_of_all_cluster[best_cluster_of_all_image[i]][9]
-            hu3 = data_of_all_cluster[best_cluster_of_all_image[i]][10]
-            hu4 = data_of_all_cluster[best_cluster_of_all_image[i]][11]
+            # hu1 = data_of_all_cluster[best_cluster_of_all_image[i]][8]
+            # hu2 = data_of_all_cluster[best_cluster_of_all_image[i]][9]
+            # hu3 = data_of_all_cluster[best_cluster_of_all_image[i]][10]
+            # hu4 = data_of_all_cluster[best_cluster_of_all_image[i]][11]
             
             density = density_of_all_image[i]
-            writer.writerow([file,cluster,minimum,maximum,average,u1,u2,u3,u4,hu1,hu2,hu3,hu4,str(density)+'%'])
+            writer.writerow([file,cluster,minimum,maximum,average,u1,u2,u3,u4])
 except FileExistsError:
     os.remove('mueseum.csv')   
 
