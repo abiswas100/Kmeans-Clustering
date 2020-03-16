@@ -1,4 +1,6 @@
 import u_val as uval
+import consider_annotation as ann
+
 import os
 from pathlib import Path
 import shutil as s
@@ -68,16 +70,26 @@ for img in range(len(image_list)):
     u_value_eq3_points = []
     u_value_eq4_points = []
     
+    temp_image ,coord  = ann.start_parsing(image_list[img],filename[img]) # returns a image and the coordinate list 
+
     file = filename[img]
     csvfilename = file[:-4] + '.csv'
     temperature = extract_temperature(csvfilename)      #Getting pixel_temperature from Extract Temp function
 
-    for row in temperature:  #iterating over temperature which is 512*640
-        for i in range(len(row)-1):
-            pixel_temp = float(row[i])
-            #U value calculation
+    useful_temp = []
+    for i in coord:
+        x = i[0]
+        y = i[1]
+        #print(x,y)
+        try:
+            temp = float(temperature[x][y])
+            useful_temp.append(temp)
+        except IndexError: continue 
+
+    for i in useful_temp:
+            pixel_temp = float(i)
+            # U value calculation
             u_value_1, u_value_2, u_value_3, u_value_4 = uval.u_value_calculation(pixel_temp)
-            # temp_array.append(float(i))
             u_value_eq1_points.append(u_value_1)
             u_value_eq2_points.append(u_value_2)
             u_value_eq3_points.append(u_value_3)
@@ -88,16 +100,42 @@ for img in range(len(image_list)):
     u4 = mean(u_value_eq4_points)
 
     #min,max, temp values of images 
-    l = 0
+
     temp_array = []
-    for i in range(len(temperature)):
-        single_row = temperature[i]
-        l = len(single_row)-1
-        for j in range(l):
-            temp_array.append(float(single_row[j]))
-    #print(len(temp_array))
+    for i in useful_temp:
+            temp_array.append(float(i))
+
     data = list([min(temp_array),max(temp_array),mean(temp_array),u1,u2,u3,u4])
     data_of_all_images.append(data)
+
+    # Uncomment the lines below if you don't want to use annotations specific for Twamley Roof
+
+    # for row in temperature:  #iterating over temperature which is 512*640
+    #     for i in range(len(row)-1):
+    #         pixel_temp = float(row[i])
+    #         #U value calculation
+    #         u_value_1, u_value_2, u_value_3, u_value_4 = uval.u_value_calculation(pixel_temp)
+    #         # temp_array.append(float(i))
+    #         u_value_eq1_points.append(u_value_1)
+    #         u_value_eq2_points.append(u_value_2)
+    #         u_value_eq3_points.append(u_value_3)
+    #         u_value_eq4_points.append(u_value_4)
+    # u1 = mean(u_value_eq1_points)
+    # u2 = mean(u_value_eq2_points)
+    # u3 = mean(u_value_eq3_points)
+    # u4 = mean(u_value_eq4_points)
+
+    # #min,max, temp values of images 
+    # l = 0
+    # temp_array = []
+    # for i in range(len(temperature)):
+    #     single_row = temperature[i]
+    #     l = len(single_row)-1
+    #     for j in range(l):
+    #         temp_array.append(float(single_row[j]))
+    # #print(len(temp_array))
+    # data = list([min(temp_array),max(temp_array),mean(temp_array),u1,u2,u3,u4])
+    # data_of_all_images.append(data)
     
     
 #Pushing data into csv
