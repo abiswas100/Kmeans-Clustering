@@ -44,7 +44,7 @@ def start_parsing(image,filename): #json_files , project_name
     with open(json_filename) as json_content:
             json_data = json.load(json_content)
             for entry in json_data['objects']:
-                if (entry['classTitle'] == 'Roof' or entry['classTitle'] == 'Roof'):
+                if (entry['classTitle'] == 'Window' or entry['classTitle'] == 'Window'):
                     #print(filename)
                     x_values = []
                     y_values = []
@@ -57,6 +57,7 @@ def start_parsing(image,filename): #json_files , project_name
                         print("ERROR: LESS THAN 4 POINTS ANNOTATED FOR WINDOW. NUMBER OF POINTS: {}".format(len(x_values)))
                     else:
                         x_coordinates, y_coordinates = polygon_area_calculation(x_values, y_values)
+         
                         
             try:  
                 counter = 1  
@@ -67,7 +68,7 @@ def start_parsing(image,filename): #json_files , project_name
     
                     counter = counter + 1
                     new_coord.append([x,y])
-                                
+                    
                 #print("x: {} y: {} z: {}".format(x_coordinates[0], y_coordinates[1], len(new_coord)))
                     
             except UnboundLocalError: print(filename)
@@ -80,9 +81,6 @@ def start_parsing(image,filename): #json_files , project_name
             except UnboundLocalError : 
                 print(filename)
                 print("")
-    #print(len(coordinates),coordinates[0])
 
-        #print(i)
-        #print(i)
     return temp_image, new_coord
      
