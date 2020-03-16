@@ -48,6 +48,7 @@ def extract_temperature(csv_filename):
 
 
 def calculate_temperature(labels,filename,coordinates): 
+    print(filename)
     list_labels = labels.tolist()
     csv_filename = filename[:-4] + '.csv'
     temperature =  extract_temperature(csv_filename)

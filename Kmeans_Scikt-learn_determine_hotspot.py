@@ -72,18 +72,21 @@ for image in pbar(image_list):
     coordinates_of_all_images.append(coordinates)
     pixel_values = np.float32(pixel_values)
     
-    kmeans = KMeans(n_clusters=3, random_state=0, n_jobs = -1).fit(pixel_values)
-    # convert back to 8 bit values
-    centers = kmeans.cluster_centers_
-    centers = np.uint8(centers)
-    # print("The centers are ----",centers)
-    # flatten the labels array
-    labels = kmeans.labels_
-    labels_of_all_image.append(labels)
-    segmented_image = centers[labels]
-    clustered_images_list.append(segmented_image)
-    a = a + 1
-
+    try:
+        kmeans = KMeans(n_clusters=3, random_state=0, n_jobs = -1).fit(pixel_values)
+        # convert back to 8 bit values
+        centers = kmeans.cluster_centers_
+        centers = np.uint8(centers)
+        # print("The centers are ----",centers)
+        # flatten the labels array
+        labels = kmeans.labels_
+        labels_of_all_image.append(labels)
+        segmented_image = centers[labels]
+        clustered_images_list.append(segmented_image)
+        a = a + 1
+    except ValueError: 
+        getpass.getpass('Delete that file and press Enter')
+        continue
 
 print(" ")
 end = time.time()
@@ -97,24 +100,20 @@ print("Finding the Cluster containing the hotspot and Masking it ...")
 print("")
 
 counter = 0
-
 masked_image_list = []
 best_cluster_of_all_image = []
 density_of_all_image = []
-data_of_all_images = []
-U_val_of_all_images = []
+
+
 '''
 The lines below iterates over the cluster_image list and converts the pixel to the hotspot_cluster and store 
 the images in the masked image list.. 
    
 '''
+
 for image in clustered_images_list:
-    
-    best_cluster,data_of_all_cluster,U_vals = fb.calculate_temperature(labels_of_all_image[counter],filenames[counter],coordinates_of_all_images[counter])
+    best_cluster,data_of_all_cluster = fb.calculate_temperature(labels_of_all_image[counter],filenames[counter],coordinates_of_all_images[counter])
     best_cluster_of_all_image.append(best_cluster)
-    data_of_all_images.append(data_of_all_cluster)
-    U_val_of_all_images.append(U_vals)
-    
     l = labels_of_all_image[counter]
     coordinate = coordinates_of_all_images[counter]
     
@@ -149,9 +148,9 @@ for image in clustered_images_list:
     counter = counter + 1
 
 #################################################
-##    Saving Images and storing Data into CSVs      ##
+##    Saving Images and storing into CSVs      ##
 #################################################
-  
+    
 #Saving the masked images in Kmeans-masked-output folder
 print("  ")
 try:
@@ -180,31 +179,23 @@ try:
     with open(file + 'museum.csv' , 'a' ,newline='') as csvfile :
         writer = csv.writer(csvfile)
         writer.writerow(['Filename','Hotspot-cluster','minimum','maximum','average','U1','U2','U3','U4','Hotspot-U1','Hotspot-U2','Hotspot-U3','Hotspot-U4','density']) 
-        
         for i in range(0,len(filenames)):
-            #for a single Image
             file = filenames[i]
-            data = data_of_all_images[i]
-            U_val_data = U_val_of_all_images[i]
+            cluster = data_of_all_cluster[best_cluster_of_all_image[i]][0]
+            minimum = data_of_all_cluster[best_cluster_of_all_image[i]][1]
+            maximum = data_of_all_cluster[best_cluster_of_all_image[i]][2]
+            average = data_of_all_cluster[best_cluster_of_all_image[i]][3]
+            u1 = data_of_all_cluster[best_cluster_of_all_image[i]][4]  
+            u2 = data_of_all_cluster[best_cluster_of_all_image[i]][5]
+            u3 = data_of_all_cluster[best_cluster_of_all_image[i]][6]
+            u4 = data_of_all_cluster[best_cluster_of_all_image[i]][7]
+            hu1 = data_of_all_cluster[best_cluster_of_all_image[i]][8]
+            hu2 = data_of_all_cluster[best_cluster_of_all_image[i]][9]
+            hu3 = data_of_all_cluster[best_cluster_of_all_image[i]][10]
+            hu4 = data_of_all_cluster[best_cluster_of_all_image[i]][11]
             
-            best_cluster_data = data[best_cluster_of_all_image[i]]
-            cluster = best_cluster_data[0]
-            minimum = best_cluster_data[1]
-            maximum = best_cluster_data[2]
-            average = best_cluster_data[3]
-            hu1 = best_cluster_data[4]
-            hu2 = best_cluster_data[5]
-            hu3 = best_cluster_data[6]
-            hu4 = best_cluster_data[7]
-            den = density_of_all_image[i]
-            
-            u1 = U_val_data[0]
-            u2 = U_val_data[1]
-            u3 = U_val_data[2]
-            u4 = U_val_data[3]
-            
-            
-            writer.writerow([file,cluster,minimum,maximum,average,u1,u2,u3,u4,hu1,hu2,hu3,hu4,str(den)+'%'])
+            density = density_of_all_image[i]
+            writer.writerow([file,cluster,minimum,maximum,average,u1,u2,u3,u4,hu1,hu2,hu3,hu4,str(density)+'%'])
 except FileExistsError:
     os.remove('mueseum.csv')   
 
