@@ -187,19 +187,7 @@ def save_to_file(filenames,masked_image_list,data_of_all_images,U_val_of_all_ima
             for i in range(0,len(filenames)):
                 #for a single Image
                 file = filenames[i]
-                print("Data................................",data_of_all_images[0][0])
-                print("Data................................",data_of_all_images[0][1])
-                print("Data................................",data_of_all_images[0][2])
-                
-                for i in data_of_all_images:
-                    print("")
-                    print(i)
-                
-                
-                
-                exit(1)
-                
-                
+        
                 data = data_of_all_images[i]
                 U_val_data = U_val_of_all_images[i]
             
