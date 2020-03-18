@@ -85,4 +85,5 @@ def start_parsing(image,filename): #json_files , project_name
         #print(i)
         #print(i)
     return temp_image, new_coord
-     
+
+    
