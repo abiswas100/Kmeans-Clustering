@@ -66,7 +66,6 @@ labels_of_all_image = []
 coordinates_of_all_images = []
 a = 0 #just a loop counter
 for image in pbar(image_list):
-    
     #adding annotations and changing the image_list array
     pixel_values,coordinates = ann.start_parsing(image,filenames[a])
     coordinates_of_all_images.append(coordinates)
@@ -103,7 +102,7 @@ counter = 0
 masked_image_list = []
 best_cluster_of_all_image = []
 density_of_all_image = []
-
+U_vals_of_all_images = []
 
 '''
 The lines below iterates over the cluster_image list and converts the pixel to the hotspot_cluster and store 
@@ -112,11 +111,12 @@ the images in the masked image list..
 '''
 
 for image in clustered_images_list:
-    best_cluster,data_of_all_cluster = fb.calculate_temperature(labels_of_all_image[counter],filenames[counter],coordinates_of_all_images[counter])
+    best_cluster,data_of_all_cluster,U_val = fb.calculate_temperature(labels_of_all_image[counter],filenames[counter],coordinates_of_all_images[counter])
+    print("In main",labels_of_all_image[counter],filenames[counter],len(coordinates_of_all_images[counter]))
     best_cluster_of_all_image.append(best_cluster)
     l = labels_of_all_image[counter]
     coordinate = coordinates_of_all_images[counter]
-    
+    U_vals_of_all_images.append(U_val)
     temp_image = image_list[counter]
     masked_image = np.copy(temp_image)
     

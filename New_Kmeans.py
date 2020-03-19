@@ -36,7 +36,7 @@ def main():
 
     labels_of_all_image,coordinates_of_all_images,clustered_images_list = clustering(image_list,filenames)
     
-    masked_image_list,best_cluster_of_all_image,data_of_all_images ,U_val_of_all_images ,density_of_all_image = masking_image(filenames,image_list,labels_of_all_image,coordinates_of_all_images,clustered_images_list)
+    masked_image_list,best_cluster_of_all_image ,data_of_all_images ,U_val_of_all_images ,density_of_all_image = masking_image(filenames,image_list,labels_of_all_image,coordinates_of_all_images,clustered_images_list)
     
     save_to_file(filenames,masked_image_list,data_of_all_images,U_val_of_all_images,density_of_all_image,best_cluster_of_all_image) # Saves all the data to Kmeans-output folder and stores data in a CSV
 
@@ -45,7 +45,7 @@ def main():
     print("Finished .................")
     print(" ")
     print(" ")
-
+ 
 def input_images():
     image_list = []
     filenames = []
@@ -93,7 +93,7 @@ def clustering(image_list,filenames):
         clustered_images_list.append(segmented_image)
         counter = counter + 1
     print(" ")
-
+    
     return labels_of_all_image,coordinates_of_all_images,clustered_images_list
 
 def masking_image(filenames,image_list,labels_of_all_image,coordinates_of_all_images,clustered_images_list):
@@ -112,22 +112,22 @@ def masking_image(filenames,image_list,labels_of_all_image,coordinates_of_all_im
     '''
     The lines below iterates over the cluster_image list and converts the pixel to the hotspot_cluster and store 
     the images in the masked image list.. 
-    
     '''
-    for image in clustered_images_list:
-    
+
+    for image in image_list:
+        print(counter)
         best_cluster,data_of_all_cluster,U_vals = fb.calculate_temperature(labels_of_all_image[counter],filenames[counter],coordinates_of_all_images[counter])
         best_cluster_of_all_image.append(best_cluster)
-        data_of_all_images.append(data_of_all_cluster)
+        data_of_all_images.append(data_of_all_cluster) 
         U_val_of_all_images.append(U_vals)
-    
+
         labels = labels_of_all_image[counter]
         coordinate = coordinates_of_all_images[counter]
     
         temp_image = image_list[counter]
         masked_image = np.copy(temp_image)
-    
-    
+
+        #changing labels    
         for i in range(len(labels)):
             if labels[i] != best_cluster:coordinate[i] = [-1,-1] 
             else:continue
@@ -142,20 +142,21 @@ def masking_image(filenames,image_list,labels_of_all_image,coordinates_of_all_im
             print(filenames[counter])
             print("")
 
-        #masked_image = masked_image.reshape(image.shape)
         masked_image_list.append(masked_image)
         #Finding the Density of Hotspot for the 
         count = 0
         for label in labels:
-            if label ==  best_cluster: count = count +1
+            if label ==  best_cluster: count = count + 1
         #print(count)
         density = (count/len(labels))*100
         print("Density of hotspot..",density,'%')
         density_of_all_image.append(density)
         counter = counter + 1
+
         return masked_image_list,best_cluster_of_all_image,data_of_all_images,U_val_of_all_images,density_of_all_image
 
 def save_to_file(filenames,masked_image_list,data_of_all_images,U_val_of_all_images,density_of_all_image,best_cluster_of_all_image):
+    #print("In save_to_file",data_of_all_images)
     try:
         path = os.getcwd()
         parent_path = Path(path).parent
