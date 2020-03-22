@@ -41,7 +41,7 @@ def main():
     save_to_file(filenames,masked_image_list,data_of_all_images,U_val_of_all_images,density_of_all_image,best_cluster_of_all_image) # Saves all the data to Kmeans-output folder and stores data in a CSV
 
     end = time.time()
-    print("Time consumed in clustering: ",end - start)
+    print("Time consumed: ",end - start)
     print("Finished .................")
     print(" ")
     print(" ")
@@ -49,7 +49,7 @@ def main():
 def input_images():
     image_list = []
     filenames = []
-    counter = 0
+    #counter = 0
     os.chdir(r"data//images")
     for files in os.listdir():
         if(files.endswith('.jpg')):
@@ -108,23 +108,23 @@ def masking_image(filenames,image_list,labels_of_all_image,coordinates_of_all_im
     data_of_all_images = []
     U_val_of_all_images = []
     
-    counter = 0
+    iterator = 0
     '''
     The lines below iterates over the cluster_image list and converts the pixel to the hotspot_cluster and store 
     the images in the masked image list.. 
     '''
 
-    for image in image_list:
-        print(counter)
-        best_cluster,data_of_all_cluster,U_vals = fb.calculate_temperature(labels_of_all_image[counter],filenames[counter],coordinates_of_all_images[counter])
+    for iterator in range(len(image_list)):
+        print(iterator)
+        best_cluster,data_of_all_cluster,U_vals = fb.calculate_temperature(labels_of_all_image[iterator],filenames[iterator],coordinates_of_all_images[iterator])
         best_cluster_of_all_image.append(best_cluster)
         data_of_all_images.append(data_of_all_cluster) 
         U_val_of_all_images.append(U_vals)
 
-        labels = labels_of_all_image[counter]
-        coordinate = coordinates_of_all_images[counter]
+        labels = labels_of_all_image[iterator]
+        coordinate = coordinates_of_all_images[iterator]
     
-        temp_image = image_list[counter]
+        temp_image = image_list[iterator]
         masked_image = np.copy(temp_image)
 
         #changing labels    
@@ -139,7 +139,7 @@ def masking_image(filenames,image_list,labels_of_all_image,coordinates_of_all_im
                     masked_image[j[1],j[0]] = [255,255,255]
    
         except UnboundLocalError : 
-            print(filenames[counter])
+            print(filenames[iterator])
             print("")
 
         masked_image_list.append(masked_image)
@@ -151,9 +151,8 @@ def masking_image(filenames,image_list,labels_of_all_image,coordinates_of_all_im
         density = (count/len(labels))*100
         print("Density of hotspot..",density,'%')
         density_of_all_image.append(density)
-        counter = counter + 1
 
-        return masked_image_list,best_cluster_of_all_image,data_of_all_images,U_val_of_all_images,density_of_all_image
+    return masked_image_list,best_cluster_of_all_image,data_of_all_images,U_val_of_all_images,density_of_all_image
 
 def save_to_file(filenames,masked_image_list,data_of_all_images,U_val_of_all_images,density_of_all_image,best_cluster_of_all_image):
     #print("In save_to_file",data_of_all_images)
@@ -188,25 +187,25 @@ def save_to_file(filenames,masked_image_list,data_of_all_images,U_val_of_all_ima
             for i in range(0,len(filenames)):
                 #for a single Image
                 file = filenames[i]
-        
+                cluster = best_cluster_of_all_image[i]
                 data = data_of_all_images[i]
-                U_val_data = U_val_of_all_images[i]
-            
-                best_cluster_data = data[best_cluster_of_all_image[i]]
-                cluster = best_cluster_data[0]
-                minimum = best_cluster_data[1]
-                maximum = best_cluster_data[2]
-                average = best_cluster_data[3]
-                hu1 = best_cluster_data[4]
-                hu2 = best_cluster_data[5]
-                hu3 = best_cluster_data[6]
-                hu4 = best_cluster_data[7]
+                u_values = U_val_of_all_images[i]
+                d = data[cluster]
+
+                minimum = d[1]
+                maximum = d[2]
+                average = d[3]
+                hu1 = d[4]
+                hu2 = d[5]
+                hu3 = d[6]
+                hu4 = d[7]
                 den = density_of_all_image[i]
-            
-                u1 = U_val_data[0]
-                u2 = U_val_data[1]
-                u3 = U_val_data[2]
-                u4 = U_val_data[3]
+
+                u1 = u_values[0]
+                u2 = u_values[1]
+                u3 = u_values[2]
+                u4 = u_values[3]
+                
                 writer.writerow([file,cluster,minimum,maximum,average,u1,u2,u3,u4,hu1,hu2,hu3,hu4,str(den)+'%'])
     except FileExistsError:
         os.remove('mueseum.csv')   
