@@ -20,9 +20,9 @@ def main():
     coordinates_of_all_images,pixel_values_of_all_images = Kmeans.add_annotation(image_list,filenames)
     
     # Restricting python to use only 2 cores
-    cpu_nums = list(range(psutil.cpu_count()))
-    proc = psutil.Process(os.getpid())
-    proc.cpu_affinity(cpu_nums[:-2])                                              #will use all CPU cores uncomment to use 2 cores     
+    # cpu_nums = list(range(psutil.cpu_count()))
+    # proc = psutil.Process(os.getpid())
+    # proc.cpu_affinity(cpu_nums[:-2])                                              #will use all CPU cores uncomment to use 2 cores     
     print("CPUS being consumed..",cpu_count())
     
     '''
