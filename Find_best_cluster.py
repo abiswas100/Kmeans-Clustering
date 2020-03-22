@@ -2,15 +2,15 @@ import U_value as U_val
 
 import os
 from pathlib import Path
+import inspect
 
 import re
 import csv
 import numpy as np
 from statistics import mean
-import pandas as pd
 
 
-def extract_temperature(csv_filename):
+def extract_temperature(filename):
     '''
     Function will extract all of the temperatures within a csv file into a 2D list of lenth [512][640].
     The temperature values should be in celisus and the 2D list cannot be any smaller than this.
@@ -25,6 +25,7 @@ def extract_temperature(csv_filename):
     os.chdir(parent_path)    
     os.chdir('csv')
 
+    csv_filename = filename[:-4] + '.csv'
     csv_name = re.split(r'[_.\s ]', csv_filename)
     if('MWIR' in csv_name):
         with open(csv_filename) as csv_file:
@@ -48,11 +49,12 @@ def extract_temperature(csv_filename):
 
 
 def calculate_temperature(labels,filename,coordinates): 
+    
     print()
     print(filename)
+
     list_labels = labels.tolist()
-    csv_filename = filename[:-4] + '.csv'
-    temperature =  extract_temperature(csv_filename)
+    temperature =  extract_temperature(filename)
     
     cluster_averages = []
     data_of_all_clusters = []
@@ -60,18 +62,13 @@ def calculate_temperature(labels,filename,coordinates):
     '''
     #converting 3-D pixel_temperature array into 1D useful_temp
     '''
-    useful_temp = [] 
-    for i in coordinates:
-        x = i[0]
-        y = i[1]
-        useful_temp.append(float(temperature[x][y]))
-    
+    useful_temp = useful_temperature(temperature,coordinates)
     '''
     Finding Min,Max and Average and U_values of Each Cluster
     '''
     no_of_labels = set(labels) 
     for cluster in no_of_labels:
-        temp_array = []                                              #temporary array to store temperature of only those pixels belonging to a perticular cluster
+        temp_array = []                                              # temporary array to store temperature of only those pixels belonging to a perticular cluster
         for j in range(len(useful_temp)): 
             if list_labels[j] == cluster:
                 temp_array.append(useful_temp[j])        
@@ -79,7 +76,7 @@ def calculate_temperature(labels,filename,coordinates):
         print("Cluster  = ",cluster)
         minimum,maximum,average = min_max_average(temp_array)       # function returns the min,max and average for each cluster 
            
-        hu1,hu2,hu3,hu4 = Hotspot_U_values(temp_array)              # function returns the U-values belonging to the cluster
+        hu1,hu2,hu3,hu4 = U_values(temp_array)                      # function returns the U-values belonging to the cluster
         
         data = list([cluster,minimum,maximum,average,hu1,hu2,hu3,hu4])    
 
@@ -91,8 +88,18 @@ def calculate_temperature(labels,filename,coordinates):
 
     return best_cluster , data_of_all_clusters 
 
+def useful_temperature(temperature,coordinates):
+    useful_temp = [] 
+    for i in coordinates:
+        x = i[0]
+        y = i[1]
+        useful_temp.append(float(temperature[x][y]))
+    return useful_temp
+
 
 def min_max_average(temperature):
+    stack = inspect.stack()
+    caller = stack[1].filename[-13:]
     '''
     Computes Min Max and Average for each cluster 
     '''
@@ -106,30 +113,31 @@ def min_max_average(temperature):
     except ValueError : minimum = min(temperature)
     maximum = max(temperature)
     average = mean(temperature)
-    print("minimum Surface Temperature = ",minimum)
-    print("maximum Surface Temperature = ",maximum)
-    print("average Surface Temperature = ",average)    
+    if caller != 'New_Kmeans.py':
+        print("minimum Surface Temperature = ",minimum)
+        print("maximum Surface Temperature = ",maximum)
+        print("average Surface Temperature = ",average) 
     
     return minimum,maximum,average
 
 
-def Hotspot_U_values(temperature):
+def U_values(temperature):
         #U value calculation
-    hu_value_eq1_points,hu_value_eq2_points,hu_value_eq3_points,hu_value_eq4_points = [],[],[],[]
-    hu1,hu2,hu3,hu4 = 0,0,0,0   
+    u_value_eq1_points,u_value_eq2_points,u_value_eq3_points,u_value_eq4_points = [],[],[],[]
+    u1,u2,u3,u4 = 0,0,0,0   
     for t in temperature:
-            hu_value_1, hu_value_2, hu_value_3, hu_value_4 = U_val.u_value_calculation(float(t))
+            u_value_1, u_value_2, u_value_3, u_value_4 = U_val.u_value_calculation(float(t))
             # temp_array.append(float(i))
-            hu_value_eq1_points.append(hu_value_1)
-            hu_value_eq2_points.append(hu_value_2)
-            hu_value_eq3_points.append(hu_value_3)
-            hu_value_eq4_points.append(hu_value_4)
+            u_value_eq1_points.append(u_value_1)
+            u_value_eq2_points.append(u_value_2)
+            u_value_eq3_points.append(u_value_3)
+            u_value_eq4_points.append(u_value_4)
         
-    hu1 = mean(hu_value_eq1_points)/5.678
-    hu2 = mean(hu_value_eq2_points)/5.678
-    hu3 = mean(hu_value_eq3_points)/5.678
-    hu4 = mean(hu_value_eq4_points)/5.678 
-    return hu1,hu2,hu3,hu4
+    u1 = mean(u_value_eq1_points)/5.678
+    u2 = mean(u_value_eq2_points)/5.678
+    u3 = mean(u_value_eq3_points)/5.678
+    u4 = mean(u_value_eq4_points)/5.678 
+    return u1,u2,u3,u4
 
 def find_hotspot(cluster_averages):
     

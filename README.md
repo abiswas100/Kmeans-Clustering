@@ -6,7 +6,7 @@ The file Optimum-K finds the best number of clusters for a dataset which is curr
 <br>
 the file Consider_annotation.py adds annotation into consideration returns image an array with only annotations of all the images
 </br>
-#Install the Requirements Files
+Install the Requirements Files
 <ol>
 <li>Open-CV</li>
 <li>numpy</li>

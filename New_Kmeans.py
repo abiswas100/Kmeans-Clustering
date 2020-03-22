@@ -24,6 +24,7 @@ import json
 
  
 def input_images():
+
     image_list = []
     filenames = []
     #counter = 0
@@ -193,42 +194,22 @@ def save_to_file(filenames,masked_image_list,data_of_all_images,density_of_all_i
 def U_value(coordinates_of_all_images,filenames):
     
     U_values_of_all_images = []
-    
+    overall_data_of_all_images = []
+
     for i in range(len(filenames)):    
         coordinates = coordinates_of_all_images[i]
         filename = filenames[i]    
-        csv_filename = filename[:-4] + '.csv'
 
-        temperature = fb.extract_temperature(csv_filename)
+        temperature = fb.extract_temperature(filename)
 
-        useful_temp = [] 
-        for i in coordinates:                                                                       #getting the temperature values in a 1-D array for the considered object
-            x = i[0]
-            y = i[1]
-            useful_temp.append(float(temperature[x][y]))
-        '''
-        Computing Overall U-values for the object and storing in U_vals_Data
-        Adding  Overall U-values for the object 
-        '''
-        #U value calculation
-        u_value_eq1_points,u_value_eq2_points,u_value_eq3_points,u_value_eq4_points = [],[],[],[]
-        ou1,ou2,ou3,ou4 = 0,0,0,0
-    
-        for t in useful_temp:                                                                          #iterating over Useful_temp which has all the pixel-temp of the object
-                u_value_1, u_value_2, u_value_3, u_value_4 = U_val.u_value_calculation(float(t))
-                # temp_array.append(float(i))
-                u_value_eq1_points.append(u_value_1)
-                u_value_eq2_points.append(u_value_2)
-                u_value_eq3_points.append(u_value_3)
-                u_value_eq4_points.append(u_value_4)
-        ou1 = mean(u_value_eq1_points)/5.678
-        ou2 = mean(u_value_eq2_points)/5.678
-        ou3 = mean(u_value_eq3_points)/5.678
-        ou4 = mean(u_value_eq4_points)/5.678
-    
+        useful_temp = fb.useful_temperature(temperature,coordinates)                                                                       #getting the temperature values in a 1-D array for the considered objec
+        
+        ou1,ou2,ou3,ou4 = fb.U_values(useful_temp)
         U_values_of_all_images.append(list([ou1,ou2,ou3,ou4]))
-    
-    print(len(U_values_of_all_images))
+
+        minimum,maximum,average = fb.min_max_average(useful_temp)
+        overall_data_of_all_images.append(list([minimum,maximum,average])) 
+
     path = os.getcwd()
     parent_path = Path(path).parent
     os.chdir(parent_path)
@@ -239,20 +220,23 @@ def U_value(coordinates_of_all_images,filenames):
         file = 'U-values'
         with open(file + '.csv' , 'a' ,newline='') as csvfile :
             writer = csv.writer(csvfile)
-            writer.writerow(['Filename','U1','U2','U3','U4']) 
+            writer.writerow(['FILENAME','MINIMUM','MAXIMUM','AVERAGE','U-VALUE 1','U-VALUE 2','U-VALUE 3','U-VALUE 4']) 
 
             for i in range(0,len(filenames)):
                 #for a single Image
                 u_values = U_values_of_all_images[i]
+                data = overall_data_of_all_images[i]
+
                 file = filenames[i]
+                mini = data[0]
+                maxi = data[1]
+                aver = data[2]
                 u1 = u_values[0]
                 u2 = u_values[1]
                 u3 = u_values[2]
                 u4 = u_values[3]
                 
-                writer.writerow([file,u1,u2,u3,u4])
-
-
+                writer.writerow([file,mini,maxi,aver,u1,u2,u3,u4])
     os.chdir(path)
 
     return 1  
