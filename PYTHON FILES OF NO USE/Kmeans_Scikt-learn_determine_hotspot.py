@@ -10,7 +10,7 @@ import shutil as s
 import time
 from multiprocessing import cpu_count
 
-import cv2
+from cv2 import cv2
 import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
