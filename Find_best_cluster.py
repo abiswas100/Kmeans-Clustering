@@ -49,12 +49,11 @@ def extract_temperature(csv_filename):
 
 def calculate_temperature(labels,filename,coordinates): 
     print(filename)
-    print("In find Best Cluster ............",labels,filename,len(coordinates))
+    
     list_labels = labels.tolist()
     csv_filename = filename[:-4] + '.csv'
     temperature =  extract_temperature(csv_filename)
     
-    U_vals_data = []
     cluster_averages = []
     data_of_all_clusters = []
     
@@ -96,8 +95,8 @@ def calculate_temperature(labels,filename,coordinates):
     
     print("")
     best_cluster =  find_hotspot(cluster_averages)
-    
-    return best_cluster , data_of_all_clusters,U_vals
+
+    return best_cluster , data_of_all_clusters, U_vals
 
 
 
