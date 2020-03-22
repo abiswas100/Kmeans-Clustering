@@ -49,7 +49,6 @@ def main():
     print("Time consumed: ",end - start)
     print("Finished .................")
     print(" ")
-    print(" ")
     return 1
 
 if __name__== "__main__":

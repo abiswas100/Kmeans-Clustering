@@ -45,9 +45,6 @@ def extract_temperature(filename):
     #print("length of Pixel temp",len(pixel_temperature))
     return pixel_temperature
 
-
-
-
 def calculate_temperature(labels,filename,coordinates): 
     
     print()
@@ -96,7 +93,6 @@ def useful_temperature(temperature,coordinates):
         useful_temp.append(float(temperature[x][y]))
     return useful_temp
 
-
 def min_max_average(temperature):
     stack = inspect.stack()
     caller = stack[1].filename[-13:]
@@ -119,7 +115,6 @@ def min_max_average(temperature):
         print("average Surface Temperature = ",average) 
     
     return minimum,maximum,average
-
 
 def U_values(temperature):
         #U value calculation
