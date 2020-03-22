@@ -23,28 +23,6 @@ from PIL import Image, ImageDraw, ImageFont
 import csv
 import json
 
-def main():
-    start = time.time()
-    
-    image_list,filenames = input_images()
-
-    # Restricting python to use only 2 cores
-    cpu_nums = list(range(psutil.cpu_count()))
-    proc = psutil.Process(os.getpid())
-    #proc.cpu_affinity(cpu_nums[:-2]) #will use all CPU cores uncomment to use 2 cores
-    print("CPUS being consumed..",cpu_count())
-
-    labels_of_all_image,coordinates_of_all_images,clustered_images_list = clustering(image_list,filenames)
-    
-    masked_image_list,best_cluster_of_all_image ,data_of_all_images ,U_val_of_all_images ,density_of_all_image = masking_image(filenames,image_list,labels_of_all_image,coordinates_of_all_images,clustered_images_list)
-    
-    save_to_file(filenames,masked_image_list,data_of_all_images,U_val_of_all_images,density_of_all_image,best_cluster_of_all_image) # Saves all the data to Kmeans-output folder and stores data in a CSV
-
-    end = time.time()
-    print("Time consumed: ",end - start)
-    print("Finished .................")
-    print(" ")
-    print(" ")
  
 def input_images():
     image_list = []
@@ -66,21 +44,31 @@ def input_images():
     
     return image_list,filenames
 
-def clustering(image_list,filenames):  
+def add_annotation(image_list,filenames):
+    coordinates_of_all_images = []
+    pixel_values_of_all_images = []
+    counter = 0
+    for image in image_list:
+        pixel_values,coordinates = ann.start_parsing(image,filenames[counter])
+        coordinates_of_all_images.append(coordinates)
+        pixel_values_of_all_images.append(pixel_values)
+        counter = counter + 1 
+    return coordinates_of_all_images,pixel_values_of_all_images
+
+def clustering(image_list,pixel_values_of_all_images,filenames  ):  
     pbar = ProgressBar()
     
     clustered_images_list = [] #list containing all the clustered outputs
     labels_of_all_image = []
-    coordinates_of_all_images = []
     
     print("")
     print("Clustering the image ")
     
-    counter = 0
-    for image in pbar(image_list):
+    for i in pbar(range(len(image_list))):
         #adding annotations and changing the image_list array
-        pixel_values,coordinates = ann.start_parsing(image,filenames[counter])
-        coordinates_of_all_images.append(coordinates)
+        # pixel_values,coordinates = ann.start_parsing(image,filenames[counter])
+        # coordinates_of_all_images.append(coordinates)
+        pixel_values = pixel_values_of_all_images[i]
         pixel_values = np.float32(pixel_values)
     
         kmeans = KMeans(n_clusters=3, random_state=0, n_jobs = -1).fit(pixel_values)
@@ -91,10 +79,9 @@ def clustering(image_list,filenames):
         labels_of_all_image.append(labels)
         segmented_image = centers[labels]
         clustered_images_list.append(segmented_image)
-        counter = counter + 1
+
     print(" ")
-    
-    return labels_of_all_image,coordinates_of_all_images,clustered_images_list
+    return labels_of_all_image,clustered_images_list
 
 def masking_image(filenames,image_list,labels_of_all_image,coordinates_of_all_images,clustered_images_list):
     print("length of clustered image",len(clustered_images_list))
@@ -213,5 +200,4 @@ def save_to_file(filenames,masked_image_list,data_of_all_images,U_val_of_all_ima
     return 1
 
 
-if __name__== "__main__":
-  main()
+
