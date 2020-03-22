@@ -48,8 +48,8 @@ def extract_temperature(csv_filename):
 
 
 def calculate_temperature(labels,filename,coordinates): 
+    print()
     print(filename)
-    
     list_labels = labels.tolist()
     csv_filename = filename[:-4] + '.csv'
     temperature =  extract_temperature(csv_filename)
@@ -65,13 +65,6 @@ def calculate_temperature(labels,filename,coordinates):
         x = i[0]
         y = i[1]
         useful_temp.append(float(temperature[x][y]))
-
-    '''
-    Computing Overall U-values for the object and storing in U_vals_Data
-    '''
-    ou1,ou2,ou3,ou4 = Overall_U_values(useful_temp)                 # function returns the U-values of the object 
-    U_vals = list([ou1,ou2,ou3,ou4])
-    
     
     '''
     Finding Min,Max and Average and U_values of Each Cluster
@@ -96,31 +89,7 @@ def calculate_temperature(labels,filename,coordinates):
     print("")
     best_cluster =  find_hotspot(cluster_averages)
 
-    return best_cluster , data_of_all_clusters, U_vals
-
-
-
-def Overall_U_values(temperature):
-    '''
-    Adding  Overall U-values for the object 
-    '''
-     #U value calculation
-    u_value_eq1_points,u_value_eq2_points,u_value_eq3_points,u_value_eq4_points = [],[],[],[]
-    ou1,ou2,ou3,ou4 = 0,0,0,0
-    
-    for t in temperature:    #iterating over temperature which is 512*640
-            u_value_1, u_value_2, u_value_3, u_value_4 = U_val.u_value_calculation(float(t))
-            # temp_array.append(float(i))
-            u_value_eq1_points.append(u_value_1)
-            u_value_eq2_points.append(u_value_2)
-            u_value_eq3_points.append(u_value_3)
-            u_value_eq4_points.append(u_value_4)
-    ou1 = mean(u_value_eq1_points)/5.678
-    ou2 = mean(u_value_eq2_points)/5.678
-    ou3 = mean(u_value_eq3_points)/5.678
-    ou4 = mean(u_value_eq4_points)/5.678
-    return ou1,ou2,ou3,ou4   
-
+    return best_cluster , data_of_all_clusters 
 
 
 def min_max_average(temperature):

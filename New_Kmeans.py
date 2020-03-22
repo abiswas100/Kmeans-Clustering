@@ -17,8 +17,7 @@ import pandas as pd
 import psutil
 from progressbar import ProgressBar
 from sklearn.cluster import KMeans
-from skimage import draw
-from PIL import Image, ImageDraw, ImageFont 
+from statistics import mean
 
 import csv
 import json
@@ -93,7 +92,6 @@ def masking_image(filenames,image_list,labels_of_all_image,coordinates_of_all_im
     best_cluster_of_all_image = []
     density_of_all_image = []
     data_of_all_images = []
-    U_val_of_all_images = []
     
     iterator = 0
     '''
@@ -102,11 +100,10 @@ def masking_image(filenames,image_list,labels_of_all_image,coordinates_of_all_im
     '''
 
     for iterator in range(len(image_list)):
-        print(iterator)
-        best_cluster,data_of_all_cluster,U_vals = fb.calculate_temperature(labels_of_all_image[iterator],filenames[iterator],coordinates_of_all_images[iterator])
+        best_cluster,data_of_all_cluster = fb.calculate_temperature(labels_of_all_image[iterator],filenames[iterator],coordinates_of_all_images[iterator])
         best_cluster_of_all_image.append(best_cluster)
         data_of_all_images.append(data_of_all_cluster) 
-        U_val_of_all_images.append(U_vals)
+
 
         labels = labels_of_all_image[iterator]
         coordinate = coordinates_of_all_images[iterator]
@@ -134,14 +131,14 @@ def masking_image(filenames,image_list,labels_of_all_image,coordinates_of_all_im
         count = 0
         for label in labels:
             if label ==  best_cluster: count = count + 1
-        #print(count)
+
         density = (count/len(labels))*100
         print("Density of hotspot..",density,'%')
         density_of_all_image.append(density)
 
-    return masked_image_list,best_cluster_of_all_image,data_of_all_images,U_val_of_all_images,density_of_all_image
+    return masked_image_list,best_cluster_of_all_image,data_of_all_images,density_of_all_image
 
-def save_to_file(filenames,masked_image_list,data_of_all_images,U_val_of_all_images,density_of_all_image,best_cluster_of_all_image):
+def save_to_file(filenames,masked_image_list,data_of_all_images,density_of_all_image,best_cluster_of_all_image):
     #print("In save_to_file",data_of_all_images)
     try:
         path = os.getcwd()
@@ -169,14 +166,13 @@ def save_to_file(filenames,masked_image_list,data_of_all_images,U_val_of_all_ima
         file = 'kmeans'
         with open(file + 'museum.csv' , 'a' ,newline='') as csvfile :
             writer = csv.writer(csvfile)
-            writer.writerow(['Filename','Hotspot-cluster','minimum','maximum','average','U1','U2','U3','U4','Hotspot-U1','Hotspot-U2','Hotspot-U3','Hotspot-U4','density']) 
+            writer.writerow(['Filename','Hotspot-cluster','minimum','maximum','average','Hotspot-U1','Hotspot-U2','Hotspot-U3','Hotspot-U4','density']) 
         
             for i in range(0,len(filenames)):
                 #for a single Image
                 file = filenames[i]
                 cluster = best_cluster_of_all_image[i]
                 data = data_of_all_images[i]
-                u_values = U_val_of_all_images[i]
                 d = data[cluster]
 
                 minimum = d[1]
@@ -188,16 +184,75 @@ def save_to_file(filenames,masked_image_list,data_of_all_images,U_val_of_all_ima
                 hu4 = d[7]
                 den = density_of_all_image[i]
 
-                u1 = u_values[0]
-                u2 = u_values[1]
-                u3 = u_values[2]
-                u4 = u_values[3]
-                
-                writer.writerow([file,cluster,minimum,maximum,average,u1,u2,u3,u4,hu1,hu2,hu3,hu4,str(den)+'%'])
+                writer.writerow([file,cluster,minimum,maximum,average,hu1,hu2,hu3,hu4,str(den)+'%'])
     except FileExistsError:
         os.remove('mueseum.csv')   
  
     return 1
 
+def U_value(coordinates_of_all_images,filenames):
+    
+    U_values_of_all_images = []
+    
+    for i in range(len(filenames)):    
+        coordinates = coordinates_of_all_images[i]
+        filename = filenames[i]    
+        csv_filename = filename[:-4] + '.csv'
+
+        temperature = fb.extract_temperature(csv_filename)
+
+        useful_temp = [] 
+        for i in coordinates:                                                                       #getting the temperature values in a 1-D array for the considered object
+            x = i[0]
+            y = i[1]
+            useful_temp.append(float(temperature[x][y]))
+        '''
+        Computing Overall U-values for the object and storing in U_vals_Data
+        Adding  Overall U-values for the object 
+        '''
+        #U value calculation
+        u_value_eq1_points,u_value_eq2_points,u_value_eq3_points,u_value_eq4_points = [],[],[],[]
+        ou1,ou2,ou3,ou4 = 0,0,0,0
+    
+        for t in useful_temp:                                                                          #iterating over Useful_temp which has all the pixel-temp of the object
+                u_value_1, u_value_2, u_value_3, u_value_4 = U_val.u_value_calculation(float(t))
+                # temp_array.append(float(i))
+                u_value_eq1_points.append(u_value_1)
+                u_value_eq2_points.append(u_value_2)
+                u_value_eq3_points.append(u_value_3)
+                u_value_eq4_points.append(u_value_4)
+        ou1 = mean(u_value_eq1_points)/5.678
+        ou2 = mean(u_value_eq2_points)/5.678
+        ou3 = mean(u_value_eq3_points)/5.678
+        ou4 = mean(u_value_eq4_points)/5.678
+    
+        U_values_of_all_images.append(list([ou1,ou2,ou3,ou4]))
+    
+    print(len(U_values_of_all_images))
+    path = os.getcwd()
+    parent_path = Path(path).parent
+    os.chdir(parent_path)
+    for files in os.listdir():
+        if files == 'U-values.csv': os.remove('U-values.csv')
+    
+    else:
+        file = 'U-values'
+        with open(file + '.csv' , 'a' ,newline='') as csvfile :
+            writer = csv.writer(csvfile)
+            writer.writerow(['Filename','U1','U2','U3','U4']) 
+
+            for i in range(0,len(filenames)):
+                #for a single Image
+                u_values = U_values_of_all_images[i]
+                file = filenames[i]
+                u1 = u_values[0]
+                u2 = u_values[1]
+                u3 = u_values[2]
+                u4 = u_values[3]
+                
+                writer.writerow([file,u1,u2,u3,u4])
 
 
+    os.chdir(path)
+
+    return 1  
