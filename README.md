@@ -22,11 +22,11 @@ Install the Requirements Modules
     The functions in Find_best_cluster finds the pixel_temperature for every image and from that finds min,max and average for each Cluster.
     From that it finds the maximum average of all the clusters and masks that cluster with (255,255,255).
 </p>
-<br></br>
+
 <p>
     <b>Optimum-K</b> finds the best number of clusters for a dataset which is currently in progress.
 </p>
-<br></br>
+
 <p>
 <b>Consider_annotation </b> adds annotation into consideration returns image an array with only annotations of all the images
 </p>
