@@ -23,12 +23,12 @@ Install the Requirements Modules
 </p>
 <p>
     <b>New_Kmeans.py</b> will perform the Clustering and Masking the hotspots in all the images.
-        Input Images functions checks the Images folder in the Data folder and inports all the images and there corresponding filenames and stores them in seperate arrays.Then it returns the image list and filenames
-        The add annotation call the consider annotations file for each image. Returns the list of coordinates and the pixel-values of the object for all images.  
-        The Clustering function takes pixel-values and clusters the object. It returns the labels array for all the images.
-        The masking Images function calls the calculate temperature from the find-best-cluster and masks those pixels belonging to the hotspot cluster. 
-        The Save-to-file creates a folder called Kmeans-Output and stores all the masked images and then writes the Data into a CSV file.
-        U-value function computes the U-values and the min max and Average of the object.
+        <br>Input Images functions checks the Images folder in the Data folder and inports all the images and there corresponding filenames and stores them in seperate arrays.Then it returns the image list and filenames</br>
+        <br>The add annotation call the consider annotations file for each image. Returns the list of coordinates and the pixel-values of the object for all images.  </br>
+        <br>The Clustering function takes pixel-values and clusters the object. It returns the labels array for all the images.</br>
+        <br>The masking Images function calls the calculate temperature from the find-best-cluster and masks those pixels belonging to the hotspot cluster. </br>
+        <br>The Save-to-file creates a folder called Kmeans-Output and stores all the masked images and then writes the Data into a CSV file.
+        U-value function computes the U-values and the min max and Average of the object.</br>
 </p>
 
 <p>
