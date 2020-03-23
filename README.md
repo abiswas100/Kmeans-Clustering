@@ -14,15 +14,34 @@ Install the Requirements Modules
 </ol>
 
 <p>
-    Run the main.py file to perform Clustering and U-value Calculation.
+    Run the main.py file to perform Clustering and U-value Calculation.It works as a driver function of the whole model.
+    It call functions from the New_Kmeans file .
 </p>
 <p>
-    <b>Find-Best-Cluster</b>finds pixel_temperature for each image and converts a 3-D temperature array into 1-D Useful temperature array. This array is used to find the <b>U-values,Minimum,Maximum and Average</b> of the total annotated object. It also return the data-of-all-clusters for an image which contains the  
+    <b>Find-Best-Cluster</b> finds pixel_temperature using Extract Temperature function , for each image and converts the 3-D temperature array into 1-D Useful temperature array. This array is used to find the <b>U-values,Minimum,Maximum and Average</b> of the total annotated object. It also return the data-of-all-clusters for an image which contains the  <b>U-values,Minimum,Maximum and Average</b> of all the cluster and the hotspot of that corresponding Image.
+    
 </p>
 <p>
     <b>New_Kmeans.py</b> will perform the Clustering and Masking the hotspots in all the images.
-        The functions in 
-        From that it finds the maximum average of all the clusters and masks that cluster with (255,255,255).
+    <ul>
+        <l1>Input Images functions checks the Images folder in the Data folder and inports all the images and there corresponding filenames and stores them in seperate arrays.Then it returns the image list and filenames
+        </li>
+        <l1>The add annotation call the consider annotations file for each image. Returns the list of coordinates and the pixel-values of the object for all images.  
+        </li>
+        <l1>
+        The Clustering function takes pixel-values and clusters the object. It returns the labels array for all the images.
+        </li>
+        <l1>
+        The masking Images function calls the calculate temperature from the find-best-cluster and masks those pixels belonging to the hotspot cluster. 
+        </li>
+        <l1>
+        The Save-to-file creates a folder called Kmeans-Output and stores all the masked images and then writes the Data into a CSV file.
+        </li>
+        <l1>
+        U-value function computes the U-values and the min max and Average of the object.
+        </li>
+    <ul>
+    
 </p>
 
 <p>
