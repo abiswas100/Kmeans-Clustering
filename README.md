@@ -16,11 +16,13 @@ Install the Requirements Modules
 <p>
     Run the main.py file to perform Clustering and U-value Calculation.
 </p>
-
+<p>
+    <b>Find-Best-Cluster</b>finds pixel_temperature for each image and converts a 3-D temperature array into 1-D Useful temperature array. This array is used to find the <b>U-values,Minimum,Maximum and Average</b> of the total annotated object. It also return the data-of-all-clusters for an image which contains the  
+</p>
 <p>
     <b>New_Kmeans.py</b> will perform the Clustering and Masking the hotspots in all the images.
-    The functions in Find_best_cluster finds the pixel_temperature for every image and from that finds min,max and average for each Cluster.
-    From that it finds the maximum average of all the clusters and masks that cluster with (255,255,255).
+        The functions in 
+        From that it finds the maximum average of all the clusters and masks that cluster with (255,255,255).
 </p>
 
 <p>
@@ -28,6 +30,6 @@ Install the Requirements Modules
 </p>
 
 <p>
-<b>Consider_annotation </b> adds annotation into consideration returns image an array with only annotations of all the images
+    <b>Consider_annotation </b> takes in the JSON files and returns pixel-array and the required coordinates of the object in Consideration.
 </p>
 
