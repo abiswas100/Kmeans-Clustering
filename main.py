@@ -46,7 +46,7 @@ def main():
     Kmeans.save_to_file(filenames,masked_image_list,data_of_all_images,density_of_all_image,best_cluster_of_all_image) # Saves all the data to Kmeans-output folder and stores data in a CSV
 
     end = time.time()
-    print("Time consumed: ",end - start)
+    print("Time consumed: ",(end - start)/60," mins.")
     print("Finished .................")
     print(" ")
     return 1

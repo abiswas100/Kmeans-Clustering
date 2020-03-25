@@ -7,7 +7,7 @@ import inspect
 import re
 import csv
 import numpy as np
-from statistics import mean
+from statistics import mean,variance
 
 
 def extract_temperature(filename):
@@ -141,5 +141,5 @@ def find_hotspot(cluster_averages):
     print("Maximum average temperature of all clusters = ",max_avg)
     best_cluster = cluster_averages.index(max_avg)
     print("The hottest cluster = ",best_cluster) 
-    
+    print("Varience =  ",variance(cluster_averages)," and the standard deviation is ...")
     return best_cluster
