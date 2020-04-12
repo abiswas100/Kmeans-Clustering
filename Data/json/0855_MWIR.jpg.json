@@ -1,0 +1,142 @@
+{
+    "description": "",
+    "tags": [],
+    "size": {
+        "height": 512,
+        "width": 640
+    },
+    "objects": [
+        {
+            "description": "",
+            "geometryType": "polygon",
+            "labelerLogin": "abiswas100",
+            "tags": [],
+            "classTitle": "Facade",
+            "points": {
+                "exterior": [
+                    [
+                        0,
+                        0
+                    ],
+                    [
+                        0,
+                        320
+                    ],
+                    [
+                        131,
+                        304
+                    ],
+                    [
+                        141,
+                        348
+                    ],
+                    [
+                        469,
+                        343
+                    ],
+                    [
+                        465,
+                        255
+                    ],
+                    [
+                        640,
+                        214
+                    ],
+                    [
+                        640,
+                        0
+                    ]
+                ],
+                "interior": []
+            }
+        },
+        {
+            "description": "",
+            "geometryType": "polygon",
+            "labelerLogin": "abiswas100",
+            "tags": [],
+            "classTitle": "Facade",
+            "points": {
+                "exterior": [
+                    [
+                        508,
+                        434
+                    ],
+                    [
+                        485,
+                        478
+                    ],
+                    [
+                        262,
+                        512
+                    ],
+                    [
+                        640,
+                        512
+                    ],
+                    [
+                        640,
+                        407
+                    ]
+                ],
+                "interior": []
+            }
+        },
+        {
+            "description": "",
+            "geometryType": "polygon",
+            "labelerLogin": "abiswas100",
+            "tags": [],
+            "classTitle": "Roof",
+            "points": {
+                "exterior": [
+                    [
+                        473,
+                        253
+                    ],
+                    [
+                        503,
+                        425
+                    ],
+                    [
+                        640,
+                        395
+                    ],
+                    [
+                        640,
+                        214
+                    ]
+                ],
+                "interior": []
+            }
+        },
+        {
+            "description": "",
+            "geometryType": "polygon",
+            "labelerLogin": "abiswas100",
+            "tags": [],
+            "classTitle": "Roof",
+            "points": {
+                "exterior": [
+                    [
+                        125,
+                        306
+                    ],
+                    [
+                        159,
+                        478
+                    ],
+                    [
+                        0,
+                        495
+                    ],
+                    [
+                        0,
+                        320
+                    ]
+                ],
+                "interior": []
+            }
+        }
+    ]
+}

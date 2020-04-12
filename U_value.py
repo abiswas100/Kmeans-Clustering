@@ -34,12 +34,12 @@ def u_value_calculation(pixel_temperature):
     Ev = 1.00 # emissivity (based on material of object)
     sigma = 5.67 * (10 ** -8) #constant 
     Tw = convert_to_kelvin(pixel_temperature) #wall temperature (from the csv)
-    Tout = convert_to_kelvin(6.6) #needs to be fetched from some source (webscraping)
-    v = convert_to_mps(37) #converts windspeed in m/h to m/s
+    Tout = convert_to_kelvin(3.1) #needs to be fetched from some source (webscraping)
+    v = convert_to_mps(6) #converts windspeed in m/h to m/s
     Tin = convert_to_kelvin(20) #inside temperature of the building (should be from thermocouple)
  
     #Extra variables for u_value_2-4
-    L = 15 #12.192 #height of building in meters (this is twamleys height)
+    L = 12.192 #height of building in meters (this is twamleys height)
     Ac = 1.365 * ((((abs(Tw - Tout)) / L)) ** (1/4))
 
     #Extra variable for u_value_4

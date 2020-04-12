@@ -1,0 +1,166 @@
+{
+    "description": "",
+    "tags": [],
+    "size": {
+        "height": 512,
+        "width": 640
+    },
+    "objects": [
+        {
+            "description": "",
+            "geometryType": "polygon",
+            "labelerLogin": "abiswas100",
+            "tags": [],
+            "classTitle": "Roof",
+            "points": {
+                "exterior": [
+                    [
+                        33,
+                        104
+                    ],
+                    [
+                        60,
+                        279
+                    ],
+                    [
+                        356,
+                        226
+                    ],
+                    [
+                        316,
+                        43
+                    ]
+                ],
+                "interior": []
+            }
+        },
+        {
+            "description": "",
+            "geometryType": "polygon",
+            "labelerLogin": "abiswas100",
+            "tags": [],
+            "classTitle": "Roof",
+            "points": {
+                "exterior": [
+                    [
+                        121,
+                        5
+                    ],
+                    [
+                        135,
+                        77
+                    ],
+                    [
+                        315,
+                        38
+                    ],
+                    [
+                        334,
+                        104
+                    ],
+                    [
+                        640,
+                        45
+                    ],
+                    [
+                        640,
+                        0
+                    ]
+                ],
+                "interior": []
+            }
+        },
+        {
+            "description": "",
+            "geometryType": "polygon",
+            "labelerLogin": "abiswas100",
+            "tags": [],
+            "classTitle": "Facade",
+            "points": {
+                "exterior": [
+                    [
+                        87,
+                        283
+                    ],
+                    [
+                        134,
+                        377
+                    ],
+                    [
+                        0,
+                        440
+                    ],
+                    [
+                        0,
+                        512
+                    ],
+                    [
+                        640,
+                        512
+                    ],
+                    [
+                        640,
+                        263
+                    ],
+                    [
+                        347,
+                        325
+                    ],
+                    [
+                        331,
+                        231
+                    ]
+                ],
+                "interior": []
+            }
+        },
+        {
+            "description": "",
+            "geometryType": "polygon",
+            "labelerLogin": "abiswas100",
+            "tags": [],
+            "classTitle": "Window",
+            "points": {
+                "exterior": [
+                    [
+                        349,
+                        446
+                    ],
+                    [
+                        349,
+                        510
+                    ],
+                    [
+                        515,
+                        488
+                    ],
+                    [
+                        557,
+                        412
+                    ],
+                    [
+                        515,
+                        404
+                    ],
+                    [
+                        466,
+                        413
+                    ],
+                    [
+                        437,
+                        419
+                    ],
+                    [
+                        407,
+                        432
+                    ],
+                    [
+                        385,
+                        436
+                    ]
+                ],
+                "interior": []
+            }
+        }
+    ]
+}

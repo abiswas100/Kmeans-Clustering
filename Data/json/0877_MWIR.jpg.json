@@ -1,0 +1,82 @@
+{
+    "description": "",
+    "tags": [],
+    "size": {
+        "height": 512,
+        "width": 640
+    },
+    "objects": [
+        {
+            "description": "",
+            "geometryType": "polygon",
+            "labelerLogin": "abiswas100",
+            "tags": [],
+            "classTitle": "Facade",
+            "points": {
+                "exterior": [
+                    [
+                        100,
+                        4
+                    ],
+                    [
+                        186,
+                        353
+                    ],
+                    [
+                        154,
+                        382
+                    ],
+                    [
+                        409,
+                        512
+                    ],
+                    [
+                        640,
+                        512
+                    ],
+                    [
+                        640,
+                        0
+                    ]
+                ],
+                "interior": []
+            }
+        },
+        {
+            "description": "",
+            "geometryType": "polygon",
+            "labelerLogin": "abiswas100",
+            "tags": [],
+            "classTitle": "Ground",
+            "points": {
+                "exterior": [
+                    [
+                        0,
+                        0
+                    ],
+                    [
+                        0,
+                        512
+                    ],
+                    [
+                        400,
+                        512
+                    ],
+                    [
+                        161,
+                        391
+                    ],
+                    [
+                        183,
+                        356
+                    ],
+                    [
+                        88,
+                        0
+                    ]
+                ],
+                "interior": []
+            }
+        }
+    ]
+}

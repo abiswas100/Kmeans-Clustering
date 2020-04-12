@@ -46,9 +46,6 @@ def extract_temperature(filename):
     return pixel_temperature
 
 def calculate_temperature(labels,filename,coordinates): 
-    
-    print()
-    print(filename)
 
     list_labels = labels.tolist()
     temperature =  extract_temperature(filename)

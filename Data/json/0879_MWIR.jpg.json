@@ -1,0 +1,86 @@
+{
+    "description": "",
+    "tags": [],
+    "size": {
+        "height": 512,
+        "width": 640
+    },
+    "objects": [
+        {
+            "description": "",
+            "geometryType": "polygon",
+            "labelerLogin": "abiswas100",
+            "tags": [],
+            "classTitle": "Facade",
+            "points": {
+                "exterior": [
+                    [
+                        336,
+                        0
+                    ],
+                    [
+                        347,
+                        315
+                    ],
+                    [
+                        346,
+                        348
+                    ],
+                    [
+                        319,
+                        354
+                    ],
+                    [
+                        607,
+                        512
+                    ],
+                    [
+                        640,
+                        512
+                    ],
+                    [
+                        640,
+                        0
+                    ]
+                ],
+                "interior": []
+            }
+        },
+        {
+            "description": "",
+            "geometryType": "polygon",
+            "labelerLogin": "abiswas100",
+            "tags": [],
+            "classTitle": "Roof",
+            "points": {
+                "exterior": [
+                    [
+                        332,
+                        5
+                    ],
+                    [
+                        327,
+                        320
+                    ],
+                    [
+                        300,
+                        356
+                    ],
+                    [
+                        589,
+                        508
+                    ],
+                    [
+                        0,
+                        512
+                    ],
+                    [
+                        0,
+                        0
+                    ]
+                ],
+                "interior": []
+            }
+        }
+    ]
+}

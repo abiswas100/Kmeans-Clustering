@@ -1,0 +1,154 @@
+{
+    "description": "",
+    "tags": [],
+    "size": {
+        "height": 512,
+        "width": 640
+    },
+    "objects": [
+        {
+            "description": "",
+            "geometryType": "polygon",
+            "labelerLogin": "debanjan",
+            "tags": [],
+            "classTitle": "Window",
+            "points": {
+                "exterior": [
+                    [
+                        24,
+                        112
+                    ],
+                    [
+                        87,
+                        366
+                    ],
+                    [
+                        376,
+                        385
+                    ],
+                    [
+                        386,
+                        131
+                    ]
+                ],
+                "interior": []
+            }
+        },
+        {
+            "description": "",
+            "geometryType": "polygon",
+            "labelerLogin": "debanjan",
+            "tags": [],
+            "classTitle": "Window",
+            "points": {
+                "exterior": [
+                    [
+                        123,
+                        436
+                    ],
+                    [
+                        128,
+                        502
+                    ],
+                    [
+                        200,
+                        505
+                    ],
+                    [
+                        191,
+                        442
+                    ]
+                ],
+                "interior": []
+            }
+        },
+        {
+            "description": "",
+            "geometryType": "polygon",
+            "labelerLogin": "debanjan",
+            "tags": [],
+            "classTitle": "Window",
+            "points": {
+                "exterior": [
+                    [
+                        265,
+                        443
+                    ],
+                    [
+                        273,
+                        510
+                    ],
+                    [
+                        386,
+                        507
+                    ],
+                    [
+                        391,
+                        450
+                    ]
+                ],
+                "interior": []
+            }
+        },
+        {
+            "description": "",
+            "geometryType": "polygon",
+            "labelerLogin": "debanjan",
+            "tags": [],
+            "classTitle": "Ground",
+            "points": {
+                "exterior": [
+                    [
+                        0,
+                        485
+                    ],
+                    [
+                        277,
+                        507
+                    ],
+                    [
+                        134,
+                        510
+                    ],
+                    [
+                        7,
+                        510
+                    ]
+                ],
+                "interior": []
+            }
+        },
+        {
+            "description": "",
+            "geometryType": "polygon",
+            "labelerLogin": "debanjan",
+            "tags": [],
+            "classTitle": "Facade",
+            "points": {
+                "exterior": [
+                    [
+                        0,
+                        3
+                    ],
+                    [
+                        638,
+                        0
+                    ],
+                    [
+                        640,
+                        508
+                    ],
+                    [
+                        93,
+                        493
+                    ],
+                    [
+                        0,
+                        485
+                    ]
+                ],
+                "interior": []
+            }
+        }
+    ]
+}

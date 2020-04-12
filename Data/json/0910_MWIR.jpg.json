@@ -1,0 +1,106 @@
+{
+    "description": "",
+    "tags": [],
+    "size": {
+        "height": 512,
+        "width": 640
+    },
+    "objects": [
+        {
+            "description": "",
+            "geometryType": "polygon",
+            "labelerLogin": "debanjan",
+            "tags": [],
+            "classTitle": "Window",
+            "points": {
+                "exterior": [
+                    [
+                        95,
+                        187
+                    ],
+                    [
+                        134,
+                        319
+                    ],
+                    [
+                        168,
+                        413
+                    ],
+                    [
+                        189,
+                        485
+                    ],
+                    [
+                        418,
+                        485
+                    ],
+                    [
+                        428,
+                        378
+                    ],
+                    [
+                        428,
+                        291
+                    ],
+                    [
+                        435,
+                        208
+                    ],
+                    [
+                        399,
+                        159
+                    ],
+                    [
+                        331,
+                        138
+                    ],
+                    [
+                        277,
+                        129
+                    ],
+                    [
+                        199,
+                        131
+                    ],
+                    [
+                        134,
+                        151
+                    ],
+                    [
+                        111,
+                        164
+                    ]
+                ],
+                "interior": []
+            }
+        },
+        {
+            "description": "",
+            "geometryType": "polygon",
+            "labelerLogin": "debanjan",
+            "tags": [],
+            "classTitle": "Facade",
+            "points": {
+                "exterior": [
+                    [
+                        1,
+                        1
+                    ],
+                    [
+                        640,
+                        3
+                    ],
+                    [
+                        639,
+                        511
+                    ],
+                    [
+                        1,
+                        509
+                    ]
+                ],
+                "interior": []
+            }
+        }
+    ]
+}

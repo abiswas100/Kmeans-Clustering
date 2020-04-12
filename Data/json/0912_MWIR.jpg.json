@@ -1,0 +1,166 @@
+{
+    "description": "",
+    "tags": [],
+    "size": {
+        "height": 512,
+        "width": 640
+    },
+    "objects": [
+        {
+            "description": "",
+            "geometryType": "polygon",
+            "labelerLogin": "debanjan",
+            "tags": [],
+            "classTitle": "Window",
+            "points": {
+                "exterior": [
+                    [
+                        82,
+                        80
+                    ],
+                    [
+                        125,
+                        228
+                    ],
+                    [
+                        176,
+                        412
+                    ],
+                    [
+                        413,
+                        413
+                    ],
+                    [
+                        422,
+                        234
+                    ],
+                    [
+                        431,
+                        112
+                    ],
+                    [
+                        421,
+                        64
+                    ],
+                    [
+                        362,
+                        26
+                    ],
+                    [
+                        314,
+                        20
+                    ],
+                    [
+                        277,
+                        16
+                    ],
+                    [
+                        228,
+                        14
+                    ],
+                    [
+                        183,
+                        17
+                    ],
+                    [
+                        138,
+                        27
+                    ],
+                    [
+                        96,
+                        57
+                    ]
+                ],
+                "interior": []
+            }
+        },
+        {
+            "description": "",
+            "geometryType": "polygon",
+            "labelerLogin": "debanjan",
+            "tags": [],
+            "classTitle": "Window",
+            "points": {
+                "exterior": [
+                    [
+                        352,
+                        447
+                    ],
+                    [
+                        245,
+                        452
+                    ],
+                    [
+                        249,
+                        499
+                    ],
+                    [
+                        349,
+                        498
+                    ]
+                ],
+                "interior": []
+            }
+        },
+        {
+            "description": "",
+            "geometryType": "polygon",
+            "labelerLogin": "debanjan",
+            "tags": [],
+            "classTitle": "Window",
+            "points": {
+                "exterior": [
+                    [
+                        634,
+                        439
+                    ],
+                    [
+                        576,
+                        439
+                    ],
+                    [
+                        579,
+                        484
+                    ],
+                    [
+                        640,
+                        486
+                    ]
+                ],
+                "interior": []
+            }
+        },
+        {
+            "description": "",
+            "geometryType": "polygon",
+            "labelerLogin": "debanjan",
+            "tags": [],
+            "classTitle": "Facade",
+            "points": {
+                "exterior": [
+                    [
+                        4,
+                        5
+                    ],
+                    [
+                        638,
+                        6
+                    ],
+                    [
+                        632,
+                        492
+                    ],
+                    [
+                        314,
+                        508
+                    ],
+                    [
+                        2,
+                        507
+                    ]
+                ],
+                "interior": []
+            }
+        }
+    ]
+}

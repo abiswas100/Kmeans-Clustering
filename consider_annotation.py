@@ -33,11 +33,12 @@ def polygon_area_calculation(x_inputs, y_inputs):
 # image_list = []
 def start_parsing(image,filename): #json_files , project_name
     #changing into the json directory in data folder
+    print(filename)
     path = os.getcwd()
     parent_path = Path(path).parent
     os.chdir(parent_path)    
     os.chdir('json')
-    
+    x_coordinates, y_coordinates = [0],[0]
     img = image 
     json_filename = filename[:-4] + '.jpg.json'  
     coordinates = []
@@ -55,23 +56,20 @@ def start_parsing(image,filename): #json_files , project_name
                         y_values.append(exterior[k][1])
                     if (len(x_values) < 4):
                         print("ERROR: LESS THAN 4 POINTS ANNOTATED FOR WINDOW. NUMBER OF POINTS: {}".format(len(x_values)))
+                        x_coordinates, y_coordinates = 0,0
                     else:
                         x_coordinates, y_coordinates = polygon_area_calculation(x_values, y_values)
-         
-                        
-            try:  
-                counter = 1  
-                new_coord = []      
-                for i in range(len(x_coordinates)):
+                    print(x_coordinates)
+                          
+            new_coord = []      
+            for i in range(len(x_coordinates)):
                     x = x_coordinates[i].item()
                     y = y_coordinates[i].item()
-    
-                    counter = counter + 1
                     new_coord.append([x,y])
                     
                 #print("x: {} y: {} z: {}".format(x_coordinates[0], y_coordinates[1], len(new_coord)))
                     
-            except UnboundLocalError: print(filename)
+            # except UnboundLocalError: print(filename)
 
             try:    
                 temp_image = []        

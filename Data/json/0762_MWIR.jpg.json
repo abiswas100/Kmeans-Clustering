@@ -1,0 +1,78 @@
+{
+    "description": "",
+    "tags": [],
+    "size": {
+        "height": 512,
+        "width": 640
+    },
+    "objects": [
+        {
+            "description": "",
+            "geometryType": "polygon",
+            "labelerLogin": "NiroopRaj",
+            "tags": [],
+            "classTitle": "HVAC",
+            "points": {
+                "exterior": [
+                    [
+                        50,
+                        448
+                    ],
+                    [
+                        393,
+                        423
+                    ],
+                    [
+                        404,
+                        512
+                    ],
+                    [
+                        49,
+                        512
+                    ]
+                ],
+                "interior": []
+            }
+        },
+        {
+            "description": "",
+            "geometryType": "polygon",
+            "labelerLogin": "NiroopRaj",
+            "tags": [],
+            "classTitle": "Facade",
+            "points": {
+                "exterior": [
+                    [
+                        0,
+                        0
+                    ],
+                    [
+                        609,
+                        2
+                    ],
+                    [
+                        640,
+                        15
+                    ],
+                    [
+                        640,
+                        487
+                    ],
+                    [
+                        640,
+                        511
+                    ],
+                    [
+                        249,
+                        510
+                    ],
+                    [
+                        0,
+                        512
+                    ]
+                ],
+                "interior": []
+            }
+        }
+    ]
+}
