@@ -15,7 +15,7 @@ Install the Requirements Modules
 
 <p>
     Run the main.py file to perform Clustering and U-value Calculation.It works as a driver function of the whole model.
-    It call functions from the New_Kmeans file .
+    It then New_Kmeans file.
 </p>
 <p>
     <b>Find-Best-Cluster</b> finds pixel_temperature using Extract Temperature function , for each image and converts the 3-D temperature array into 1-D Useful temperature array. This array is used to find the <b>U-values,Minimum,Maximum and Average</b> of the total annotated object. It also return the data-of-all-clusters for an image which contains the  <b>U-values,Minimum,Maximum and Average</b> of all the cluster and the hotspot of that corresponding Image.

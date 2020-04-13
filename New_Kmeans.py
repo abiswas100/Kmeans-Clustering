@@ -27,20 +27,18 @@ def input_images():
 
     image_list = []
     filenames = []
-    #counter = 0
+    counter = 0
     os.chdir(r"data//images")
     for files in os.listdir():
         if(files.endswith('.jpg')):
-            #if(counter == 0): 
+        #    if(counter == 0): 
                 # to input all the image just remove the conditional statements and use the below 4 lines and comment from counter to break
                 img = cv2.imread(str(files))
                 image_list.append(img)
                 filenames.append(files)
     print("")
     print("All Images loaded into array")
-        #         counter = counter+1
-        # else:            
-        #     breakpass
+    counter = counter+1
     
     return image_list,filenames
 
@@ -65,16 +63,11 @@ def clustering(image_list,pixel_values_of_all_images,filenames  ):
     print("Clustering the image ")
     
     for i in pbar(range(len(image_list))):
-        #adding annotations and changing the image_list array
-        # pixel_values,coordinates = ann.start_parsing(image,filenames[counter])
-        # coordinates_of_all_images.append(coordinates)
         pixel_values = pixel_values_of_all_images[i]
         pixel_values = np.float32(pixel_values)
     
         kmeans = KMeans(n_clusters=3, random_state=0, n_jobs = -1).fit(pixel_values)
-        # convert back to 8 bit values
-        centers = kmeans.cluster_centers_
-        centers = np.uint8(centers)
+
         labels = kmeans.labels_
         labels_of_all_image.append(labels)
         segmented_image = centers[labels]
@@ -160,7 +153,8 @@ def save_to_file(filenames,masked_image_list,data_of_all_images,density_of_all_i
             cv2.imwrite(filenames[counter], img)
             counter = counter + 1
             img = 0
-    
+    print()
+    print()
     print("Images loaded to disk..pushing clustering information to csv file")
     print("")    
     try:

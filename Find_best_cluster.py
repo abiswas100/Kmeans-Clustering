@@ -7,7 +7,7 @@ import inspect
 import re
 import csv
 import numpy as np
-from statistics import mean,variance
+from statistics import mean,variance,stdev
 
 
 def extract_temperature(filename):
@@ -43,7 +43,7 @@ def extract_temperature(filename):
                 if(i >= 1):
                     pixel_temperature.append(data[0:])
     #print("length of Pixel temp",len(pixel_temperature))
-    return pixel_temperature
+    return pixel_temperature 
 
 def calculate_temperature(labels,filename,coordinates): 
 
@@ -83,11 +83,18 @@ def calculate_temperature(labels,filename,coordinates):
     return best_cluster , data_of_all_clusters 
 
 def useful_temperature(temperature,coordinates):
+    error_coords = []
     useful_temp = [] 
+   
     for i in coordinates:
-        x = i[0]
-        y = i[1]
-        useful_temp.append(float(temperature[x][y]))
+        x = i[1]
+        y = i[0]
+        try:
+            useful_temp.append(float(temperature[x][y]))
+        except:
+            error_coords.append([x,y])
+            continue
+
     return useful_temp
 
 def min_max_average(temperature):
@@ -138,5 +145,5 @@ def find_hotspot(cluster_averages):
     print("Maximum average temperature of all clusters = ",max_avg)
     best_cluster = cluster_averages.index(max_avg)
     print("The hottest cluster = ",best_cluster) 
-    print("Varience =  ",variance(cluster_averages)," and the standard deviation is ...")
+    print("Varience =  ",variance(cluster_averages)," and the standard deviation is ...",stdev(cluster_averages))
     return best_cluster
