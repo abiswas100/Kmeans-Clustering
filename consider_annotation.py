@@ -46,7 +46,7 @@ def start_parsing(image,filename): #json_files , project_name
             json_data = json.load(json_content)
             
             for entry in json_data['objects']:
-                if (entry['classTitle'] == 'Window' or entry['classTitle'] == 'Window'):
+                if (entry['classTitle'] == 'Roof' or entry['classTitle'] == 'Roof'):
                     #print(filename)
                     x_values = []
                     y_values = []
