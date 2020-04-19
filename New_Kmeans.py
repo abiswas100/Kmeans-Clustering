@@ -136,7 +136,7 @@ def masking_image(filenames,image_list,labels_of_all_image,coordinates_of_all_im
     return masked_image_list,best_cluster_of_all_image,data_of_all_images,density_of_all_image
 
 def save_to_file(filenames,masked_image_list,data_of_all_images,density_of_all_image,best_cluster_of_all_image):
-    #print("In save_to_file",data_of_all_images)
+
     try:
         path = os.getcwd()
         parent_path = Path(path).parent
