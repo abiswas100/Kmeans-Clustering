@@ -37,12 +37,16 @@ def start_parsing(image,filename): #json_files , project_name
     parent_path = Path(path).parent
     os.chdir(parent_path)    
     os.chdir('json')
-    
+
+
+    x_coordinates, y_coordinates = [0],[0]
     img = image 
     json_filename = filename[:-4] + '.jpg.json'  
-    
+
     with open(json_filename) as json_content:
             json_data = json.load(json_content)
+            
+
             for entry in json_data['objects']:
                 if (entry['classTitle'] == 'Roof' or entry['classTitle'] == 'Roof'):
                     #print(filename)
@@ -50,27 +54,26 @@ def start_parsing(image,filename): #json_files , project_name
                     y_values = []
                     points = entry['points']
                     exterior = points['exterior']
-                    for k,coordinates in enumerate(exterior):
+
+                    for k, coordinates in enumerate(exterior):
                         x_values.append(exterior[k][0])
                         y_values.append(exterior[k][1])
                     if (len(x_values) < 4):
-                        print("ERROR: LESS THAN 4 POINTS ANNOTATED FOR WINDOW. NUMBER OF POINTS: {}".format(len(x_values)))
+                        print("ERROR: LESS THAN 4 POINTS ANNOTATED FOR WINDOW. NUMBER OF POINTS: {}".format(len(x_values)),filename)
+                        x_coordinates, y_coordinates = 0,0
                     else:
                         x_coordinates, y_coordinates = polygon_area_calculation(x_values, y_values)
-                        
-            try:  
-                counter = 1  
-                new_coord = []      
-                for i in range(len(x_coordinates)):
+                          
+            new_coord = []      
+            for i in range(len(x_coordinates)):
                     x = x_coordinates[i].item()
                     y = y_coordinates[i].item()
-    
-                    counter = counter + 1
                     new_coord.append([x,y])
-                                
+                    
                 #print("x: {} y: {} z: {}".format(x_coordinates[0], y_coordinates[1], len(new_coord)))
                     
-            except UnboundLocalError: print(filename)
+            # except UnboundLocalError: print(filename)
+
 
             try:    
                 temp_image = []        
@@ -78,11 +81,10 @@ def start_parsing(image,filename): #json_files , project_name
                     r ,g,b = img[j[1],j[0]]
                     temp_image.append(list([r,g,b]))    
             except UnboundLocalError : 
-                print(filename)
-                print("")
-    #print(len(coordinates),coordinates[0])
 
-        #print(i)
-        #print(i)
+                print("Annotation not working",filename)
+                print("")
+    
     return temp_image, new_coord
      
+

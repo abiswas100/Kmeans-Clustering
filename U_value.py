@@ -24,9 +24,6 @@ def convert_to_mps(wind_speed):
     '''
     return wind_speed * .44704
 
-
-
-
 '''
 Function responsible for u-value calcualtions. One function is now responsible for calculating
 all u-values. (The parameters for each u-value calculation are quite similar)
@@ -37,8 +34,8 @@ def u_value_calculation(pixel_temperature):
     Ev = 1.00 # emissivity (based on material of object)
     sigma = 5.67 * (10 ** -8) #constant 
     Tw = convert_to_kelvin(pixel_temperature) #wall temperature (from the csv)
-    Tout = convert_to_kelvin(12.8) #needs to be fetched from some source (webscraping)
-    v = convert_to_mps(22) #converts windspeed in m/h to m/s
+    Tout = convert_to_kelvin(3.1) #needs to be fetched from some source (webscraping)
+    v = convert_to_mps(6) #converts windspeed in m/h to m/s
     Tin = convert_to_kelvin(20) #inside temperature of the building (should be from thermocouple)
  
     #Extra variables for u_value_2-4
@@ -71,7 +68,7 @@ def u_value_calculation(pixel_temperature):
     try:
         u_value_3 = numerator_u3 / denominator_u3
     except ZeroDivisionError:
-        print("ERROR: Inside temperature: {} and Outside temperature: {} are the same. Cannot divide by 0. Skipping data point.".format(Tref, Tai))
+        print("ERROR: Inside temperature: {} and Outside temperature: {} are the same. Cannot divide by 0. Skipping data point.".format(Tw, Tout))
 
     #u_value_4 calculation
     numerator_u4 = (4 * Ev * sigma * ((Tm) ** 3) * ((Tw) - (Tout)) + Ac * (Tw - Tout))
@@ -79,7 +76,6 @@ def u_value_calculation(pixel_temperature):
     try:
         u_value_4 = numerator_u4 / denominator_u4
     except ZeroDivisionError:
-        print("ERROR: Inside temperature: {} and Outside temperature: {} are the same. Cannot divide by 0. Skipping data point.".format(Tref, Tai))
+        print("ERROR: Inside temperature: {} and Outside temperature: {} are the same. Cannot divide by 0. Skipping data point.".format(Tw, Tout))
 
     return u_value_1, u_value_2, u_value_3, u_value_4
-
