@@ -60,25 +60,24 @@ def start_parsing(image,filename): #json_files , project_name
                         x_coordinates, y_coordinates = 0,0
                     else:
                         x_coordinates, y_coordinates = polygon_area_calculation(x_values, y_values)
-                          
-            new_coord = []      
-            for i in range(len(x_coordinates)):
-                    x = x_coordinates[i].item()
-                    y = y_coordinates[i].item()
-                    new_coord.append([x,y])
-                    
-                #print("x: {} y: {} z: {}".format(x_coordinates[0], y_coordinates[1], len(new_coord)))
-                    
-            # except UnboundLocalError: print(filename)
+                        new_coord = []      
+                        for i in range(len(x_coordinates)):
+                                x = x_coordinates[i].item()
+                                y = y_coordinates[i].item()
+                                new_coord.append([x,y])
+                                
+                            #print("x: {} y: {} z: {}".format(x_coordinates[0], y_coordinates[1], len(new_coord)))
+                                
+                        # except UnboundLocalError: print(filename)
 
-            try:    
-                temp_image = []        
-                for j in new_coord:
-                    r ,g,b = img[j[1],j[0]]
-                    temp_image.append(list([r,g,b]))    
-            except UnboundLocalError : 
-                print("Annotation not working",filename)
-                print("")
+                        try:    
+                            temp_image = []        
+                            for j in new_coord:
+                                r ,g,b = img[j[1],j[0]]
+                                temp_image.append(list([r,g,b]))    
+                        except UnboundLocalError : 
+                            print("Annotation not working",filename)
+                            print("")
     
     return temp_image, new_coord
      

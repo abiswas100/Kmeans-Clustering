@@ -1,0 +1,117 @@
+{
+  "description": "",
+  "objects": [
+    {
+      "bitmap": null,
+      "classTitle": "Window",
+      "description": "",
+      "points": {
+        "exterior": [
+          [
+            300,
+            219
+          ],
+          [
+            515,
+            216
+          ],
+          [
+            513,
+            494
+          ],
+          [
+            279,
+            498
+          ]
+        ],
+        "interior": [
+        ]
+      },
+      "tags": [
+        {
+          "name": "Window",
+          "value": null
+        }
+      ]
+    },
+    {
+      "bitmap": null,
+      "classTitle": "Facades",
+      "description": "",
+      "points": {
+        "exterior": [
+          [
+            2,
+            1
+          ],
+          [
+            636,
+            1
+          ],
+          [
+            635,
+            474
+          ],
+          [
+            533,
+            478
+          ],
+          [
+            509,
+            216
+          ],
+          [
+            374,
+            214
+          ],
+          [
+            309,
+            215
+          ],
+          [
+            292,
+            271
+          ],
+          [
+            275,
+            461
+          ],
+          [
+            271,
+            472
+          ],
+          [
+            273,
+            487
+          ],
+          [
+            83,
+            495
+          ],
+          [
+            17,
+            494
+          ],
+          [
+            0,
+            490
+          ]
+        ],
+        "interior": [
+        ]
+      },
+      "tags": [
+        {
+          "name": "Facade",
+          "value": null
+        }
+      ]
+    }
+  ],
+  "size": {
+    "height": 512,
+    "width": 640
+  },
+  "tags": [
+  ]
+}
