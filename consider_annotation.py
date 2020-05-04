@@ -37,16 +37,18 @@ def start_parsing(image_list,filenames): #json_files , project_name
     parent_path = Path(path).parent
     os.chdir(parent_path)    
     os.chdir('json')
+
     for i in range(len(image_list)):
 
         choice = int("Enter the object 1. Windows 2. Facade 3.Roof")
-        filename = 
+        filename = filenames[i]
+
         if choice  == 1: classtitle,classtitle1 = 'Windows','Window'
         elif choice == 2 : classtitle,classtitle1 = 'Facades','Facades'
         elif choice == 3 : classtitle,classtitle1 = 'Roofs','Roof' 
 
         x_coordinates, y_coordinates = [0],[0]
-        img = image 
+        img = image_list[i]
         json_filename = filename[:-4] + '.jpg.json'  
 
         with open(json_filename) as json_content:
@@ -89,7 +91,8 @@ def start_parsing(image_list,filenames): #json_files , project_name
 
                                 print("Annotation not working",filename)
                                 print("")
-
+                    else:
+                        
     return temp_image, new_coord
      
 
