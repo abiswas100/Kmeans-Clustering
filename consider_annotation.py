@@ -37,14 +37,10 @@ def start_parsing(image_list,filenames): #json_files , project_name
     parent_path = Path(path).parent
     os.chdir(parent_path)    
     os.chdir('json')
-    for image in image_list:
+    for i in range(len(image_list)):
 
-        choice = int("Enter the object 
-                    1. Windows
-                    2. Facade
-                    3.Roof
-                    ")
-
+        choice = int("Enter the object 1. Windows 2. Facade 3.Roof")
+        filename = 
         if choice  == 1: classtitle,classtitle1 = 'Windows','Window'
         elif choice == 2 : classtitle,classtitle1 = 'Facades','Facades'
         elif choice == 3 : classtitle,classtitle1 = 'Roofs','Roof' 
@@ -73,27 +69,26 @@ def start_parsing(image_list,filenames): #json_files , project_name
                             x_coordinates, y_coordinates = 0,0
                         else:
                             x_coordinates, y_coordinates = polygon_area_calculation(x_values, y_values)
-                                
-                new_coord = []      
-                for i in range(len(x_coordinates)):
-                        x = x_coordinates[i].item()
-                        y = y_coordinates[i].item()
-                        new_coord.append([x,y])
-                        
-                    #print("x: {} y: {} z: {}".format(x_coordinates[0], y_coordinates[1], len(new_coord)))
-                        
-                # except UnboundLocalError: print(filename)
+        
+                            new_coord = []      
+                            for i in range(len(x_coordinates)):
+                                    x = x_coordinates[i].item()
+                                    y = y_coordinates[i].item()
+                                    new_coord.append([x,y])
+                                    
+                                #print("x: {} y: {} z: {}".format(x_coordinates[0], y_coordinates[1], len(new_coord)))
+                                    
+                            # except UnboundLocalError: print(filename)
 
+                            try:    
+                                temp_image = []        
+                                for j in new_coord:
+                                    r ,g,b = img[j[1],j[0]]
+                                    temp_image.append(list([r,g,b]))    
+                            except UnboundLocalError : 
 
-                try:    
-                    temp_image = []        
-                    for j in new_coord:
-                        r ,g,b = img[j[1],j[0]]
-                        temp_image.append(list([r,g,b]))    
-                except UnboundLocalError : 
-
-                    print("Annotation not working",filename)
-                    print("")
+                                print("Annotation not working",filename)
+                                print("")
 
     return temp_image, new_coord
      
