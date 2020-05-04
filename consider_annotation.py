@@ -33,6 +33,9 @@ def polygon_area_calculation(x_inputs, y_inputs):
 # image_list = []
 def start_parsing(image_list,filenames): #json_files , project_name
     #changing into the json directory in data folder
+
+    temp_images,new_coords = [],[]
+
     path = os.getcwd()
     parent_path = Path(path).parent
     os.chdir(parent_path)    
@@ -87,12 +90,13 @@ def start_parsing(image_list,filenames): #json_files , project_name
                                 for j in new_coord:
                                     r ,g,b = img[j[1],j[0]]
                                     temp_image.append(list([r,g,b]))    
+                            
                             except UnboundLocalError : 
-
                                 print("Annotation not working",filename)
                                 print("")
                     else:
-                        
-    return temp_image, new_coord
+                        image_list = image_list.remobe(img)
+                        filenames = filename.remove(filename)
+    return temp_images, new_coords
      
 
