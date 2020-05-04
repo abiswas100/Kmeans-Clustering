@@ -56,7 +56,6 @@ def start_parsing(image_list,filenames): #json_files , project_name
 
         with open(json_filename) as json_content:
                 json_data = json.load(json_content)
-                
 
                 for entry in json_data['objects']:
                     if (entry['classTitle'] == classtitle or entry['classTitle'] == classtitle1):
@@ -80,9 +79,9 @@ def start_parsing(image_list,filenames): #json_files , project_name
                                     x = x_coordinates[i].item()
                                     y = y_coordinates[i].item()
                                     new_coord.append([x,y])
-                                    
-                                #print("x: {} y: {} z: {}".format(x_coordinates[0], y_coordinates[1], len(new_coord)))
-                                    
+                            new_coords.append(new_coord)       # apppending new_coord of 1 image to new_coords of all images        
+                                
+                            #print("x: {} y: {} z: {}".format(x_coordinates[0], y_coordinates[1], len(new_coord)))        
                             # except UnboundLocalError: print(filename)
 
                             try:    
@@ -90,13 +89,15 @@ def start_parsing(image_list,filenames): #json_files , project_name
                                 for j in new_coord:
                                     r ,g,b = img[j[1],j[0]]
                                     temp_image.append(list([r,g,b]))    
-                            
+
                             except UnboundLocalError : 
                                 print("Annotation not working",filename)
                                 print("")
+                            temp_images.append(temp_image)    # apppending temp_image of 1 image to temp_images of all images
                     else:
                         image_list = image_list.remobe(img)
                         filenames = filename.remove(filename)
-    return temp_images, new_coords
+
+    return temp_images, new_coords,image_list,filenames
      
 
