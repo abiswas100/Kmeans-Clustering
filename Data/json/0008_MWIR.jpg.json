@@ -1,0 +1,278 @@
+{
+    "description": "",
+    "tags": [],
+    "size": {
+        "height": 512,
+        "width": 640
+    },
+    "objects": [
+        {
+            "description": "",
+            "geometryType": "polygon",
+            "labelerLogin": "speri203",
+            "tags": [],
+            "classTitle": "HVAC",
+            "points": {
+                "exterior": [
+                    [
+                        2,
+                        360
+                    ],
+                    [
+                        153,
+                        361
+                    ],
+                    [
+                        159,
+                        375
+                    ],
+                    [
+                        6,
+                        375
+                    ]
+                ],
+                "interior": []
+            }
+        },
+        {
+            "description": "",
+            "geometryType": "polygon",
+            "labelerLogin": "speri203",
+            "tags": [],
+            "classTitle": "Roof",
+            "points": {
+                "exterior": [
+                    [
+                        0,
+                        216
+                    ],
+                    [
+                        126,
+                        172
+                    ],
+                    [
+                        103,
+                        99
+                    ],
+                    [
+                        84,
+                        98
+                    ],
+                    [
+                        89,
+                        1
+                    ],
+                    [
+                        0,
+                        0
+                    ]
+                ],
+                "interior": []
+            }
+        },
+        {
+            "description": "",
+            "geometryType": "polygon",
+            "labelerLogin": "speri203",
+            "tags": [],
+            "classTitle": "Roof",
+            "points": {
+                "exterior": [
+                    [
+                        299,
+                        105
+                    ],
+                    [
+                        292,
+                        97
+                    ],
+                    [
+                        298,
+                        92
+                    ],
+                    [
+                        298,
+                        43
+                    ],
+                    [
+                        440,
+                        39
+                    ],
+                    [
+                        526,
+                        40
+                    ],
+                    [
+                        549,
+                        41
+                    ],
+                    [
+                        536,
+                        97
+                    ],
+                    [
+                        520,
+                        108
+                    ],
+                    [
+                        409,
+                        105
+                    ],
+                    [
+                        343,
+                        107
+                    ]
+                ],
+                "interior": []
+            }
+        },
+        {
+            "description": "",
+            "geometryType": "polygon",
+            "labelerLogin": "speri203",
+            "tags": [],
+            "classTitle": "Window",
+            "points": {
+                "exterior": [
+                    [
+                        328,
+                        437
+                    ],
+                    [
+                        315,
+                        335
+                    ],
+                    [
+                        345,
+                        320
+                    ],
+                    [
+                        396,
+                        315
+                    ],
+                    [
+                        440,
+                        312
+                    ],
+                    [
+                        480,
+                        318
+                    ],
+                    [
+                        498,
+                        332
+                    ],
+                    [
+                        492,
+                        365
+                    ],
+                    [
+                        480,
+                        400
+                    ],
+                    [
+                        471,
+                        443
+                    ]
+                ],
+                "interior": []
+            }
+        },
+        {
+            "description": "",
+            "geometryType": "polygon",
+            "labelerLogin": "speri203",
+            "tags": [],
+            "classTitle": "Window",
+            "points": {
+                "exterior": [
+                    [
+                        40,
+                        418
+                    ],
+                    [
+                        17,
+                        382
+                    ],
+                    [
+                        159,
+                        376
+                    ],
+                    [
+                        174,
+                        417
+                    ]
+                ],
+                "interior": []
+            }
+        },
+        {
+            "description": "",
+            "geometryType": "polygon",
+            "labelerLogin": "speri203",
+            "tags": [],
+            "classTitle": "Facade",
+            "points": {
+                "exterior": [
+                    [
+                        0,
+                        261
+                    ],
+                    [
+                        138,
+                        222
+                    ],
+                    [
+                        106,
+                        99
+                    ],
+                    [
+                        289,
+                        99
+                    ],
+                    [
+                        296,
+                        197
+                    ],
+                    [
+                        538,
+                        199
+                    ],
+                    [
+                        566,
+                        95
+                    ],
+                    [
+                        636,
+                        93
+                    ],
+                    [
+                        640,
+                        483
+                    ],
+                    [
+                        376,
+                        489
+                    ],
+                    [
+                        275,
+                        491
+                    ],
+                    [
+                        148,
+                        491
+                    ],
+                    [
+                        29,
+                        488
+                    ],
+                    [
+                        2,
+                        488
+                    ]
+                ],
+                "interior": []
+            }
+        }
+    ]
+}

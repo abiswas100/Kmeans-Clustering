@@ -1,0 +1,118 @@
+{
+    "description": "",
+    "tags": [],
+    "size": {
+        "height": 512,
+        "width": 640
+    },
+    "objects": [
+        {
+            "description": "",
+            "geometryType": "polygon",
+            "labelerLogin": "abiswas100",
+            "tags": [],
+            "classTitle": "Window",
+            "points": {
+                "exterior": [
+                    [
+                        485,
+                        13
+                    ],
+                    [
+                        457,
+                        283
+                    ],
+                    [
+                        639,
+                        265
+                    ],
+                    [
+                        639,
+                        2
+                    ]
+                ],
+                "interior": []
+            }
+        },
+        {
+            "description": "",
+            "geometryType": "polygon",
+            "labelerLogin": "abiswas100",
+            "tags": [],
+            "classTitle": "Door",
+            "points": {
+                "exterior": [
+                    [
+                        418,
+                        474
+                    ],
+                    [
+                        416,
+                        512
+                    ],
+                    [
+                        572,
+                        511
+                    ],
+                    [
+                        587,
+                        463
+                    ]
+                ],
+                "interior": []
+            }
+        },
+        {
+            "description": "",
+            "geometryType": "polygon",
+            "labelerLogin": "abiswas100",
+            "tags": [],
+            "classTitle": "Facade",
+            "points": {
+                "exterior": [
+                    [
+                        0,
+                        0
+                    ],
+                    [
+                        0,
+                        512
+                    ],
+                    [
+                        415,
+                        512
+                    ],
+                    [
+                        419,
+                        473
+                    ],
+                    [
+                        583,
+                        461
+                    ],
+                    [
+                        569,
+                        512
+                    ],
+                    [
+                        640,
+                        512
+                    ],
+                    [
+                        640,
+                        264
+                    ],
+                    [
+                        640,
+                        0
+                    ],
+                    [
+                        488,
+                        0
+                    ]
+                ],
+                "interior": []
+            }
+        }
+    ]
+}

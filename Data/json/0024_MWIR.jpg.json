@@ -1,0 +1,90 @@
+{
+    "description": "",
+    "tags": [],
+    "size": {
+        "height": 512,
+        "width": 640
+    },
+    "objects": [
+        {
+            "description": "",
+            "geometryType": "polygon",
+            "labelerLogin": "speri203",
+            "tags": [],
+            "classTitle": "Facade",
+            "points": {
+                "exterior": [
+                    [
+                        639,
+                        94
+                    ],
+                    [
+                        498,
+                        133
+                    ],
+                    [
+                        494,
+                        143
+                    ],
+                    [
+                        208,
+                        138
+                    ],
+                    [
+                        259,
+                        397
+                    ],
+                    [
+                        255,
+                        478
+                    ],
+                    [
+                        272,
+                        477
+                    ],
+                    [
+                        274,
+                        501
+                    ],
+                    [
+                        274,
+                        512
+                    ],
+                    [
+                        640,
+                        511
+                    ]
+                ],
+                "interior": []
+            }
+        },
+        {
+            "description": "",
+            "geometryType": "polygon",
+            "labelerLogin": "speri203",
+            "tags": [],
+            "classTitle": "Roof",
+            "points": {
+                "exterior": [
+                    [
+                        278,
+                        2
+                    ],
+                    [
+                        277,
+                        43
+                    ],
+                    [
+                        500,
+                        50
+                    ],
+                    [
+                        640,
+                        2
+                    ]
+                ],
+                "interior": []
+            }
+        }
+    ]
+}
