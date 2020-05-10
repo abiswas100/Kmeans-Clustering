@@ -46,8 +46,8 @@ def start_parsing(image,filename): #json_files , project_name
             json_data = json.load(json_content)
             
             for entry in json_data['objects']:
-                if (entry['classTitle'] == 'Roof' or entry['classTitle'] == 'Roof'):
-                    #print(filename)
+                if (entry['classTitle'] == 'Windows' or entry['classTitle'] == 'Window'):
+                    print(filename)
                     x_values = []
                     y_values = []
                     points = entry['points']
@@ -78,6 +78,8 @@ def start_parsing(image,filename): #json_files , project_name
                         except UnboundLocalError : 
                             print("Annotation not working",filename)
                             print("")
-    
+                else: 
+                    temp_image = -1        
+                    continue                       # if the image does not have specified annotation
     return temp_image, new_coord
      

@@ -17,7 +17,8 @@ def main():
     '''
     Getting Annotations from Consider_Annotations function
     '''
-    coordinates_of_all_images,pixel_values_of_all_images = Kmeans.add_annotation(image_list,filenames)
+    print("Getting annotations for images")
+    coordinates_of_all_images,pixel_values_of_all_images,filenames = Kmeans.add_annotation(image_list,filenames)
     
     # Restricting python to use only 2 cores
     # cpu_nums = list(range(psutil.cpu_count()))

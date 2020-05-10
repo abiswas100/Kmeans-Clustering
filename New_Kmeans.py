@@ -48,10 +48,13 @@ def add_annotation(image_list,filenames):
     counter = 0
     for image in image_list:
         pixel_values,coordinates = ann.start_parsing(image,filenames[counter])
-        coordinates_of_all_images.append(coordinates)
-        pixel_values_of_all_images.append(pixel_values)
+        if pixel_values_of_all_images == -1 :
+            filenames = filenames.remove(filenames[counter]) 
+        else:
+            coordinates_of_all_images.append(coordinates)
+            pixel_values_of_all_images.append(pixel_values)
         counter = counter + 1 
-    return coordinates_of_all_images,pixel_values_of_all_images
+    return coordinates_of_all_images,pixel_values_of_all_images,filenames
 
 def clustering(image_list,pixel_values_of_all_images,filenames  ):  
     pbar = ProgressBar()
