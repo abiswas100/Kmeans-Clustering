@@ -41,18 +41,18 @@ def start_parsing(image_list,filenames): #json_files , project_name
     os.chdir(parent_path)    
     os.chdir('json')
 
-    choice = int(input("Enter the object 1. Windows 2. Facade 3.Roof"))
+    choice = int(input("Enter the object 1. Windows 2. Facade 3.Roof  - "))
     
 
-    if choice  == 1: classtitle,classtitle1 = 'Windows','Window'
-    elif choice == 2 : classtitle,classtitle1 = 'Facades','Facades'
+    if   choice == 1 : classtitle,classtitle1 = 'Windows','Window'
+    elif choice == 2 : classtitle,classtitle1 = 'Facades','Facade'
     elif choice == 3 : classtitle,classtitle1 = 'Roofs','Roof'
 
     for i in range(len(image_list)):
 
         filename = filenames[i]
 
-        x_coordinates, y_coordinates = [0],[0]
+        x_coordinates, y_coordinates = [0],[0];
         img = image_list[i]
         json_filename = filename[:-4] + '.jpg.json'  
 
@@ -97,8 +97,8 @@ def start_parsing(image_list,filenames): #json_files , project_name
                                 print("")
                             temp_images.append(temp_image)    # apppending temp_image of 1 image to temp_images of all images
                     else:
-                        image_list = image_list.remobe(img)
-                        filenames = filename.remove(filename)
+                        image_list = image_list.remove(img)
+                        filenames = filenames.remove(filename)
 
     return temp_images, new_coords,image_list,filenames
      
