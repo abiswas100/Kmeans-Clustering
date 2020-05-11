@@ -30,9 +30,9 @@ def polygon_area_calculation(x_inputs, y_inputs):
     return x_coordinates, y_coordinates
 
 
-# image_list = []
+
 def start_parsing(image,filename): #json_files , project_name
-    #changing into the json directory in data folder
+                                                            #changing into the json directory in data folder
     path = os.getcwd()
     parent_path = Path(path).parent
     os.chdir(parent_path)    
@@ -41,11 +41,13 @@ def start_parsing(image,filename): #json_files , project_name
     x_coordinates, y_coordinates = [0],[0]
     img = image 
     json_filename = filename[:-4] + '.jpg.json'  
-
+    new_coord = []
+    temp_image = []
     with open(json_filename) as json_content:
             json_data = json.load(json_content)
             
             for entry in json_data['objects']:
+                
                 if (entry['classTitle'] == 'Window' or entry['classTitle'] == 'Windows'):
                     print("working",filename)
                     x_values = []
@@ -59,23 +61,21 @@ def start_parsing(image,filename): #json_files , project_name
                         print("ERROR: LESS THAN 4 POINTS ANNOTATED FOR WINDOW. NUMBER OF POINTS: {}".format(len(x_values)),filename)
                         x_coordinates, y_coordinates = 0,0
                     else:
-                        x_coordinates, y_coordinates = polygon_area_calculation(x_values, y_values)
-                        new_coord = []      
+                        x_coordinates, y_coordinates = polygon_area_calculation(x_values, y_values)      
                         for i in range(len(x_coordinates)):
                                 x = x_coordinates[i].item()
                                 y = y_coordinates[i].item()
                                 new_coord.append([x,y])
-                        try:    
-                            temp_image = []        
-                            for j in new_coord:
-                                r ,g,b = img[j[1],j[0]]
-                                temp_image.append(list([r,g,b]))    
-                        except UnboundLocalError : 
-                            print("Annotation not working",filename)
-                            print("")
-                            
-                # else: 
-                #     print("Annotation not working",filename)
-                #     temp_image = -1                          # if the image does not have specified annotation
+            
+            try:     
+                for j in new_coord:
+                    r ,g,b = img[j[1],j[0]]
+                    temp_image.append(list([r,g,b]))  
+                                     
+            except UnboundLocalError : 
+                print("Annotation not working",filename)
+                print("")
+    
+   
     return temp_image, new_coord
      

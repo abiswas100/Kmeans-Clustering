@@ -43,6 +43,7 @@ def input_images():
     return image_list,filenames
 
 def add_annotation(image_list,filenames):
+    
     coordinates_of_all_images = []
     pixel_values_of_all_images = []
     counter = 0
@@ -70,7 +71,7 @@ def clustering(image_list,pixel_values_of_all_images,filenames  ):
         pixel_values = pixel_values_of_all_images[i]
         pixel_values = np.float32(pixel_values)
         try:
-            kmeans = KMeans(n_clusters=5, random_state=0, n_jobs = -1).fit(pixel_values)
+            kmeans = KMeans(n_clusters=3, random_state=0, n_jobs = -1).fit(pixel_values)
             # convert back to 8 bit values
             centers = kmeans.cluster_centers_
             centers = np.uint8(centers)
@@ -84,7 +85,7 @@ def clustering(image_list,pixel_values_of_all_images,filenames  ):
     return labels_of_all_image,clustered_images_list
 
 def masking_image(filenames,image_list,labels_of_all_image,coordinates_of_all_images,clustered_images_list):
-    print("length of clustered image",len(clustered_images_list))
+   
     print("")
     print("Finding the Cluster containing the hotspot and Masking it ...")
     print("")
@@ -111,9 +112,10 @@ def masking_image(filenames,image_list,labels_of_all_image,coordinates_of_all_im
     
         temp_image = image_list[iterator]
         masked_image = np.copy(temp_image)
-
+        
         #changing labels    
         for i in range(len(labels)):
+            
             if labels[i] != best_cluster:coordinate[i] = [-1,-1] 
             else:continue
     
