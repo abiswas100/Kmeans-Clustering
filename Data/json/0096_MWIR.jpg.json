@@ -1,0 +1,102 @@
+{
+    "description": "",
+    "tags": [],
+    "size": {
+        "height": 512,
+        "width": 640
+    },
+    "objects": [
+        {
+            "description": "",
+            "geometryType": "polygon",
+            "labelerLogin": "abiswas100",
+            "tags": [],
+            "classTitle": "Ground",
+            "points": {
+                "exterior": [
+                    [
+                        566,
+                        0
+                    ],
+                    [
+                        558,
+                        309
+                    ],
+                    [
+                        0,
+                        355
+                    ],
+                    [
+                        0,
+                        512
+                    ],
+                    [
+                        640,
+                        512
+                    ],
+                    [
+                        640,
+                        0
+                    ]
+                ],
+                "interior": []
+            }
+        },
+        {
+            "description": "",
+            "geometryType": "polygon",
+            "labelerLogin": "abiswas100",
+            "tags": [],
+            "classTitle": "Facade",
+            "points": {
+                "exterior": [
+                    [
+                        565,
+                        4
+                    ],
+                    [
+                        551,
+                        309
+                    ],
+                    [
+                        0,
+                        356
+                    ],
+                    [
+                        0,
+                        0
+                    ]
+                ],
+                "interior": []
+            }
+        },
+        {
+            "description": "",
+            "geometryType": "polygon",
+            "labelerLogin": "abiswas100",
+            "tags": [],
+            "classTitle": "Window",
+            "points": {
+                "exterior": [
+                    [
+                        0,
+                        236
+                    ],
+                    [
+                        24,
+                        234
+                    ],
+                    [
+                        53,
+                        309
+                    ],
+                    [
+                        0,
+                        313
+                    ]
+                ],
+                "interior": []
+            }
+        }
+    ]
+}

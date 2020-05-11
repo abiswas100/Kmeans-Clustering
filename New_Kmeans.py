@@ -69,16 +69,17 @@ def clustering(image_list,pixel_values_of_all_images,filenames  ):
 
         pixel_values = pixel_values_of_all_images[i]
         pixel_values = np.float32(pixel_values)
-    
-        kmeans = KMeans(n_clusters=5, random_state=0, n_jobs = -1).fit(pixel_values)
-        # convert back to 8 bit values
-        centers = kmeans.cluster_centers_
-        centers = np.uint8(centers)
-        labels = kmeans.labels_
-        labels_of_all_image.append(labels)
-        segmented_image = centers[labels]
-        clustered_images_list.append(segmented_image)
-
+        try:
+            kmeans = KMeans(n_clusters=5, random_state=0, n_jobs = -1).fit(pixel_values)
+            # convert back to 8 bit values
+            centers = kmeans.cluster_centers_
+            centers = np.uint8(centers)
+            labels = kmeans.labels_
+            labels_of_all_image.append(labels)
+            segmented_image = centers[labels]
+            clustered_images_list.append(segmented_image)
+        except ValueError:
+            print(pixel_values)
     print(" ")
     return labels_of_all_image,clustered_images_list
 
