@@ -31,8 +31,8 @@ def polygon_area_calculation(x_inputs, y_inputs):
 
 
 
-def start_parsing(image,filename): #json_files , project_name
-                                                            #changing into the json directory in data folder
+def start_parsing(image,filename,choice): # choice is the 
+    #changing into the json directory in data folder
     path = os.getcwd()
     parent_path = Path(path).parent
     os.chdir(parent_path)    
@@ -41,32 +41,39 @@ def start_parsing(image,filename): #json_files , project_name
     x_coordinates, y_coordinates = [0],[0]
     img = image 
     json_filename = filename[:-4] + '.jpg.json'  
-    new_coord = []
-    temp_image = []
+    new_coord = []                         # will contain all the coordinate values for the Region of Interst
+    temp_image = []                        #will contain the pixel color values for coordinates in new_coord
     with open(json_filename) as json_content:
             json_data = json.load(json_content)
-            
             for entry in json_data['objects']:
-                
-                if (entry['classTitle'] == 'Window' or entry['classTitle'] == 'Windows'):
-                    print("working",filename)
-                    x_values = []
-                    y_values = []
-                    points = entry['points']
-                    exterior = points['exterior']
-                    for k, coordinates in enumerate(exterior):
-                        x_values.append(exterior[k][0])
-                        y_values.append(exterior[k][1])
-                    if (len(x_values) < 4):
-                        print("ERROR: LESS THAN 4 POINTS ANNOTATED FOR WINDOW. NUMBER OF POINTS: {}".format(len(x_values)),filename)
-                        x_coordinates, y_coordinates = 0,0
-                    else:
-                        x_coordinates, y_coordinates = polygon_area_calculation(x_values, y_values)      
-                        for i in range(len(x_coordinates)):
-                                x = x_coordinates[i].item()
-                                y = y_coordinates[i].item()
-                                new_coord.append([x,y])
-            
+                if choice == 1:
+                    #Considering Window annotations
+                    if (entry['classTitle'] == 'Window' or entry['classTitle'] == 'Windows'):
+                        print("working",filename)
+                        x_values = []
+                        y_values = []
+                        points = entry['points']
+                        exterior = points['exterior']
+                        for k, coordinates in enumerate(exterior):
+                            x_values.append(exterior[k][0])
+                            y_values.append(exterior[k][1])
+                        if (len(x_values) < 4):
+                            print("ERROR: LESS THAN 4 POINTS ANNOTATED FOR WINDOW. NUMBER OF POINTS: {}".format(len(x_values)),filename)
+                            x_coordinates, y_coordinates = 0,0
+                        else:
+                            x_coordinates, y_coordinates = polygon_area_calculation(x_values, y_values)      
+                            for i in range(len(x_coordinates)):
+                                    x = x_coordinates[i].item()
+                                    y = y_coordinates[i].item()
+                                    new_coord.append([x,y])
+                elif choice == 2 : 
+                    pass
+                    '''
+                    Wall Annotation goes here
+                    '''
+
+
+            #adding the pixel values for the ROI        
             try:     
                 for j in new_coord:
                     r ,g,b = img[j[1],j[0]]
@@ -75,7 +82,5 @@ def start_parsing(image,filename): #json_files , project_name
             except UnboundLocalError : 
                 print("Annotation not working",filename)
                 print("")
-    
-   
     return temp_image, new_coord
      
