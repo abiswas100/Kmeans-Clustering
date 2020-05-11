@@ -70,112 +70,132 @@ def start_parsing(image,filename,choice): # choice is the
                         '''
                         Wall Annotation goes here
                         '''            
+
                 elif choice == 2 : 
-
-                        if (entry['classTitle'] == 'Facet' or entry['classTitle'] == 'Facade' or entry['classTitle'] == 'Facades'):
-                            x_values = []
-                            y_values = []
-                            points = entry['points']
-                            exterior = points['exterior']
-                            for k, coordinates in enumerate(exterior):
-                                x_values.append(exterior[k][0])
-                                y_values.append(exterior[k][1])
-                            if (len(x_values) < 4):
-                                print("ERROR: LESS THAN 4 POINTS ANNOTATED FOR FACADE. NUMBER OF POINTS: {}".format(len(x_values)),filename)
-                            else:
-                                x_coordinates, y_coordinates = polygon_area_calculation(x_values, y_values)
-                                '''
-                                Subtracting window pixels from facade pixels
-                                '''
-                                #Convert the x and y coordiantes lists into one list of x,y
-                                coordinates = []
-                                for i in range(len(x_coordinates)):
-                                    coordinates.append([x_coordinates[i], y_coordinates[i]])
-                                #convert list to set
-                                coordinate_set = set(tuple(x) for x in coordinates)
-                                
-
-                            #Open up the json file again and reread all windows
-                            with open(json_filename) as json_file_content:
-                                '''
-                                Lists that will have coordiantes added to for each object. It should be noted that the coordinates
-                                appended to these lists are a cumilitaive of all instances of that object within a picture.
-                                This way they can be subtracted from the face coordiantes. 
-                                '''
-                                window_sets = []
-                                door_sets = []
-                                hvac_sets = []
-
-                                json_data = json.load(json_file_content)
-                                for entry in json_data['objects']:
-                                    if(entry['classTitle'] == 'Window'):
-                                        x_values = []
-                                        y_values = []
-                                        points = entry['points']
-                                        exterior = points['exterior']
-                                        for i, coordinates in enumerate(exterior):
-                                            x_values.append(exterior[i][0])
-                                            y_values.append(exterior[i][1])
-                                        if(len(x_values) < 4):
-                                            print("ERROR: LESS THAN 4 POINTS ANNOTATED FOR WINDOW. NUMBER OF POINTS: {}".format(len(x_values)))
-                                        else:
-                                            x_coordinates, y_coordinates = polygon_area_calculation(x_values, y_values)
-                                            
-                                            #Convert x and y coordinate of windows to sets
-                                            for y in range(len(x_coordinates)):
-                                                window_sets.append([x_coordinates[y], y_coordinates[y]])
-
-                                    if(entry['classTitle'] == 'Door'):
-                                        x_values = []
-                                        y_values = []
-                                        points = entry['points']
-                                        exterior = points['exterior']
-                                        for i, coordinates in enumerate(exterior):
-                                            x_values.append(exterior[i][0])
-                                            y_values.append(exterior[i][1])
-                                        if(len(x_values) < 4):
-                                            print("ERROR: LESS THAN 4 POINTS ANNOTATED FOR DOOR. NUMBER OF POINTS: {}".format(len(x_values)))
-                                        else:
-                                            x_door_coordinates, y_door_coordinates = polygon_area_calculation(x_values, y_values)
-                                            
-                                            #Convert x and y coordinate of windows to sets
-                                            for y in range(len(x_door_coordinates)):
-                                                door_sets.append([x_door_coordinates[y], y_door_coordinates[y]])
-
-                                            #Cluster section for door goes here
-
-                                    if(entry['classTitle'] == 'HVAC'):
-                                        x_values = []
-                                        y_values = []
-                                        points = entry['points']
-                                        exterior = points['exterior']
-                                        for i, coordinates in enumerate(exterior):
-                                            x_values.append(exterior[i][0])
-                                            y_values.append(exterior[i][1])
-                                        if(len(x_values) < 4):
-                                            print("ERROR: LESS THAN 4 POINTS ANNOTATED FOR DOOR. NUMBER OF POINTS: {}".format(len(x_values)))
-                                        else:
-                                            x_hvac_coordinates, y_hvac_coordinates = polygon_area_calculation(x_values, y_values)
-                                            
-                                            #Convert x and y coordinate of windows to sets
-                                            for y in range(len(x_hvac_coordinates)):
-                                                hvac_sets.append([x_hvac_coordinates[y], y_hvac_coordinates[y]])
-
-                                            #Cluster section for door goes here
-
-                            #Converting the list to a set
-                            window_sets = set(tuple(x) for x in window_sets)
-                            door_sets = set(tuple(x) for x in door_sets)
-                            hvac_sets = set(tuple(x) for x in hvac_sets)
-                            #Finding difference (set-thory) to extract facade pixels
-                            coordinate_set = coordinate_set.difference(window_sets)
-                            coordinate_set = coordinate_set.difference(door_sets)
-                            coordinate_set = coordinate_set.difference(hvac_sets)       
+                    if (entry['classTitle'] == 'Facet' or entry['classTitle'] == 'Facade' or entry['classTitle'] == 'Facades'):
+                        x_values = []
+                        y_values = []
+                        points = entry['points']
+                        exterior = points['exterior']
+                        for k, coordinates in enumerate(exterior):
+                            x_values.append(exterior[k][0])
+                            y_values.append(exterior[k][1])
+                        if (len(x_values) < 4):
+                            print("ERROR: LESS THAN 4 POINTS ANNOTATED FOR FACADE. NUMBER OF POINTS: {}".format(len(x_values)),filename)
+                        else:
+                            x_coordinates, y_coordinates = polygon_area_calculation(x_values, y_values)
                             '''
-                            At this point coordinate_set has only the pixels of the facade. Windows, doors, and hvacs have been subtracted.
+                            Subtracting window pixels from facade pixels
                             '''
-                            new_coord = list(coordinate_set)
+                            #Convert the x and y coordiantes lists into one list of x,y
+                            coordinates = []
+                            for i in range(len(x_coordinates)):
+                                coordinates.append([x_coordinates[i], y_coordinates[i]])
+                            #convert list to set
+                            coordinate_set = set(tuple(x) for x in coordinates)
+                            
 
+                        #Open up the json file again and reread all windows
+                        with open(json_filename) as json_file_content:
+                            '''
+                            Lists that will have coordiantes added to for each object. It should be noted that the coordinates
+                            appended to these lists are a cumilitaive of all instances of that object within a picture.
+                            This way they can be subtracted from the face coordiantes. 
+                            '''
+                            window_sets = []
+                            door_sets = []
+                            hvac_sets = []
+
+                            json_data = json.load(json_file_content)
+                            for entry in json_data['objects']:
+                                if(entry['classTitle'] == 'Window'):
+                                    x_values = []
+                                    y_values = []
+                                    points = entry['points']
+                                    exterior = points['exterior']
+                                    for i, coordinates in enumerate(exterior):
+                                        x_values.append(exterior[i][0])
+                                        y_values.append(exterior[i][1])
+                                    if(len(x_values) < 4):
+                                        print("ERROR: LESS THAN 4 POINTS ANNOTATED FOR WINDOW. NUMBER OF POINTS: {}".format(len(x_values)))
+                                    else:
+                                        x_coordinates, y_coordinates = polygon_area_calculation(x_values, y_values)
+                                        
+                                        #Convert x and y coordinate of windows to sets
+                                        for y in range(len(x_coordinates)):
+                                            window_sets.append([x_coordinates[y], y_coordinates[y]])
+
+                                if(entry['classTitle'] == 'Door'):
+                                    x_values = []
+                                    y_values = []
+                                    points = entry['points']
+                                    exterior = points['exterior']
+                                    for i, coordinates in enumerate(exterior):
+                                        x_values.append(exterior[i][0])
+                                        y_values.append(exterior[i][1])
+                                    if(len(x_values) < 4):
+                                        print("ERROR: LESS THAN 4 POINTS ANNOTATED FOR DOOR. NUMBER OF POINTS: {}".format(len(x_values)))
+                                    else:
+                                        x_door_coordinates, y_door_coordinates = polygon_area_calculation(x_values, y_values)
+                                        
+                                        #Convert x and y coordinate of windows to sets
+                                        for y in range(len(x_door_coordinates)):
+                                            door_sets.append([x_door_coordinates[y], y_door_coordinates[y]])
+
+                                    
+                                if(entry['classTitle'] == 'HVAC'):
+                                    x_values = []
+                                    y_values = []
+                                    points = entry['points']
+                                    exterior = points['exterior']
+                                    for i, coordinates in enumerate(exterior):
+                                        x_values.append(exterior[i][0])
+                                        y_values.append(exterior[i][1])
+                                    if(len(x_values) < 4):
+                                        print("ERROR: LESS THAN 4 POINTS ANNOTATED FOR DOOR. NUMBER OF POINTS: {}".format(len(x_values)))
+                                    else:
+                                        x_hvac_coordinates, y_hvac_coordinates = polygon_area_calculation(x_values, y_values)
+                                        
+                                        #Convert x and y coordinate of windows to sets
+                                        for y in range(len(x_hvac_coordinates)):
+                                            hvac_sets.append([x_hvac_coordinates[y], y_hvac_coordinates[y]])
+
+
+                        #Converting the list to a set
+                        window_sets = set(tuple(x) for x in window_sets)
+                        door_sets = set(tuple(x) for x in door_sets)
+                        hvac_sets = set(tuple(x) for x in hvac_sets)
+                        
+                        #Finding difference (set-thory) to extract facade pixels
+                        coordinate_set = coordinate_set.difference(window_sets)
+                        coordinate_set = coordinate_set.difference(door_sets)
+                        coordinate_set = coordinate_set.difference(hvac_sets)       
+                        '''
+                        At this point coordinate_set has only the pixels of the facade. Windows, doors, and hvacs have been subtracted.
+                        '''
+                        new_coord = list(coordinate_set)
+                
+                elif choice == 3 : 
+                    #Considering Roof annotations
+                    if (entry['classTitle'] == 'Roof' or entry['classTitle'] == 'Roofs'):
+                        print("working",filename)
+                        x_values = []
+                        y_values = []
+                        points = entry['points']
+                        exterior = points['exterior']
+                        for k, coordinates in enumerate(exterior):
+                            x_values.append(exterior[k][0])
+                            y_values.append(exterior[k][1])
+                        if (len(x_values) < 4):
+                            print("ERROR: LESS THAN 4 POINTS ANNOTATED FOR WINDOW. NUMBER OF POINTS: {}".format(len(x_values)),filename)
+                            x_coordinates, y_coordinates = 0,0
+                        else:
+                            x_coordinates, y_coordinates = polygon_area_calculation(x_values, y_values)      
+                            for i in range(len(x_coordinates)):
+                                    x = x_coordinates[i].item()
+                                    y = y_coordinates[i].item()
+                                    new_coord.append([x,y])
+                    
             #adding the pixel values for the ROI        
             try:     
                 for j in new_coord:

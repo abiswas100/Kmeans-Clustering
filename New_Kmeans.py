@@ -43,7 +43,7 @@ def input_images():
     return image_list,filenames
 
 def add_annotation(image_list,filenames):
-    choice = int(input("enter the choice of object for Annotation 1.Window 2.Wall 3.Roof"))
+    choice = int(input("enter the choice of object for Annotation 1.Window 2.Wall 3.Roof : "))
     coordinates_of_all_images = []
     pixel_values_of_all_images = []
     counter = 0
@@ -71,7 +71,7 @@ def clustering(image_list,pixel_values_of_all_images,filenames  ):
         pixel_values = pixel_values_of_all_images[i]
         pixel_values = np.float32(pixel_values)
         try:
-            kmeans = KMeans(n_clusters=3, random_state=0, n_jobs = -1).fit(pixel_values)
+            kmeans = KMeans(n_clusters=5, random_state=0, n_jobs = -1).fit(pixel_values)
             # convert back to 8 bit values
             centers = kmeans.cluster_centers_
             centers = np.uint8(centers)

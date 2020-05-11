@@ -26,10 +26,12 @@ def main():
     # proc.cpu_affinity(cpu_nums[:-2])                                              #will use all CPU cores uncomment to use 2 cores     
     print("CPUS being consumed..",cpu_count())
     
-    # '''
-    # Getting U-values for images 
-    # '''
-    # Kmeans.U_value(coordinates_of_all_images,filenames)
+    '''
+     Getting U-values for images 
+    '''
+    print()
+    print("Adding U_Values...")
+    Kmeans.U_value(coordinates_of_all_images,filenames)
 
     '''
     Cluster Images
