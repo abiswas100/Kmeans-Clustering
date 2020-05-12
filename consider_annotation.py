@@ -31,7 +31,8 @@ def polygon_area_calculation(x_inputs, y_inputs):
 
 
 
-def start_parsing(image,filename,choice): # choice is the 
+def start_parsing(image,filename,choice): # choice is the type of annootation
+    flag = 0
     #changing into the json directory in data folder
     path = os.getcwd()
     parent_path = Path(path).parent
@@ -68,7 +69,9 @@ def start_parsing(image,filename,choice): # choice is the
                             for i in range(len(x_coordinates)):
                                     x = x_coordinates[i].item()
                                     y = y_coordinates[i].item()
-                                    new_coord.append([x,y])                 
+                                    new_coord.append([x,y])
+                    else: 
+                        flag = -1             
                 '''
                 Wall Annotation goes here
                 '''            
@@ -160,7 +163,7 @@ def start_parsing(image,filename,choice): # choice is the
                                         #Convert x and y coordinate of windows to sets
                                         for y in range(len(x_hvac_coordinates)):
                                             hvac_sets.append([x_hvac_coordinates[y], y_hvac_coordinates[y]])
-
+                    
 
                         #Converting the list to a set
                         window_sets = set(tuple(x) for x in window_sets)
@@ -171,6 +174,9 @@ def start_parsing(image,filename,choice): # choice is the
                         coordinate_set = coordinate_set.difference(window_sets)
                         coordinate_set = coordinate_set.difference(door_sets)
                         coordinate_set = coordinate_set.difference(hvac_sets)       
+                    
+                    else: 
+                        flag = -1
                         '''
                         At this point coordinate_set has only the pixels of the facade. Windows, doors, and hvacs have been subtracted.
                         '''
@@ -198,16 +204,19 @@ def start_parsing(image,filename,choice): # choice is the
                                     x = x_coordinates[i].item()
                                     y = y_coordinates[i].item()
                                     new_coord.append([x,y])
-                    
+                    else: 
+                        flag = -1
+            
             #adding the pixel values for the ROI        
-            try:     
-                for j in new_coord:
-                    r ,g,b = img[j[1],j[0]]
-                    temp_image.append(list([r,g,b]))  
-                                     
-            except UnboundLocalError : 
-                print("Annotation not working",filename)
-                print("")
-
-    return temp_image, new_coord
+            if flag != -1 :
+                try:     
+                    for j in new_coord:
+                        r ,g,b = img[j[1],j[0]]
+                        temp_image.append(list([r,g,b]))  
+                                        
+                except UnboundLocalError : 
+                    print("Annotation not working",filename)
+                    print("")   
+            else : continue
+    return temp_image, new_coord,flag
      

@@ -48,8 +48,9 @@ def add_annotation(image_list,filenames):
     pixel_values_of_all_images = []
     counter = 0
     for image in image_list:
-        pixel_values,coordinates = ann.start_parsing(image,filenames[counter],choice)
-        if pixel_values_of_all_images == -1 :
+        pixel_values,coordinates,flag = ann.start_parsing(image,filenames[counter],choice)
+        if flag == -1 :
+            image_list = image_list.remove(image)
             filenames = filenames.remove(filenames[counter]) 
         else:
             coordinates_of_all_images.append(coordinates)
