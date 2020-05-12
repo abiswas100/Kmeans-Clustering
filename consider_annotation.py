@@ -46,6 +46,9 @@ def start_parsing(image,filename,choice): # choice is the
     with open(json_filename) as json_content:
             json_data = json.load(json_content)
             for entry in json_data['objects']:
+                '''
+                Window Annotation goes here
+                ''' 
                 if   choice == 1:
                     #Considering Window annotations
                     if (entry['classTitle'] == 'Window' or entry['classTitle'] == 'Windows'):
@@ -65,12 +68,10 @@ def start_parsing(image,filename,choice): # choice is the
                             for i in range(len(x_coordinates)):
                                     x = x_coordinates[i].item()
                                     y = y_coordinates[i].item()
-                                    new_coord.append([x,y])        
-                                    
-                        '''
-                        Wall Annotation goes here
-                        '''            
-
+                                    new_coord.append([x,y])                 
+                '''
+                Wall Annotation goes here
+                '''            
                 elif choice == 2 : 
                     if (entry['classTitle'] == 'Facet' or entry['classTitle'] == 'Facade' or entry['classTitle'] == 'Facades'):
                         x_values = []
@@ -174,7 +175,9 @@ def start_parsing(image,filename,choice): # choice is the
                         At this point coordinate_set has only the pixels of the facade. Windows, doors, and hvacs have been subtracted.
                         '''
                         new_coord = list(coordinate_set)
-                
+                '''
+                Roof Annotation goes here
+                ''' 
                 elif choice == 3 : 
                     #Considering Roof annotations
                     if (entry['classTitle'] == 'Roof' or entry['classTitle'] == 'Roofs'):
@@ -205,5 +208,6 @@ def start_parsing(image,filename,choice): # choice is the
             except UnboundLocalError : 
                 print("Annotation not working",filename)
                 print("")
+
     return temp_image, new_coord
      
