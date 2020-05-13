@@ -48,8 +48,9 @@ def add_annotation(image_list,filenames):
     pixel_values_of_all_images = []
     counter = 0
     for image in image_list:
-        pixel_values,coordinates = ann.start_parsing(image,filenames[counter],choice)
-        if pixel_values_of_all_images == -1 :
+        pixel_values,coordinates,flag = ann.start_parsing(image,filenames[counter],choice)
+        if flag == -1 :
+            image_list = image_list.remove(image)
             filenames = filenames.remove(filenames[counter]) 
         else:
             coordinates_of_all_images.append(coordinates)
@@ -94,7 +95,7 @@ def masking_image(filenames,image_list,labels_of_all_image,coordinates_of_all_im
     best_cluster_of_all_image = []
     density_of_all_image = []
     data_of_all_images = []
-    
+    counts_of_all_images = []
     iterator = 0
     '''
     The lines below iterates over the cluster_image list and converts the pixel to the hotspot_cluster and store 
@@ -134,7 +135,7 @@ def masking_image(filenames,image_list,labels_of_all_image,coordinates_of_all_im
         count = 0
         for label in labels:
             if label ==  best_cluster: count = count + 1
-
+        count_of_all_images.append(count)
         density = (count/len(labels))*100
         print("Density of hotspot..",density,'%')
         density_of_all_image.append(density)
@@ -153,7 +154,6 @@ def save_to_file(filenames,masked_image_list,data_of_all_images,density_of_all_i
         print("Folder already exists so removing the previous outputs and creating again")
         s.rmtree('kmeans-output')
         os.mkdir('kmeans-output')
-
     finally:
         print("Pushing clustered images to disk..............")    
         os.chdir('kmeans-output')
@@ -163,14 +163,13 @@ def save_to_file(filenames,masked_image_list,data_of_all_images,density_of_all_i
             counter = counter + 1
             img = 0
     print()
-    print()
     print("Images loaded to disk..pushing clustering information to csv file")
     print("")    
     try:
         file = 'kmeans'
         with open(file + 'museum.csv' , 'a' ,newline='') as csvfile :
             writer = csv.writer(csvfile)
-            writer.writerow(['Filename','Hotspot-cluster','minimum','maximum','average','Hotspot-U1','Hotspot-U2','Hotspot-U3','Hotspot-U4','density']) 
+            writer.writerow(['Filename','Hotspot-cluster','minimum','maximum','average','Hotspot-U1','Hotspot-U2','Hotspot-U3','Hotspot-U4','count','density']) 
         
             for i in range(0,len(filenames)):
                 #for a single Image
@@ -186,9 +185,10 @@ def save_to_file(filenames,masked_image_list,data_of_all_images,density_of_all_i
                 hu2 = d[5]
                 hu3 = d[6]
                 hu4 = d[7]
+                count = count_of_all_images[i]
                 den = density_of_all_image[i]
 
-                writer.writerow([file,cluster,minimum,maximum,average,hu1,hu2,hu3,hu4,str(den)+'%'])
+                writer.writerow([file,cluster,minimum,maximum,average,hu1,hu2,hu3,hu4,count,str(den)]) #+'%'
     except FileExistsError:
         os.remove('mueseum.csv')   
  
