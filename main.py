@@ -41,12 +41,12 @@ def main():
     '''
     Masking Hotspot Clusters in the Image
     '''
-    masked_image_list,best_cluster_of_all_image ,data_of_all_images ,density_of_all_image = Kmeans.masking_image(filenames,image_list,labels_of_all_image,coordinates_of_all_images,clustered_images_list)
+    masked_image_list,best_cluster_of_all_image ,data_of_all_images ,density_of_all_image,count_of_all_images = Kmeans.masking_image(filenames,image_list,labels_of_all_image,coordinates_of_all_images,clustered_images_list)
     
     '''
     Saving Data in CSVs and pushing images into folder
     '''
-    Kmeans.save_to_file(filenames,masked_image_list,data_of_all_images,density_of_all_image,best_cluster_of_all_image) # Saves all the data to Kmeans-output folder and stores data in a CSV
+    Kmeans.save_to_file(filenames,masked_image_list,data_of_all_images,density_of_all_image,best_cluster_of_all_image,count_of_all_images) # Saves all the data to Kmeans-output folder and stores data in a CSV
 
     end = time.time()
     print("Time consumed: ",(end - start)/60," mins.")

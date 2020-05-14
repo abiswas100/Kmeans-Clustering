@@ -72,9 +72,8 @@ def start_parsing(image,filename,choice): # choice is the type of annootation
                                     new_coord.append([x,y])
                     else: 
                         flag = -1             
-                '''
-                Wall Annotation goes here
-                '''            
+                
+                            
                 elif choice == 2 : 
                     if (entry['classTitle'] == 'Facet' or entry['classTitle'] == 'Facade' or entry['classTitle'] == 'Facades'):
                         x_values = []
@@ -181,9 +180,7 @@ def start_parsing(image,filename,choice): # choice is the type of annootation
                         At this point coordinate_set has only the pixels of the facade. Windows, doors, and hvacs have been subtracted.
                         '''
                         new_coord = list(coordinate_set)
-                '''
-                Roof Annotation goes here
-                ''' 
+               
                 elif choice == 3 : 
                     #Considering Roof annotations
                     if (entry['classTitle'] == 'Roof' or entry['classTitle'] == 'Roofs'):
@@ -217,6 +214,7 @@ def start_parsing(image,filename,choice): # choice is the type of annootation
                 except UnboundLocalError : 
                     print("Annotation not working",filename)
                     print("")   
-            else : continue
+             
+                
     return temp_image, new_coord,flag
      

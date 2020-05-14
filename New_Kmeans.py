@@ -1,4 +1,3 @@
-import optimum_K as op
 import Find_best_cluster as fb
 import consider_annotation as ann
 import U_value as U_val
@@ -95,7 +94,7 @@ def masking_image(filenames,image_list,labels_of_all_image,coordinates_of_all_im
     best_cluster_of_all_image = []
     density_of_all_image = []
     data_of_all_images = []
-    counts_of_all_images = []
+    count_of_all_images = []
     iterator = 0
     '''
     The lines below iterates over the cluster_image list and converts the pixel to the hotspot_cluster and store 
@@ -140,9 +139,9 @@ def masking_image(filenames,image_list,labels_of_all_image,coordinates_of_all_im
         print("Density of hotspot..",density,'%')
         density_of_all_image.append(density)
 
-    return masked_image_list,best_cluster_of_all_image,data_of_all_images,density_of_all_image
+    return masked_image_list,best_cluster_of_all_image,data_of_all_images,density_of_all_image,count_of_all_images
 
-def save_to_file(filenames,masked_image_list,data_of_all_images,density_of_all_image,best_cluster_of_all_image):
+def save_to_file(filenames,masked_image_list,data_of_all_images,density_of_all_image,best_cluster_of_all_image,count_of_all_images):
 
     try:
         path = os.getcwd()
