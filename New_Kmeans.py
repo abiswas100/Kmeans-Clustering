@@ -48,13 +48,15 @@ def add_annotation(image_list,filenames):
     counter = 0
     for image in image_list:
         pixel_values,coordinates,flag = ann.start_parsing(image,filenames[counter],choice)
-        if flag == -1 :
+        if flag != 0 :
             image_list = image_list.remove(image)
             filenames = filenames.remove(filenames[counter]) 
-        else:
+        else:    
             coordinates_of_all_images.append(coordinates)
             pixel_values_of_all_images.append(pixel_values)
-        counter = counter + 1 
+    
+        counter = counter + 1
+         
     return coordinates_of_all_images,pixel_values_of_all_images,filenames
 
 def clustering(image_list,pixel_values_of_all_images,filenames  ):  
@@ -201,7 +203,7 @@ def U_value(coordinates_of_all_images,filenames):
     for i in range(len(filenames)):    
         coordinates = coordinates_of_all_images[i]
         filename = filenames[i]    
-
+        print((filename))
         temperature = fb.extract_temperature(filename)
 
         useful_temp = fb.useful_temperature(temperature,coordinates)                                                                       #getting the temperature values in a 1-D array for the considered objec
