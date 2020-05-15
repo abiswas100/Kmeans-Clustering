@@ -1,0 +1,126 @@
+{
+    "description": "",
+    "tags": [],
+    "size": {
+        "height": 512,
+        "width": 640
+    },
+    "objects": [
+        {
+            "description": "",
+            "geometryType": "polygon",
+            "labelerLogin": "speri203",
+            "tags": [],
+            "classTitle": "Window",
+            "points": {
+                "exterior": [
+                    [
+                        344,
+                        187
+                    ],
+                    [
+                        338,
+                        1
+                    ],
+                    [
+                        0,
+                        1
+                    ],
+                    [
+                        5,
+                        49
+                    ],
+                    [
+                        32,
+                        184
+                    ]
+                ],
+                "interior": []
+            }
+        },
+        {
+            "description": "",
+            "geometryType": "polygon",
+            "labelerLogin": "speri203",
+            "tags": [],
+            "classTitle": "Window",
+            "points": {
+                "exterior": [
+                    [
+                        180,
+                        512
+                    ],
+                    [
+                        170,
+                        459
+                    ],
+                    [
+                        46,
+                        458
+                    ],
+                    [
+                        61,
+                        512
+                    ]
+                ],
+                "interior": []
+            }
+        },
+        {
+            "description": "",
+            "geometryType": "polygon",
+            "labelerLogin": "speri203",
+            "tags": [],
+            "classTitle": "Window",
+            "points": {
+                "exterior": [
+                    [
+                        368,
+                        512
+                    ],
+                    [
+                        367,
+                        457
+                    ],
+                    [
+                        291,
+                        458
+                    ],
+                    [
+                        292,
+                        511
+                    ]
+                ],
+                "interior": []
+            }
+        },
+        {
+            "description": "",
+            "geometryType": "polygon",
+            "labelerLogin": "speri203",
+            "tags": [],
+            "classTitle": "Facade",
+            "points": {
+                "exterior": [
+                    [
+                        0,
+                        0
+                    ],
+                    [
+                        640,
+                        0
+                    ],
+                    [
+                        640,
+                        512
+                    ],
+                    [
+                        0,
+                        512
+                    ]
+                ],
+                "interior": []
+            }
+        }
+    ]
+}

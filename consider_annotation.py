@@ -70,8 +70,7 @@ def start_parsing(image,filename,choice): # choice is the type of annootation
                                     x = x_coordinates[i].item()
                                     y = y_coordinates[i].item()
                                     new_coord.append([x,y])
-                    else: 
-                        flag = 1             
+                               
                 
                             
                 elif choice == 2 :    # wqll annotation

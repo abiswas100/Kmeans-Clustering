@@ -170,7 +170,7 @@ def save_to_file(filenames,masked_image_list,data_of_all_images,density_of_all_i
         file = 'kmeans'
         with open(file + 'museum.csv' , 'a' ,newline='') as csvfile :
             writer = csv.writer(csvfile)
-            writer.writerow(['Filename','Hotspot-cluster','minimum','maximum','average','Hotspot-U1','Hotspot-U2','Hotspot-U3','Hotspot-U4','count','density']) 
+            writer.writerow(['Filename','Hotspot-cluster','minimum','maximum','average','count','density']) #'Hotspot-U1','Hotspot-U2','Hotspot-U3','Hotspot-U4',
         
             for i in range(0,len(filenames)):
                 #for a single Image
@@ -182,14 +182,14 @@ def save_to_file(filenames,masked_image_list,data_of_all_images,density_of_all_i
                 minimum = d[1]
                 maximum = d[2]
                 average = d[3]
-                hu1 = d[4]
-                hu2 = d[5]
-                hu3 = d[6]
-                hu4 = d[7]
+                # hu1 = d[4]
+                # hu2 = d[5]
+                # hu3 = d[6]
+                # hu4 = d[7]
                 count = count_of_all_images[i]
                 den = density_of_all_image[i]
 
-                writer.writerow([file,cluster,minimum,maximum,average,hu1,hu2,hu3,hu4,count,str(den)]) #+'%'
+                writer.writerow([file,cluster,minimum,maximum,average,count,str(den)]) #hu1,hu2,hu3,hu4,+'%'
     except FileExistsError:
         os.remove('mueseum.csv')   
  

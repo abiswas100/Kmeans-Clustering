@@ -1,0 +1,226 @@
+{
+    "description": "",
+    "tags": [],
+    "size": {
+        "height": 512,
+        "width": 640
+    },
+    "objects": [
+        {
+            "description": "",
+            "geometryType": "polygon",
+            "labelerLogin": "NiroopRaj",
+            "tags": [],
+            "classTitle": "Window",
+            "points": {
+                "exterior": [
+                    [
+                        397,
+                        116
+                    ],
+                    [
+                        383,
+                        233
+                    ],
+                    [
+                        640,
+                        246
+                    ],
+                    [
+                        639,
+                        186
+                    ],
+                    [
+                        640,
+                        128
+                    ]
+                ],
+                "interior": []
+            }
+        },
+        {
+            "description": "",
+            "geometryType": "polygon",
+            "labelerLogin": "NiroopRaj",
+            "tags": [],
+            "classTitle": "Window",
+            "points": {
+                "exterior": [
+                    [
+                        358,
+                        330
+                    ],
+                    [
+                        355,
+                        350
+                    ],
+                    [
+                        459,
+                        358
+                    ],
+                    [
+                        463,
+                        334
+                    ]
+                ],
+                "interior": []
+            }
+        },
+        {
+            "description": "",
+            "geometryType": "polygon",
+            "labelerLogin": "NiroopRaj",
+            "tags": [],
+            "classTitle": "Window",
+            "points": {
+                "exterior": [
+                    [
+                        540,
+                        343
+                    ],
+                    [
+                        536,
+                        364
+                    ],
+                    [
+                        597,
+                        362
+                    ],
+                    [
+                        599,
+                        344
+                    ]
+                ],
+                "interior": []
+            }
+        },
+        {
+            "description": "",
+            "geometryType": "polygon",
+            "labelerLogin": "NiroopRaj",
+            "tags": [],
+            "classTitle": "Window",
+            "points": {
+                "exterior": [
+                    [
+                        4,
+                        310
+                    ],
+                    [
+                        13,
+                        333
+                    ],
+                    [
+                        110,
+                        335
+                    ],
+                    [
+                        102,
+                        313
+                    ]
+                ],
+                "interior": []
+            }
+        },
+        {
+            "description": "",
+            "geometryType": "polygon",
+            "labelerLogin": "NiroopRaj",
+            "tags": [],
+            "classTitle": "Window",
+            "points": {
+                "exterior": [
+                    [
+                        0,
+                        0
+                    ],
+                    [
+                        56,
+                        0
+                    ],
+                    [
+                        146,
+                        279
+                    ],
+                    [
+                        0,
+                        272
+                    ]
+                ],
+                "interior": []
+            }
+        },
+        {
+            "description": "",
+            "geometryType": "polygon",
+            "labelerLogin": "NiroopRaj",
+            "tags": [],
+            "classTitle": "Facade",
+            "points": {
+                "exterior": [
+                    [
+                        0,
+                        354
+                    ],
+                    [
+                        221,
+                        366
+                    ],
+                    [
+                        483,
+                        381
+                    ],
+                    [
+                        640,
+                        387
+                    ],
+                    [
+                        640,
+                        0
+                    ],
+                    [
+                        209,
+                        0
+                    ],
+                    [
+                        0,
+                        0
+                    ],
+                    [
+                        0,
+                        195
+                    ]
+                ],
+                "interior": []
+            }
+        },
+        {
+            "description": "",
+            "geometryType": "polygon",
+            "labelerLogin": "NiroopRaj",
+            "tags": [],
+            "classTitle": "HVAC",
+            "points": {
+                "exterior": [
+                    [
+                        403,
+                        77
+                    ],
+                    [
+                        402,
+                        110
+                    ],
+                    [
+                        639,
+                        124
+                    ],
+                    [
+                        640,
+                        84
+                    ]
+                ],
+                "interior": []
+            }
+        }
+    ]
+}

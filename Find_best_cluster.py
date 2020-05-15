@@ -70,9 +70,9 @@ def calculate_temperature(labels,filename,coordinates):
         print("Cluster  = ",cluster)
         minimum,maximum,average = min_max_average(temp_array)       # function returns the min,max and average for each cluster 
            
-        hu1,hu2,hu3,hu4 = U_values(temp_array)                      # function returns the U-values belonging to the cluster
+        #hu1,hu2,hu3,hu4 = U_values(temp_array)                      # function returns the U-values belonging to the cluster
         
-        data = list([cluster,minimum,maximum,average,hu1,hu2,hu3,hu4])    
+        data = list([cluster,minimum,maximum,average]) #,hu1,hu2,hu3,hu4    
 
         cluster_averages.append(average)
         data_of_all_clusters.append(data)        
