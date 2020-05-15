@@ -59,7 +59,7 @@ def add_annotation(image_list,filenames):
          
     return coordinates_of_all_images,pixel_values_of_all_images,filenames
 
-def clustering(image_list,pixel_values_of_all_images,filenames  ):  
+def clustering(image_list,pixel_values_of_all_images,filenames ):  
     pbar = ProgressBar()
     
     clustered_images_list = [] #list containing all the clustered outputs
