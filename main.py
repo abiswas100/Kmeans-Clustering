@@ -30,8 +30,9 @@ def main():
     '''
     Finding the prediction of the clusters
     '''
-    metric.Silhoette_Coeff(pixel_values_of_all_images,filenames)
+    #metric.Silhoette_Coeff(pixel_values_of_all_images,filenames)
     
+    metric.Davis_Bouldin(pixel_values_of_all_images,filenames)
     
     # '''
     #  Getting U-values for images 
