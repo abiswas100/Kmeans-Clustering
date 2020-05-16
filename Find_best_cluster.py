@@ -134,7 +134,7 @@ def U_values(temperature):
         
     u1 = mean(u_value_eq1_points)/5.678
     u2 = mean(u_value_eq2_points)/5.678
-    u3 = mean(u_value_eq3_points)/5.678
+    u3 = mean(u_value_eq3_points)/5.678  
     u4 = mean(u_value_eq4_points)/5.678 
     return u1,u2,u3,u4
 
