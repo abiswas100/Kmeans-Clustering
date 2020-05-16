@@ -41,17 +41,17 @@ def Silhoette_Coeff(pixel_values_of_all_images,filenames):
         if files == 'Metric.csv': 
             os.remove('Metric.csv')    
         
-        else: 
-            file = 'Metrics'
-            with open(file + '.csv' , 'a' ,newline='') as csvfile :
-                writer = csv.writer(csvfile)
-                writer.writerow(['FILENAME','SILHOETTE COEFFICIENT']) 
+    else: 
+        file = 'Metrics'
+        with open(file + '.csv' , 'a' ,newline='') as csvfile :
+            writer = csv.writer(csvfile)
+            writer.writerow(['FILENAME','SILHOETTE COEFFICIENT']) 
+            
+            for i in range(0,len(filenames)):
+                filename = filenames[i]
+                metric = silhouette[i]
                 
-                for i in range(0,len(filenames)):
-                    filename = filenames[i]
-                    metric = silhouette[i]
-                    
-                    writer.writerow([filename,metric])
+                writer.writerow([filename,metric])
     os.chdir(path)
 
     return 1
@@ -79,17 +79,17 @@ def Davis_Bouldin(pixel_values_of_all_images,filenames):
         if files == 'Metric.csv': 
             os.remove('Metric.csv')    
         
-        else: 
-            file = 'Davis Bouldin Metrics'
-            with open(file + '.csv' , 'a' ,newline='') as csvfile :
-                writer = csv.writer(csvfile)
-                writer.writerow(['FILENAME','SILHOETTE COEFFICIENT']) 
+    else: 
+        file = 'Davis Bouldin Metrics'
+        with open(file + '.csv' , 'a' ,newline='') as csvfile :
+            writer = csv.writer(csvfile)
+            writer.writerow(['FILENAME','SILHOETTE COEFFICIENT']) 
+            
+            for i in range(0,len(filenames)):
+                filename = filenames[i]
+                metric = DB[i]
                 
-                for i in range(0,len(filenames)):
-                    filename = filenames[i]
-                    metric = DB[i]
-                    
-                    writer.writerow([filename,metric])
+                writer.writerow([filename,metric])
     os.chdir(path)
 
     return 1
