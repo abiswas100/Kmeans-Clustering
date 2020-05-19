@@ -1,0 +1,146 @@
+{
+    "description": "",
+    "tags": [],
+    "size": {
+        "height": 512,
+        "width": 640
+    },
+    "objects": [
+        {
+            "description": "",
+            "geometryType": "polygon",
+            "labelerLogin": "speri203",
+            "tags": [],
+            "classTitle": "HVAC",
+            "points": {
+                "exterior": [
+                    [
+                        241,
+                        247
+                    ],
+                    [
+                        532,
+                        237
+                    ],
+                    [
+                        519,
+                        276
+                    ],
+                    [
+                        252,
+                        288
+                    ]
+                ],
+                "interior": []
+            }
+        },
+        {
+            "description": "",
+            "geometryType": "polygon",
+            "labelerLogin": "speri203",
+            "tags": [],
+            "classTitle": "Window",
+            "points": {
+                "exterior": [
+                    [
+                        262,
+                        299
+                    ],
+                    [
+                        273,
+                        381
+                    ],
+                    [
+                        491,
+                        371
+                    ],
+                    [
+                        507,
+                        291
+                    ]
+                ],
+                "interior": []
+            }
+        },
+        {
+            "description": "",
+            "geometryType": "polygon",
+            "labelerLogin": "speri203",
+            "tags": [],
+            "classTitle": "Facade",
+            "points": {
+                "exterior": [
+                    [
+                        3,
+                        497
+                    ],
+                    [
+                        4,
+                        105
+                    ],
+                    [
+                        258,
+                        0
+                    ],
+                    [
+                        640,
+                        0
+                    ],
+                    [
+                        638,
+                        505
+                    ],
+                    [
+                        494,
+                        508
+                    ],
+                    [
+                        405,
+                        511
+                    ],
+                    [
+                        189,
+                        510
+                    ],
+                    [
+                        41,
+                        507
+                    ],
+                    [
+                        0,
+                        511
+                    ]
+                ],
+                "interior": []
+            }
+        },
+        {
+            "description": "",
+            "geometryType": "polygon",
+            "labelerLogin": "speri203",
+            "tags": [],
+            "classTitle": "Door",
+            "points": {
+                "exterior": [
+                    [
+                        276,
+                        504
+                    ],
+                    [
+                        273,
+                        475
+                    ],
+                    [
+                        361,
+                        475
+                    ],
+                    [
+                        356,
+                        509
+                    ]
+                ],
+                "interior": []
+            }
+        }
+    ]
+}

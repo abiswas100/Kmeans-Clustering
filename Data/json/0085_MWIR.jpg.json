@@ -1,0 +1,66 @@
+{
+    "description": "",
+    "tags": [],
+    "size": {
+        "height": 512,
+        "width": 640
+    },
+    "objects": [
+        {
+            "description": "",
+            "geometryType": "polygon",
+            "labelerLogin": "abiswas100",
+            "tags": [],
+            "classTitle": "Facade",
+            "points": {
+                "exterior": [
+                    [
+                        479,
+                        2
+                    ],
+                    [
+                        453,
+                        512
+                    ],
+                    [
+                        0,
+                        512
+                    ],
+                    [
+                        0,
+                        0
+                    ]
+                ],
+                "interior": []
+            }
+        },
+        {
+            "description": "",
+            "geometryType": "polygon",
+            "labelerLogin": "abiswas100",
+            "tags": [],
+            "classTitle": "Ground",
+            "points": {
+                "exterior": [
+                    [
+                        480,
+                        0
+                    ],
+                    [
+                        452,
+                        512
+                    ],
+                    [
+                        640,
+                        512
+                    ],
+                    [
+                        640,
+                        0
+                    ]
+                ],
+                "interior": []
+            }
+        }
+    ]
+}

@@ -1,0 +1,126 @@
+{
+    "description": "",
+    "tags": [],
+    "size": {
+        "height": 512,
+        "width": 640
+    },
+    "objects": [
+        {
+            "description": "",
+            "geometryType": "polygon",
+            "labelerLogin": "abiswas100",
+            "tags": [],
+            "classTitle": "Ground",
+            "points": {
+                "exterior": [
+                    [
+                        640,
+                        20
+                    ],
+                    [
+                        573,
+                        512
+                    ],
+                    [
+                        640,
+                        512
+                    ]
+                ],
+                "interior": []
+            }
+        },
+        {
+            "description": "",
+            "geometryType": "polygon",
+            "labelerLogin": "abiswas100",
+            "tags": [],
+            "classTitle": "Facade",
+            "points": {
+                "exterior": [
+                    [
+                        0,
+                        0
+                    ],
+                    [
+                        0,
+                        291
+                    ],
+                    [
+                        32,
+                        412
+                    ],
+                    [
+                        0,
+                        410
+                    ],
+                    [
+                        0,
+                        507
+                    ],
+                    [
+                        567,
+                        512
+                    ],
+                    [
+                        639,
+                        0
+                    ]
+                ],
+                "interior": []
+            }
+        },
+        {
+            "description": "",
+            "geometryType": "polygon",
+            "labelerLogin": "abiswas100",
+            "tags": [],
+            "classTitle": "Window",
+            "points": {
+                "exterior": [
+                    [
+                        0,
+                        413
+                    ],
+                    [
+                        23,
+                        413
+                    ],
+                    [
+                        63,
+                        512
+                    ],
+                    [
+                        0,
+                        512
+                    ]
+                ],
+                "interior": []
+            }
+        },
+        {
+            "description": "",
+            "geometryType": "polygon",
+            "labelerLogin": "abiswas100",
+            "tags": [],
+            "classTitle": "HVAC",
+            "points": {
+                "exterior": [
+                    [
+                        0,
+                        292
+                    ],
+                    [
+                        28,
+                        406
+                    ],
+                    [
+                        0,
+                        412
+                    ]
+                ],
+                "interior": []
+            }
+        }
+    ]
+}
