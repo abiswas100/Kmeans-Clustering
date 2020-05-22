@@ -64,12 +64,11 @@ def Davis_Bouldin(pixel_values_of_all_images,filenames):
     
     DB = []
     for i in range(len(pixel_values_of_all_images)):
-        pixel_value = pixel_values_of_all_images[i]
-     
+        pixel_value = pixel_values_of_all_images[i]    
         clusterer = KMeans(n_clusters = 3, n_jobs = -1)
         cluster_labels = clusterer.fit_predict(pixel_value)
         Davis_B = davies_bouldin_score(pixel_value, cluster_labels)
-        print("The davis Bouldin score is :", Davis_B)         
+        print("File ...",filenames[i],"      The davis Bouldin score is :", Davis_B)         
         DB.append(Davis_B) 
         
     path = os.getcwd()
