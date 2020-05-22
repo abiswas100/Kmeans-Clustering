@@ -1,6 +1,6 @@
 import New_Kmeans as Kmeans
 import metric as metric
-
+import Optimum_K as K
 import os
 from pathlib import Path
 import psutil
@@ -27,12 +27,15 @@ def main():
     # proc.cpu_affinity(cpu_nums[:-2])                                              #will use all CPU cores uncomment to use 2 cores     
     print("CPUS being consumed..",cpu_count())
     
-    '''
-    Finding the prediction of the clusters
-    '''
-    #metric.Silhoette_Coeff(pixel_values_of_all_images,filenames)
+    #optimum K
+    #K.Silhoette(pixel_values_of_all_images,filenames)
     
-    #metric.Davis_Bouldin(pixel_values_of_all_images,filenames)
+    # '''
+    # Finding the prediction of the clusters
+    # '''
+    # metric.Silhoette_Coeff(pixel_values_of_all_images,filenames)
+    
+    metric.Davis_Bouldin(pixel_values_of_all_images,filenames)
     
     '''
      Getting U-values for images 
