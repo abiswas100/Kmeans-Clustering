@@ -1,0 +1,114 @@
+{
+    "description": "",
+    "tags": [],
+    "size": {
+        "height": 512,
+        "width": 640
+    },
+    "objects": [
+        {
+            "description": "",
+            "geometryType": "polygon",
+            "labelerLogin": "NiroopRaj",
+            "tags": [],
+            "classTitle": "Window",
+            "points": {
+                "exterior": [
+                    [
+                        0,
+                        444
+                    ],
+                    [
+                        334,
+                        438
+                    ],
+                    [
+                        338,
+                        512
+                    ],
+                    [
+                        2,
+                        512
+                    ]
+                ],
+                "interior": []
+            }
+        },
+        {
+            "description": "",
+            "geometryType": "polygon",
+            "labelerLogin": "NiroopRaj",
+            "tags": [],
+            "classTitle": "HVAC",
+            "points": {
+                "exterior": [
+                    [
+                        0,
+                        338
+                    ],
+                    [
+                        336,
+                        332
+                    ],
+                    [
+                        343,
+                        434
+                    ],
+                    [
+                        0,
+                        437
+                    ],
+                    [
+                        0,
+                        436
+                    ]
+                ],
+                "interior": []
+            }
+        },
+        {
+            "description": "",
+            "geometryType": "polygon",
+            "labelerLogin": "NiroopRaj",
+            "tags": [],
+            "classTitle": "Facade",
+            "points": {
+                "exterior": [
+                    [
+                        1,
+                        0
+                    ],
+                    [
+                        640,
+                        0
+                    ],
+                    [
+                        640,
+                        512
+                    ],
+                    [
+                        0,
+                        510
+                    ],
+                    [
+                        2,
+                        441
+                    ],
+                    [
+                        343,
+                        440
+                    ],
+                    [
+                        237,
+                        439
+                    ],
+                    [
+                        0,
+                        439
+                    ]
+                ],
+                "interior": []
+            }
+        }
+    ]
+}

@@ -20,7 +20,7 @@ import matplotlib.cm as cm
      The silhouette_score gives the average value for all the samples.
      This gives a perspective into the density and separation of the formed clusters
 '''
-def Silhoette(pixel_values_of_all_images,filenames):
+def Elbow(pixel_values_of_all_images,filenames):
     print("Computting Silhoette Coefficient ...")
     print("")
     
@@ -28,16 +28,9 @@ def Silhoette(pixel_values_of_all_images,filenames):
     for i in range(len(pixel_values_of_all_images)):
         
         pixel_value = pixel_values_of_all_images[i]
-     
-        # clusterer = KMeans(n_clusters = 3, n_jobs = -1)
-        # cluster_labels = clusterer.fit_predict(pixel_value)
-        # silhouette_avg = silhouette_score(pixel_value, cluster_labels)
-        # print("The average silhouette_score is :", silhouette_avg)         
-        
-        # silhouette.append(silhouette_avg)
-        
         Sum_of_squared_distances = []
         K = range(1,21)
+        
         for k in range(1,21):
             km = KMeans(n_clusters= k ,n_jobs= -1)
             km = km.fit(pixel_value)

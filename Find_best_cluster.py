@@ -146,4 +146,5 @@ def find_hotspot(cluster_averages):
     best_cluster = cluster_averages.index(max_avg)
     print("The hottest cluster = ",best_cluster) 
     print("Varience =  ",variance(cluster_averages)," and the standard deviation is ...",stdev(cluster_averages))
+    print("")
     return best_cluster

@@ -1,0 +1,162 @@
+{
+    "description": "",
+    "tags": [],
+    "size": {
+        "height": 512,
+        "width": 640
+    },
+    "objects": [
+        {
+            "description": "",
+            "geometryType": "polygon",
+            "labelerLogin": "speri203",
+            "tags": [],
+            "classTitle": "Window",
+            "points": {
+                "exterior": [
+                    [
+                        382,
+                        302
+                    ],
+                    [
+                        381,
+                        198
+                    ],
+                    [
+                        297,
+                        200
+                    ],
+                    [
+                        301,
+                        296
+                    ]
+                ],
+                "interior": []
+            }
+        },
+        {
+            "description": "",
+            "geometryType": "polygon",
+            "labelerLogin": "speri203",
+            "tags": [],
+            "classTitle": "Window",
+            "points": {
+                "exterior": [
+                    [
+                        194,
+                        293
+                    ],
+                    [
+                        179,
+                        198
+                    ],
+                    [
+                        51,
+                        204
+                    ],
+                    [
+                        69,
+                        287
+                    ]
+                ],
+                "interior": []
+            }
+        },
+        {
+            "description": "",
+            "geometryType": "polygon",
+            "labelerLogin": "speri203",
+            "tags": [],
+            "classTitle": "Facade",
+            "points": {
+                "exterior": [
+                    [
+                        0,
+                        0
+                    ],
+                    [
+                        640,
+                        0
+                    ],
+                    [
+                        636,
+                        316
+                    ],
+                    [
+                        606,
+                        316
+                    ],
+                    [
+                        567,
+                        320
+                    ],
+                    [
+                        526,
+                        319
+                    ],
+                    [
+                        485,
+                        319
+                    ],
+                    [
+                        431,
+                        322
+                    ],
+                    [
+                        391,
+                        323
+                    ],
+                    [
+                        359,
+                        323
+                    ],
+                    [
+                        326,
+                        326
+                    ],
+                    [
+                        302,
+                        324
+                    ],
+                    [
+                        267,
+                        323
+                    ],
+                    [
+                        230,
+                        324
+                    ],
+                    [
+                        199,
+                        327
+                    ],
+                    [
+                        175,
+                        330
+                    ],
+                    [
+                        136,
+                        329
+                    ],
+                    [
+                        103,
+                        328
+                    ],
+                    [
+                        66,
+                        327
+                    ],
+                    [
+                        29,
+                        326
+                    ],
+                    [
+                        0,
+                        326
+                    ]
+                ],
+                "interior": []
+            }
+        }
+    ]
+}
