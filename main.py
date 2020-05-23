@@ -14,9 +14,10 @@ def main():
     # Restricting python to use only 2 cores
     cpu_nums = list(range(psutil.cpu_count()))
     proc = psutil.Process(os.getpid())
-    proc.cpu_affinity(cpu_nums[:-2])                                              #will use all CPU cores uncomment to use 2 cores     
+    proc.cpu_affinity(cpu_nums[:-4])                                              #will use all CPU cores uncomment to use 2 cores     
     print("CPUS being consumed..",cpu_count())
     
+     
     '''
     Inputting Images
     '''
@@ -36,6 +37,8 @@ def main():
     '''
     Finding the prediction of the clusters
     '''
+    print("Calculating Silhoette Coefficient and Davis Bouldin Index ..")
+    print()
     metric.Silhoette_Coeff(pixel_values_of_all_images,filenames)
     
     metric.Davis_Bouldin(pixel_values_of_all_images,filenames)
@@ -63,6 +66,7 @@ def main():
     Kmeans.save_to_file(filenames,masked_image_list,data_of_all_images,density_of_all_image,best_cluster_of_all_image,count_of_all_images) # Saves all the data to Kmeans-output folder and stores data in a CSV
 
     end = time.time()
+    print()
     print("Time consumed: ",(end - start)/60," mins.")
     print("Finished .................")
     print(" ")

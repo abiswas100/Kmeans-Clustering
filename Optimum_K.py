@@ -21,12 +21,10 @@ import matplotlib.cm as cm
      This gives a perspective into the density and separation of the formed clusters
 '''
 def Elbow(pixel_values_of_all_images,filenames):
-    print("Computting Silhoette Coefficient ...")
+    print("Finding the best number of  Clusters for the Image ...")
     print("")
     
-    # silhouette = []
     for i in range(len(pixel_values_of_all_images)):
-        
         pixel_value = pixel_values_of_all_images[i]
         Sum_of_squared_distances = []
         K = range(1,21)

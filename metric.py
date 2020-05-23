@@ -26,7 +26,7 @@ def Silhoette_Coeff(pixel_values_of_all_images,filenames):
     for i in range(len(pixel_values_of_all_images)):
         pixel_value = pixel_values_of_all_images[i]
      
-        clusterer = KMeans(n_clusters = 3, n_jobs = -1)
+        clusterer = KMeans(n_clusters = 3, n_jobs = 1)
         cluster_labels = clusterer.fit_predict(pixel_value)
         silhouette_avg = silhouette_score(pixel_value, cluster_labels)
         print("The average silhouette_score is :", silhouette_avg)         
@@ -75,7 +75,7 @@ def Davis_Bouldin(pixel_values_of_all_images,filenames):
     parent_path = Path(path).parent
     os.chdir(parent_path)
     for files in os.listdir():  
-        if files == 'Metric.csv': 
+        if files == 'Davis Bouldin Metrics': 
             os.remove('Metric.csv')    
         
     else: 
