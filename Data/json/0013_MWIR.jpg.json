@@ -1,0 +1,362 @@
+{
+    "description": "",
+    "tags": [],
+    "size": {
+        "height": 512,
+        "width": 640
+    },
+    "objects": [
+        {
+            "description": "",
+            "geometryType": "polygon",
+            "labelerLogin": "speri203",
+            "tags": [],
+            "classTitle": "HVAC",
+            "points": {
+                "exterior": [
+                    [
+                        2,
+                        366
+                    ],
+                    [
+                        140,
+                        364
+                    ],
+                    [
+                        146,
+                        378
+                    ],
+                    [
+                        1,
+                        380
+                    ]
+                ],
+                "interior": []
+            }
+        },
+        {
+            "description": "",
+            "geometryType": "polygon",
+            "labelerLogin": "speri203",
+            "tags": [],
+            "classTitle": "Window",
+            "points": {
+                "exterior": [
+                    [
+                        318,
+                        440
+                    ],
+                    [
+                        303,
+                        340
+                    ],
+                    [
+                        321,
+                        327
+                    ],
+                    [
+                        347,
+                        322
+                    ],
+                    [
+                        383,
+                        317
+                    ],
+                    [
+                        410,
+                        317
+                    ],
+                    [
+                        446,
+                        321
+                    ],
+                    [
+                        477,
+                        329
+                    ],
+                    [
+                        488,
+                        337
+                    ],
+                    [
+                        485,
+                        366
+                    ],
+                    [
+                        472,
+                        398
+                    ],
+                    [
+                        467,
+                        419
+                    ],
+                    [
+                        464,
+                        439
+                    ]
+                ],
+                "interior": []
+            }
+        },
+        {
+            "description": "",
+            "geometryType": "polygon",
+            "labelerLogin": "speri203",
+            "tags": [],
+            "classTitle": "Window",
+            "points": {
+                "exterior": [
+                    [
+                        28,
+                        425
+                    ],
+                    [
+                        4,
+                        384
+                    ],
+                    [
+                        145,
+                        382
+                    ],
+                    [
+                        167,
+                        421
+                    ]
+                ],
+                "interior": []
+            }
+        },
+        {
+            "description": "",
+            "geometryType": "polygon",
+            "labelerLogin": "speri203",
+            "tags": [],
+            "classTitle": "Window",
+            "points": {
+                "exterior": [
+                    [
+                        639,
+                        408
+                    ],
+                    [
+                        611,
+                        412
+                    ],
+                    [
+                        640,
+                        369
+                    ]
+                ],
+                "interior": []
+            }
+        },
+        {
+            "description": "",
+            "geometryType": "polygon",
+            "labelerLogin": "speri203",
+            "tags": [],
+            "classTitle": "Roof",
+            "points": {
+                "exterior": [
+                    [
+                        2,
+                        214
+                    ],
+                    [
+                        108,
+                        178
+                    ],
+                    [
+                        80,
+                        111
+                    ],
+                    [
+                        63,
+                        106
+                    ],
+                    [
+                        67,
+                        2
+                    ],
+                    [
+                        2,
+                        0
+                    ]
+                ],
+                "interior": []
+            }
+        },
+        {
+            "description": "",
+            "geometryType": "polygon",
+            "labelerLogin": "speri203",
+            "tags": [],
+            "classTitle": "Roof",
+            "points": {
+                "exterior": [
+                    [
+                        290,
+                        111
+                    ],
+                    [
+                        277,
+                        100
+                    ],
+                    [
+                        278,
+                        51
+                    ],
+                    [
+                        336,
+                        48
+                    ],
+                    [
+                        399,
+                        46
+                    ],
+                    [
+                        461,
+                        43
+                    ],
+                    [
+                        515,
+                        46
+                    ],
+                    [
+                        527,
+                        46
+                    ],
+                    [
+                        520,
+                        79
+                    ],
+                    [
+                        514,
+                        105
+                    ]
+                ],
+                "interior": []
+            }
+        },
+        {
+            "description": "",
+            "geometryType": "polygon",
+            "labelerLogin": "speri203",
+            "tags": [],
+            "classTitle": "Facade",
+            "points": {
+                "exterior": [
+                    [
+                        0,
+                        263
+                    ],
+                    [
+                        122,
+                        226
+                    ],
+                    [
+                        86,
+                        107
+                    ],
+                    [
+                        272,
+                        107
+                    ],
+                    [
+                        278,
+                        203
+                    ],
+                    [
+                        526,
+                        200
+                    ],
+                    [
+                        546,
+                        98
+                    ],
+                    [
+                        640,
+                        94
+                    ],
+                    [
+                        639,
+                        480
+                    ],
+                    [
+                        498,
+                        484
+                    ],
+                    [
+                        434,
+                        488
+                    ],
+                    [
+                        375,
+                        489
+                    ],
+                    [
+                        311,
+                        492
+                    ],
+                    [
+                        239,
+                        494
+                    ],
+                    [
+                        173,
+                        492
+                    ],
+                    [
+                        112,
+                        492
+                    ],
+                    [
+                        52,
+                        493
+                    ],
+                    [
+                        2,
+                        494
+                    ]
+                ],
+                "interior": []
+            }
+        },
+        {
+            "description": "",
+            "geometryType": "polygon",
+            "labelerLogin": "speri203",
+            "tags": [],
+            "classTitle": "Roof",
+            "points": {
+                "exterior": [
+                    [
+                        278,
+                        2
+                    ],
+                    [
+                        280,
+                        16
+                    ],
+                    [
+                        383,
+                        3
+                    ],
+                    [
+                        432,
+                        8
+                    ],
+                    [
+                        525,
+                        17
+                    ],
+                    [
+                        527,
+                        2
+                    ]
+                ],
+                "interior": []
+            }
+        }
+    ]
+}

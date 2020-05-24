@@ -12,9 +12,9 @@ def main():
     start = time.time()
     
     # Restricting python to use only 2 cores
-    cpu_nums = list(range(psutil.cpu_count()))
-    proc = psutil.Process(os.getpid())
-    proc.cpu_affinity(cpu_nums[:-4])                                              #will use all CPU cores uncomment to use 2 cores     
+    # cpu_nums = list(range(psutil.cpu_count()))
+    # proc = psutil.Process(os.getpid())
+    # proc.cpu_affinity(cpu_nums[:-4])                                              #will use all CPU cores uncomment to use 2 cores     
     print("CPUS being consumed..",cpu_count())
     
      
@@ -29,10 +29,10 @@ def main():
     print("Getting annotations for images")
     coordinates_of_all_images,pixel_values_of_all_images,filenames = Kmeans.add_annotation(image_list,filenames)
     
-    '''
-    optimum K
-    '''
-    K.Elbow(pixel_values_of_all_images,filenames)
+    # '''
+    # optimum K
+    # '''
+    # K.Elbow(pixel_values_of_all_images,filenames)
     
     '''
     Finding the prediction of the clusters

@@ -1,0 +1,70 @@
+{
+    "description": "",
+    "tags": [],
+    "size": {
+        "height": 512,
+        "width": 640
+    },
+    "objects": [
+        {
+            "description": "",
+            "geometryType": "polygon",
+            "labelerLogin": "speri203",
+            "tags": [],
+            "classTitle": "Door",
+            "points": {
+                "exterior": [
+                    [
+                        581,
+                        400
+                    ],
+                    [
+                        578,
+                        380
+                    ],
+                    [
+                        589,
+                        343
+                    ],
+                    [
+                        640,
+                        340
+                    ],
+                    [
+                        638,
+                        398
+                    ]
+                ],
+                "interior": []
+            }
+        },
+        {
+            "description": "",
+            "geometryType": "polygon",
+            "labelerLogin": "speri203",
+            "tags": [],
+            "classTitle": "Facade",
+            "points": {
+                "exterior": [
+                    [
+                        213,
+                        441
+                    ],
+                    [
+                        640,
+                        395
+                    ],
+                    [
+                        640,
+                        1
+                    ],
+                    [
+                        129,
+                        3
+                    ]
+                ],
+                "interior": []
+            }
+        }
+    ]
+}
