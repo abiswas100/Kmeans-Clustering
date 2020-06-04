@@ -37,18 +37,18 @@ def main():
     '''
     Finding the prediction of the clusters
     '''
-    print("Calculating Silhoette Coefficient and Davis Bouldin Index ..")
-    print()
-    metric.Silhoette_Coeff(pixel_values_of_all_images,filenames)
+    # print("Calculating Silhoette Coefficient and Davis Bouldin Index ..")
+    # print()
+    # metric.Silhoette_Coeff(pixel_values_of_all_images,filenames)
     
-    metric.Davis_Bouldin(pixel_values_of_all_images,filenames)
+    # metric.Davis_Bouldin(pixel_values_of_all_images,filenames)
     
-    '''
-     Getting U-values for images 
-    '''
-    print()
-    print("Adding U_Values...")
-    Kmeans.U_value(coordinates_of_all_images,filenames)
+    # '''
+    #  Getting U-values for images 
+    # '''
+    # print()
+    # print("Adding U_Values...")
+    # Kmeans.U_value(coordinates_of_all_images,filenames)
 
     '''
     Cluster Images

@@ -9,26 +9,38 @@
         {
             "description": "",
             "geometryType": "polygon",
-            "labelerLogin": "abiswas100",
+            "labelerLogin": "debanjan",
             "tags": [],
-            "classTitle": "Facade",
+            "classTitle": "Window",
             "points": {
                 "exterior": [
                     [
-                        479,
-                        2
+                        498,
+                        3
                     ],
                     [
-                        453,
-                        512
+                        425,
+                        73
                     ],
                     [
-                        0,
-                        512
+                        406,
+                        232
                     ],
                     [
-                        0,
-                        0
+                        403,
+                        370
+                    ],
+                    [
+                        400,
+                        507
+                    ],
+                    [
+                        636,
+                        511
+                    ],
+                    [
+                        640,
+                        5
                     ]
                 ],
                 "interior": []
@@ -37,26 +49,54 @@
         {
             "description": "",
             "geometryType": "polygon",
-            "labelerLogin": "abiswas100",
+            "labelerLogin": "debanjan",
             "tags": [],
-            "classTitle": "Ground",
+            "classTitle": "Window",
             "points": {
                 "exterior": [
                     [
-                        480,
-                        0
+                        0,
+                        130
                     ],
                     [
-                        452,
-                        512
+                        50,
+                        134
+                    ],
+                    [
+                        136,
+                        462
+                    ],
+                    [
+                        3,
+                        442
+                    ]
+                ],
+                "interior": []
+            }
+        },
+        {
+            "description": "",
+            "geometryType": "polygon",
+            "labelerLogin": "debanjan",
+            "tags": [],
+            "classTitle": "Facade",
+            "points": {
+                "exterior": [
+                    [
+                        3,
+                        4
                     ],
                     [
                         640,
+                        7
+                    ],
+                    [
+                        636,
                         512
                     ],
                     [
-                        640,
-                        0
+                        7,
+                        508
                     ]
                 ],
                 "interior": []
