@@ -34,9 +34,9 @@ def main():
     # '''
     # K.Elbow(pixel_values_of_all_images,filenames)
     
-    '''
-    Finding the prediction of the clusters
-    '''
+    # '''
+    # Finding the prediction of the clusters
+    # '''
     # print("Calculating Silhoette Coefficient and Davis Bouldin Index ..")
     # print()
     # metric.Silhoette_Coeff(pixel_values_of_all_images,filenames)
