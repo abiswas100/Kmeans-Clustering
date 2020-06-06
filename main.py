@@ -10,7 +10,7 @@ from multiprocessing import cpu_count
 
 def main():
     start = time.time()
-    
+    print("Starting Compilation.....")
     # Restricting python to use only 2 cores
     # cpu_nums = list(range(psutil.cpu_count()))
     # proc = psutil.Process(os.getpid())
