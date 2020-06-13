@@ -98,8 +98,8 @@ def useful_temperature(temperature,coordinates):
     return useful_temp
 
 def min_max_average(temperature):
-    stack = inspect.stack()
-    caller = stack[1].filename[-13:]
+    # stack = inspect.stack()
+    # caller = stack[1].filename[-13:]
     '''
     Computes Min Max and Average for each cluster 
     '''
@@ -110,13 +110,15 @@ def min_max_average(temperature):
             min2.append(val)        
         else:continue
     try : minimum = min(min2)
-    except ValueError : minimum = min(temperature)
-    maximum = max(temperature)
-    average = mean(temperature)
-    if caller != 'New_Kmeans.py':
-        print("minimum Surface Temperature = ",minimum)
-        print("maximum Surface Temperature = ",maximum)
-        print("average Surface Temperature = ",average) 
+    except ValueError : minimum = 0      #min(temperature)
+    try: maximum = max(temperature)
+    except : maximum = 0 
+    try :average = mean(temperature)
+    except : average = 0
+    # if caller != 'New_Kmeans.py':
+    #     print("minimum Surface Temperature = ",minimum)
+    #     print("maximum Surface Temperature = ",maximum)
+    #     print("average Surface Temperature = ",average) 
     
     return minimum,maximum,average
 
@@ -145,6 +147,6 @@ def find_hotspot(cluster_averages):
     print("Maximum average temperature of all clusters = ",max_avg)
     best_cluster = cluster_averages.index(max_avg)
     print("The hottest cluster = ",best_cluster) 
-    print("Varience =  ",variance(cluster_averages)," and the standard deviation is ...",stdev(cluster_averages))
+    # print("Varience =  ",variance(cluster_averages)," and the standard deviation is ...",stdev(cluster_averages))
     print("")
     return best_cluster

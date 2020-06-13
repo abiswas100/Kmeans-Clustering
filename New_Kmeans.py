@@ -10,9 +10,8 @@ import time
 from multiprocessing import cpu_count
 
 from cv2 import cv2
-import matplotlib.pyplot as plt
+
 import numpy as np
-import pandas as pd
 import psutil
 from progressbar import ProgressBar
 from sklearn.cluster import KMeans
@@ -73,7 +72,7 @@ def clustering(image_list,pixel_values_of_all_images,filenames ):
         pixel_values = pixel_values_of_all_images[i]
         pixel_values = np.float32(pixel_values)
         try:
-            kmeans = KMeans(n_clusters = 6, random_state=10, n_jobs = 1).fit(pixel_values)
+            kmeans = KMeans(n_clusters = 7, random_state=10, n_jobs = 1).fit(pixel_values)
             # convert back to 8 bit values
             centers = kmeans.cluster_centers_
             centers = np.uint8(centers)
