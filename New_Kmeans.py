@@ -127,7 +127,7 @@ def masking_image(filenames,image_list,labels_of_all_image,coordinates_of_all_im
                 if j != [-1,-1]:
                     masked_image[j[1],j[0]] = [255,255,255]
    
-        except UnboundLocalError : 
+        except (UnboundLocalError,IndexError) as e : 
             print(filenames[iterator])
             print("")
 
