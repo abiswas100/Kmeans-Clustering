@@ -1,0 +1,106 @@
+{
+    "description": "",
+    "tags": [],
+    "size": {
+        "height": 512,
+        "width": 640
+    },
+    "objects": [
+        {
+            "description": "",
+            "geometryType": "polygon",
+            "labelerLogin": "debanjan",
+            "tags": [],
+            "classTitle": "Window",
+            "points": {
+                "exterior": [
+                    [
+                        498,
+                        3
+                    ],
+                    [
+                        425,
+                        73
+                    ],
+                    [
+                        406,
+                        232
+                    ],
+                    [
+                        403,
+                        370
+                    ],
+                    [
+                        400,
+                        507
+                    ],
+                    [
+                        636,
+                        511
+                    ],
+                    [
+                        640,
+                        5
+                    ]
+                ],
+                "interior": []
+            }
+        },
+        {
+            "description": "",
+            "geometryType": "polygon",
+            "labelerLogin": "debanjan",
+            "tags": [],
+            "classTitle": "Window",
+            "points": {
+                "exterior": [
+                    [
+                        0,
+                        130
+                    ],
+                    [
+                        50,
+                        134
+                    ],
+                    [
+                        136,
+                        462
+                    ],
+                    [
+                        3,
+                        442
+                    ]
+                ],
+                "interior": []
+            }
+        },
+        {
+            "description": "",
+            "geometryType": "polygon",
+            "labelerLogin": "debanjan",
+            "tags": [],
+            "classTitle": "Facade",
+            "points": {
+                "exterior": [
+                    [
+                        3,
+                        4
+                    ],
+                    [
+                        640,
+                        7
+                    ],
+                    [
+                        636,
+                        512
+                    ],
+                    [
+                        7,
+                        508
+                    ]
+                ],
+                "interior": []
+            }
+        }
+    ]
+}

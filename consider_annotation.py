@@ -98,7 +98,6 @@ def start_parsing(image,filename,choice): # choice is the type of annootation
                             #convert list to set
                             coordinate_set = set(tuple(x) for x in coordinates)
                             
-
                             #Open up the json file again and reread all windows
                             with open(json_filename) as json_file_content:
                                 '''
@@ -202,8 +201,6 @@ def start_parsing(image,filename,choice): # choice is the type of annootation
                                     x = x_coordinates[i].item()
                                     y = y_coordinates[i].item()
                                     new_coord.append([x,y])
-                    # else: 
-                    #     flag = 1
             
             
             #adding the pixel values for the ROI        
