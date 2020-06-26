@@ -9,82 +9,70 @@
         {
             "description": "",
             "geometryType": "polygon",
-            "labelerLogin": "abiswas100",
+            "labelerLogin": "debanjan",
+            "tags": [],
+            "classTitle": "Window",
+            "points": {
+                "exterior": [
+                    [
+                        4,
+                        7
+                    ],
+                    [
+                        128,
+                        11
+                    ],
+                    [
+                        224,
+                        45
+                    ],
+                    [
+                        318,
+                        144
+                    ],
+                    [
+                        330,
+                        273
+                    ],
+                    [
+                        338,
+                        381
+                    ],
+                    [
+                        335,
+                        507
+                    ],
+                    [
+                        0,
+                        509
+                    ]
+                ],
+                "interior": []
+            }
+        },
+        {
+            "description": "",
+            "geometryType": "polygon",
+            "labelerLogin": "debanjan",
             "tags": [],
             "classTitle": "Facade",
             "points": {
                 "exterior": [
                     [
                         0,
-                        0
-                    ],
-                    [
-                        0,
-                        512
-                    ],
-                    [
-                        640,
-                        483
+                        5
                     ],
                     [
                         640,
                         0
-                    ]
-                ],
-                "interior": []
-            }
-        },
-        {
-            "description": "",
-            "geometryType": "polygon",
-            "labelerLogin": "abiswas100",
-            "tags": [],
-            "classTitle": "Window",
-            "points": {
-                "exterior": [
-                    [
-                        175,
-                        2
-                    ],
-                    [
-                        238,
-                        398
-                    ],
-                    [
-                        575,
-                        370
                     ],
                     [
                         637,
-                        0
-                    ]
-                ],
-                "interior": []
-            }
-        },
-        {
-            "description": "",
-            "geometryType": "polygon",
-            "labelerLogin": "abiswas100",
-            "tags": [],
-            "classTitle": "Window",
-            "points": {
-                "exterior": [
-                    [
-                        321,
-                        443
+                        506
                     ],
                     [
-                        322,
+                        1,
                         509
-                    ],
-                    [
-                        465,
-                        499
-                    ],
-                    [
-                        470,
-                        441
                     ]
                 ],
                 "interior": []

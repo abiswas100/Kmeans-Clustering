@@ -16,6 +16,7 @@ import psutil
 from progressbar import ProgressBar
 from sklearn.cluster import KMeans
 from statistics import mean
+import collections
 
 import csv
 import json
@@ -72,7 +73,7 @@ def clustering(image_list,pixel_values_of_all_images,filenames ):
         pixel_values = pixel_values_of_all_images[i]
         pixel_values = np.float32(pixel_values)
         try:
-            kmeans = KMeans(n_clusters = 7, random_state=10, n_jobs = 1).fit(pixel_values)
+            kmeans = KMeans(n_clusters = 6, random_state=10, n_jobs = 1).fit(pixel_values)
             # convert back to 8 bit values
             centers = kmeans.cluster_centers_
             centers = np.uint8(centers)
@@ -125,12 +126,21 @@ def masking_image(filenames,image_list,labels_of_all_image,coordinates_of_all_im
             temp_image = []        
             for j in coordinate:
                 if j != [-1,-1]:
-                    masked_image[j[1],j[0]] = [255,255,255]
-   
+                    masked_image[j[1],j[0]] = [255,255,255]        
+                    
         except (UnboundLocalError,IndexError) as e : 
             print(filenames[iterator])
             print("")
-
+        #make the image as B/W with hotspots as White 
+        c = 0
+        for i in range(512):
+            for j in range(640):
+                pix = [255,255,255]        
+                if collections.Counter(masked_image[i][j]) == collections.Counter(pix) : 
+                    c = c + 1
+                else:
+                    masked_image[i][j] = [0,0,0]
+        
         masked_image_list.append(masked_image)
         #Finding the Density of Hotspot for the 
         count = 0
@@ -192,7 +202,34 @@ def save_to_file(filenames,masked_image_list,data_of_all_images,density_of_all_i
                 writer.writerow([file,cluster,minimum,maximum,average,count,str(den)]) #hu1,hu2,hu3,hu4,+'%'
     except FileExistsError:
         os.remove('mueseum.csv')   
- 
+    
+    try:
+            file = 'All Cluster Data'
+            with open(file + '.csv', 'a' ,newline='') as csvfile :
+                writer = csv.writer(csvfile)
+                
+                for i in range(0,len(filenames)):
+                    #for a single Image
+                    file = filenames[i]
+                    cluster = best_cluster_of_all_image[i]
+                    data = data_of_all_images[i]
+                    count = count_of_all_images[i]
+                    den = density_of_all_image[i]
+                    writer.writerow(['Filename','Hotspot-cluster','minimum','maximum','average','cluster_number','count','density'])
+                    for j in data:            
+                        cluster_number = j[0]
+                        minimum = j[1]
+                        maximum = j[2]
+                        average = j[3]
+                        writer.writerow([file,cluster,minimum,maximum,average,cluster_number+1,count,str(den)])
+                        
+    except FileExistsError:
+        os.remove('mueseum.csv')   
+    
+    
+    
+    
+    
     return 1
 
 def U_value(coordinates_of_all_images,filenames):

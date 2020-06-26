@@ -9,66 +9,26 @@
         {
             "description": "",
             "geometryType": "polygon",
-            "labelerLogin": "debanjan",
-            "tags": [],
-            "classTitle": "Window",
-            "points": {
-                "exterior": [
-                    [
-                        498,
-                        3
-                    ],
-                    [
-                        425,
-                        73
-                    ],
-                    [
-                        406,
-                        232
-                    ],
-                    [
-                        403,
-                        370
-                    ],
-                    [
-                        400,
-                        507
-                    ],
-                    [
-                        636,
-                        511
-                    ],
-                    [
-                        640,
-                        5
-                    ]
-                ],
-                "interior": []
-            }
-        },
-        {
-            "description": "",
-            "geometryType": "polygon",
-            "labelerLogin": "debanjan",
+            "labelerLogin": "abiswas100",
             "tags": [],
             "classTitle": "Window",
             "points": {
                 "exterior": [
                     [
                         0,
-                        130
+                        0
                     ],
                     [
-                        50,
-                        134
+                        62,
+                        374
                     ],
                     [
-                        136,
-                        462
+                        405,
+                        345
                     ],
                     [
-                        3,
-                        442
+                        409,
+                        1
                     ]
                 ],
                 "interior": []
@@ -77,26 +37,82 @@
         {
             "description": "",
             "geometryType": "polygon",
-            "labelerLogin": "debanjan",
+            "labelerLogin": "abiswas100",
+            "tags": [],
+            "classTitle": "Window",
+            "points": {
+                "exterior": [
+                    [
+                        166,
+                        426
+                    ],
+                    [
+                        180,
+                        484
+                    ],
+                    [
+                        325,
+                        477
+                    ],
+                    [
+                        320,
+                        414
+                    ]
+                ],
+                "interior": []
+            }
+        },
+        {
+            "description": "",
+            "geometryType": "polygon",
+            "labelerLogin": "abiswas100",
             "tags": [],
             "classTitle": "Facade",
             "points": {
                 "exterior": [
                     [
-                        3,
-                        4
+                        0,
+                        0
+                    ],
+                    [
+                        0,
+                        500
+                    ],
+                    [
+                        365,
+                        511
                     ],
                     [
                         640,
-                        7
+                        483
                     ],
                     [
-                        636,
+                        640,
+                        0
+                    ]
+                ],
+                "interior": []
+            }
+        },
+        {
+            "description": "",
+            "geometryType": "polygon",
+            "labelerLogin": "abiswas100",
+            "tags": [],
+            "classTitle": "Ground",
+            "points": {
+                "exterior": [
+                    [
+                        368,
+                        506
+                    ],
+                    [
+                        634,
+                        487
+                    ],
+                    [
+                        640,
                         512
-                    ],
-                    [
-                        7,
-                        508
                     ]
                 ],
                 "interior": []
