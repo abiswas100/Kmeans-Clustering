@@ -29,10 +29,10 @@ def main():
     print("Getting annotations for images")
     coordinates_of_all_images,pixel_values_of_all_images,filenames = Kmeans.add_annotation(image_list,filenames)
     
-    # '''
-    # optimum K
-    # '''
-    # K.Elbow(pixel_values_of_all_images,filenames)
+    '''
+    optimum K
+    '''
+    K.Elbow(pixel_values_of_all_images,filenames)
     
     # '''
     # Finding the prediction of the clusters
