@@ -15,9 +15,9 @@ To get more Information about the project visit -> https://github.com/speri203/H
 
 ### Clustering Results(Images in B/W with White regions showing Thermal Hotspot in Walls and Windows)
 <p align="center" width="100%">
- <img src="https://github.com/abiswas100/Kmeans-Clustering/blob/master/Data/images/0066_MWIR.jpg" width="200" height="200"> &nbsp;<img src="https://github.com/abiswas100/Kmeans-        Clustering/blob/master/Data/kmeans-output/0066_MWIR.jpg" width="200" height="200"> <br>
-<img src="https://github.com/abiswas100/Kmeans-Clustering/blob/master/Data/images/0067_MWIR.jpg" width="200" height="200"> &nbsp;<img src="https://github.com/abiswas100/Kmeans-        Clustering/blob/master/Data/kmeans-output/0067_MWIR.jpg" width="200" height="200"> <br>
-<img src="https://github.com/abiswas100/Kmeans-Clustering/blob/master/Data/images/0817_MWIR.jpg" width="200" height="200"> &nbsp;<img src="https://github.com/abiswas100/Kmeans-        Clustering/blob/master/Data/kmeans-output/0817_MWIR.jpg" width="200" height="200"> 
+ <img src="https://github.com/abiswas100/Kmeans-Clustering/blob/master/Data/images/0066_MWIR.jpg" width="200" height="200"> &nbsp;<img src="https://github.com/abiswas100/Kmeans-Clustering/blob/master/Data/kmeans-output/0066_MWIR.jpg" width="200" height="200"> <br>
+<img src="https://github.com/abiswas100/Kmeans-Clustering/blob/master/Data/images/0067_MWIR.jpg" width="200" height="200"> &nbsp;<img src="https://github.com/abiswas100/Kmeans-Clustering/blob/master/Data/kmeans-output/0067_MWIR.jpg" width="200" height="200"> <br>
+<img src="https://github.com/abiswas100/Kmeans-Clustering/blob/master/Data/images/0817_MWIR.jpg" width="200" height="200"> &nbsp;<img src="https://github.com/abiswas100/Kmeans-Clustering/blob/master/Data/kmeans-output/0817_MWIR.jpg" width="200" height="200"> 
 <p>
 
 
