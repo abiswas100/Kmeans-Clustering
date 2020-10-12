@@ -1,9 +1,8 @@
 # Kmeans-Clustering          [![GitHub contributors](https://img.shields.io/github/contributors/abiswas100/Kmeans-Clustering)](https://github.com/abiswas100/Kmeans-Clustering/graphs/contributors)
 
-This repo is a Heat Loss Project at University of North Dakota - Department of Computer Science and Electrical Engineering. <br>
+This repo is a part of the Heat Loss Project at University of North Dakota - Department of Computer Science and Electrical Engineering. The objective of this repo is to cluster thermal hotspot in Thermal Images of different building from UND and other campuses. 
 
 To get more Information about the project visit -> https://github.com/speri203/Heatloss_Public_Research
-
 
 
 ### Made with - 
