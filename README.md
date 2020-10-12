@@ -1,13 +1,14 @@
 # Kmeans-Clustering
 
 [![forthebadge made-with-python](http://ForTheBadge.com/images/badges/made-with-python.svg)](https://www.python.org/)
+[![GitHub contributors](https://img.shields.io/github/contributors/abiswas100/Kmeans-Clustering)](https://github.com/abiswas100/Kmeans-Clustering/graphs/contributors)
 ### Installation
 Install the Requirements Modules 
 ```python
 pip install -r requirements.txt
 ```
 
-To get more Information about the project visit - https://github.com/speri203/Heatloss_Public_Research
+To get more Information about the project visit -> https://github.com/speri203/Heatloss_Public_Research
 
 ### Contributing
 
