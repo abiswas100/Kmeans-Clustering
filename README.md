@@ -1,6 +1,6 @@
 # Kmeans-Clustering
 
-'/github/repo-size/:abiswas100/:Kmeans-Clustering' 
+[![forthebadge made-with-python](http://ForTheBadge.com/images/badges/made-with-python.svg)](https://www.python.org/)
 
 Install the Requirements Modules 
 ```python
